@@ -3,8 +3,6 @@
 
 . ~/.profile
 
-cd simulate
-
 logfile="../simulate.log"
 lockfile="sim.lock"
 
