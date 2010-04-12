@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#This is basically just the command that runs simulate.m
+#run "preprocessing.m" first to make sure the data is there.
+
+. ~/.profile
+
+nohup comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "simulate" >> ../simulate.log &
