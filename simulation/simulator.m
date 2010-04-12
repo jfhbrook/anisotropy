@@ -6,10 +6,11 @@ flreport('off');
 load ../data/k_mats
 
 %Always something there to store results in...
-%k_results=cell(size(k_mats));
-
-%have some results half-done
-load ../data/k_results
+if exist('../data/k_results')
+    load ../data/k_results
+else
+    k_results=cell(size(k_mats));
+end
 
 
 for i=1:size(k_results,1),
@@ -30,7 +31,8 @@ for i=1:size(k_results,1),
     	        %fprintf('\n\n\n')
     	end
     end
-    touch('down') %Rocketman!
 end
+fprintf('Completely finished!')
+touch('down') %Rocketman!
 
 exit

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-#script that runs comsol sim
-#run "preprocessing.m" first to make sure the data is there.
+#my crappy bash program that does things similar to supervise.
 
 . ~/.profile
 
+cd simulate
 
-logfile="babbysit.log"
+logfile="../simulate.log"
 lockfile="sim.lock"
 
 if [ -f $lockfile ]; then
@@ -15,7 +15,7 @@ if [ -f $lockfile ]; then
     fi
 fi
 
-nohup comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "main" >> $logfile &
+nohup comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "simulator" >> $logfile &
 comPID=$!
 echo "Comsol Matlab PID: $comPID " >> $logfile
 echo $comPID > $lockfile

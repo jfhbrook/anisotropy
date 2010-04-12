@@ -4,4 +4,4 @@
 
 . ~/.profile
 
-nohup comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "simulate" >> ../simulate.log &
+comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "simulator" >> ../simulate.log &
