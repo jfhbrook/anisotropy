@@ -7,15 +7,19 @@ function [k_mats, k_mats_props]=k_generator(kmin,kmax,kres,sphres)
 
     %generates needle orient's--x,y,z are O2 tensors
     [x y z]=sphere(sphres);
+
+    
+    
     %We only need one slice of the sphere due to symmetry.
-    %That is, y=0, x>0 and z>0.
+    %That is, y~0, x>0 and z>0.
+    %There's some floating point BS going on, so we have to compare about-ly for y.
     %i is the orientation index
     xpts=[];
     ypts=[];
     zpts=[];
     imax=(sphres+1)^2;
     for i=1:imax,
-        if (x(i)>0)&(y(i)==0)&(z(i)>0),
+        if (x(i)>0)&(abs(y(i))<0.001)&(z(i)>0),
             xpts=[xpts x(i)];
             ypts=[xpts y(i)];
             zpts=[xpts z(i)];
@@ -40,7 +44,7 @@ function [k_mats, k_mats_props]=k_generator(kmin,kmax,kres,sphres)
     for i=1:imax,
         for j=1:jmax,
             k_mats{i,j}=tosymmcells(cond_mat(kxy(j),kz(j),[xpts(i) ypts(i) zpts(i)]));
-            k_mats_props{i,j}={kxy(j),kz(j),[xpts(i) ypts(i) zpts(i)]}
+            k_mats_props{i,j}={kxy(j),kz(j),[xpts(i) ypts(i) zpts(i)]};
         end
     end
 end
