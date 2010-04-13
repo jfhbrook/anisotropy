@@ -7,25 +7,27 @@ function output=comsol(k_cell)
     % modified by Josh Holbrook
     
     flreport('off') %Supposed to suppress the retarded window results thing.
-    %k_cell
+
+    % Some parameters, with which we may modify our model
+    % Note that some of these MIGHT BE A BAD IDEA TO CHANGE
+    % Check where they come into play first!
+    % note2self: int2str()
+    rprobe=0.0005
+    lprobe=0.1 %nochange >_<
+    tdomain=[colon(0,0.1,1) colon(2,2,10) colon(20,10,2000)]
   
     flclear fem
-
-    % COMSOL version
-    %clear vrsn
-    %vrsn.name = 'COMSOL 3.5';
-    %vrsn.ext = 'a';
-    %vrsn.major = 0;
-    %vrsn.build = 603;
-    %vrsn.rcs = '$Name:  $';
-    %vrsn.date = '$Date: 2008/12/03 17:02:19 $';
-    %fem.version = vrsn;
 
     fprintf('Geometry-ing...\n');
     
     % Geometry
     g1=block3('0.2','0.2','0.2','base','corner','pos',{'-0.1','-0.1','-0.1'},'axis',{'0','0','1'},'rot','0');
-    g3=cylinder3('0.0005','0.1','pos',{'0','0','0'},'axis',{'0','0','1'},'rot','0');
+    % This represents the geometry of the needle probe.
+    % Truth be told, I probably want to change how this
+    % is done, because I think the probe starts at (0,0,0)
+    % and ends at (0,0,lprobe) instead of vice-versa.
+    % In other words, don't change these values yet. >_<
+    g3=cylinder3(int2str(rprobe),int2str(lprobe),'pos',{'0','0','0'},'axis',{'0','0','1'},'rot','0');
     parr={point3(0,0,0)};
     g4=geomcoerce('point',parr);
 
@@ -104,7 +106,7 @@ function output=comsol(k_cell)
                     'solcomp',{'T'}, ...
                     'outcomp',{'T'}, ...
                     'blocksize','auto', ...
-                    'tlist',[colon(0,0.1,1) colon(2,2,10) colon(20,10,1000)], ...
+                    'tlist',tdomain, ...
                     'estrat',1, ...
                     'tout','tlist', ...
                     'linsolver','gmres', ...
@@ -123,6 +125,8 @@ function output=comsol(k_cell)
     
     % The data we're interested in:
     output=[fem.sol.tlist; postint(fem,'T', 'unit','K', 'recover','off','dl',9,'edim',0,'solnum','all')];
+    % Should also grab temperatures from more points around
+    % edge of control volume!
 
     % Remove generated GMG mesh cases
     fem=meshcasedel(fem,[1]);
