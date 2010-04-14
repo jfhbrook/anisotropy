@@ -12,30 +12,39 @@ function output=comsol(k_cell)
     % Note that some of these MIGHT BE A BAD IDEA TO CHANGE
     % Check where they come into play first!
     % note2self: int2str()
-    rprobe=0.0005
-    lprobe=0.1 %nochange >_<
-    tdomain=[colon(0,0.1,1) colon(2,2,10) colon(20,10,2000)]
+    rprobe=0.0005; %probe radius, meters
+    lprobe=0.1; %probe length, meters
+    snow_width=0.2; %snow CV side length, meters
+    tdomain=[colon(0,0.1,1) colon(2,2,10) colon(20,10,2000)]; %times to evaluate at, in seconds iirc
   
     flclear fem
 
     fprintf('Geometry-ing...\n');
     
     % Geometry
-    g1=block3('0.2','0.2','0.2','base','corner','pos',{'-0.1','-0.1','-0.1'},'axis',{'0','0','1'},'rot','0');
+    % This represents the geometry of the snow control volume.
+    g1=block3(snow_width,snow_width,snow_width, ... %lengths of all sides
+             'base','corner','pos', ...
+             {-0.5*snow_width,-0.5*snow_width,-0.5*snow_width}, ... %beginning corner
+             'axis',{'0','0','1'},'rot','0');
     % This represents the geometry of the needle probe.
-    % Truth be told, I probably want to change how this
-    % is done, because I think the probe starts at (0,0,0)
-    % and ends at (0,0,lprobe) instead of vice-versa.
-    % In other words, don't change these values yet. >_<
-    g3=cylinder3(int2str(rprobe),int2str(lprobe),'pos',{'0','0','0'},'axis',{'0','0','1'},'rot','0');
-    parr={point3(0,0,0)};
+    g3=cylinder3(rprobe,lprobe, ... %radius and length
+                 'pos',{'0','0',0.5*snow_width}, ... %start at edge of box
+                 'axis',{'0','0','-1'},'rot','0'); %Go in the -z direction
+    parr={point3(0,0,0.5*snow_width-lprobe)}; %should be a point at the tip of the probe
     g4=geomcoerce('point',parr);
+    parr={point3(0,0,-0.5*snow_width)}; % bottom of snow
+    g5=geomcoerce('point',parr);
+    parr={point3(0,0.5*snow_width,0)}; % y face of snow
+    g6=geomcoerce('point',parr);
+    parr={point3(-0.5*snow_width,0,0)}; % x face of snow
+    g7=geomcoerce('point',parr);
 
     % Analyzed geometry
     clear p s
-    p.objs={g4};
-    p.name={'TEMP_MEAS'};
-    p.tags={'g4'};
+    p.objs={g4,g5,g6,g7};
+    p.name={'TEMP_MEAS','BOUNDARY_1','BOUNDARY_2','BOUNDARY_3'};
+    p.tags={'g4','g5','g6','g7'};
 
     s.objs={g1,g3};
     s.name={'SNOW','NEEDLE'};
@@ -124,7 +133,8 @@ function output=comsol(k_cell)
     fprintf('Output.\n');
     
     % The data we're interested in:
-    output=[fem.sol.tlist; postint(fem,'T', 'unit','K', 'recover','off','dl',9,'edim',0,'solnum','all')];
+    output=[fem.sol.tlist; ...
+            postint(fem,'T', 'unit','K', 'recover','off','dl',14,'edim',0,'solnum','all')];
     % Should also grab temperatures from more points around
     % edge of control volume!
 

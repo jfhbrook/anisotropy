@@ -12,14 +12,15 @@ function [k_mats, k_mats_props]=k_generator(kmin,kmax,kres,sphres)
     
     %We only need one slice of the sphere due to symmetry.
     %That is, y~0, x>0 and z>0.
-    %There's some floating point BS going on, so we have to compare about-ly for y.
+    %There points for x and y aren't exactly at 0, unfortunately, so some
+    %shenanigans regarding grabbing values "close enough" goes down.
     %i is the orientation index
     xpts=[];
     ypts=[];
     zpts=[];
     imax=(sphres+1)^2;
     for i=1:imax,
-        if (x(i)>0)&(abs(y(i))<0.001)&(z(i)>0),
+        if (x(i)>0)&(y(i)<0.12)&(y(i)>=0)&(z(i)>0),
             xpts=[xpts x(i)];
             ypts=[xpts y(i)];
             zpts=[xpts z(i)];

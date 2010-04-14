@@ -5,7 +5,7 @@ from scipy import log, diff, ones
 from numpy import interp
 from matplotlib.pylab import plot, show
 
-k_results=loadmat('../data/k_results_feb2010.mat')['k_results']
+k_results=loadmat('../data/k_results.mat')['k_results']
 log_t = log(k_results[0][0][0])
 temp = k_results[0][0][1]
 

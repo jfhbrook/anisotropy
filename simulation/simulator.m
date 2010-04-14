@@ -18,11 +18,11 @@ for i=1:size(k_results,1),
     	if size(k_results{i,j},1)>0,
     		fprintf('Already calculated for k(%i,%i)...\n',i,j);
     	else,
-    	        fprintf('Running comsol model on k(%i,%i)...', i , j);
+    	        fprintf('Running comsol model on k(%i,%i)...\n', i , j);
             	k_results{i,j}=comsol(k_mats{i,j})
     	        fprintf('finished.\n');
             	fprintf('Saving data...');
-    	        save k_results k_results
+    	        save ../data/k_results k_results
             	fprintf('Done.\n\n');
                 %code for printing out results
                 %I have it teh commented.

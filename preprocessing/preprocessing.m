@@ -10,5 +10,5 @@ sphres=9;
 
 [k_mats,k_mats_props]=k_generator(kmin,kmax,kres,sphres);
 
-save k_mats ../data/k_mats
-save k_mats_props ../data/k_mats_props
+save ../data/k_mats k_mats
+save ../data/k_mats_props k_mats_props
