@@ -7,3 +7,5 @@ road_map
 *.tex
 *.png
 *.pdf
+*.aux
+*.log
