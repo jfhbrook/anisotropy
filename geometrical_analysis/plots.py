@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+from matplotlib import pyplot
+from numpy import array, arange, hstack, linspace, ones
+
 def kzkx_planar(rt,rk):
     return (rt**2. + 2.*rt + 1.)/(rt**2. + (rk + (1./rk))*rt + 1.)
 
@@ -15,10 +18,8 @@ def kzkx_honeycomb(rt,rk):
     b4 = -rk**2.
     return (a1*rt**3. + a2*rt**2. + a3*rt + a4)/(b1*rt**3. + b2*rt**2. + b3*rt + b4)
 
-if __name__ == "__main__":
-    from matplotlib import pyplot
-    from numpy import array, arange, hstack, linspace, ones
-
+def plot_planar():
+    pyplot.figure()
     rts = hstack( (arange(0,2,0.05),arange(2,16,0.5)) )
     rks = [100., 50.,10.,4.,2.,1.] #[0.01, 0.05, 0.1, 0.25, 0.5, 1.0]
     annotate_text=linspace(-0.05,1.05,len(rks))
@@ -33,17 +34,15 @@ if __name__ == "__main__":
     pyplot.title('Planar Geometry')
     pyplot.xlabel(r'$r_t$')
     pyplot.ylabel(r'$ k_z $ / $ k_x $')
-    #pyplot.show()
+    pyplot.show()
 
+def plot_honeycomb_low_rk():
     pyplot.figure()
-
     rt_min=0
     rt_max=0.05
     rts = arange(rt_min,rt_max,0.001)
-    # r_k < 1 situations
     rks = [0.05,0.04,0.03,0.02,0.01]
     annotate_text=linspace(0.85,2.0,len(rks))
-
     for i, rk in enumerate(rks):
         kzkx=kzkx_honeycomb(rts,rk)
         xpts=[rts[j] for j in xrange(len(kzkx)) if kzkx[j]>1]
@@ -59,11 +58,9 @@ if __name__ == "__main__":
     pyplot.xlabel(r'$r_t$')
     pyplot.ylabel(r'$ k_z $ / $ k_x $')
 
+def plot_honeycomb_high_rk():
     pyplot.figure()
     rts = arange(rt_min,rt_max,0.001)
-    # r_k < 1 situations
-    #rks = [0.01,0.05, 0.1, 0.3, 0.5,1.0]
-    # r_k > 1 situations
     rks = [5.,10.,20.,30.,100000.]
 
     for i, rk in enumerate(rks):
@@ -75,3 +72,8 @@ if __name__ == "__main__":
     pyplot.ylabel(r'$ k_z $ / $ k_x $')
     pyplot.show()
 
+
+if __name__ == "__main__":
+    plot_planar()
+    #plot_honeycomb_low_rk()
+    #plot_honeycomb_high_rk()
