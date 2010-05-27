@@ -4,15 +4,16 @@ def kzkx_planar(rt,rk):
     return (rt**2. + 2.*rt + 1.)/(rt**2. + (rk + (1./rk))*rt + 1.)
 
 def kzkx_honeycomb(rt,rk):
-    a1 = 6.*rk**2. - 5.*rk - 1.
-    a2 = 6.*rk**3. - 10.*rk**2. + 5.*rk - 1.
-    a3 = 2.*rk**3. - 4.*rk**2. + 2.*rk
-    a4 = rk**2.
-    a5 = 2.*rk**2. - rk
-    a6 = rk**2. - 2.*rk
-    a7 = 4.*rk**2. + rk
-    a8 = a4
-    return (2./3.)*(a1*rt**3. + a2*rt**2. - a3*rt -a4)/(a5*rt**3. + a6*rt**2. - a7*rt -a8)
+    a1 = 6.*rk**2. - 8.*rk + 2.
+    a2 = 6.*rk**3. - 10.*rk**2. + 7.*rk - 1.
+    a3 = -2.*rk**3. + 5.*rk**2. - 2.*rk
+    a4 = -rk**2.
+
+    b1 = 2.*rk**2. - rk
+    b2 = 3.*rk**2. - 3.*rk
+    b3 = -2.*rk
+    b4 = -rk**2.
+    return (a1*rt**3. + a2*rt**2. + a3*rt + a4)/(b1*rt**3. + b2*rt**2. + b3*rt + b4)
 
 if __name__ == "__main__":
     from matplotlib import pyplot
@@ -25,7 +26,7 @@ if __name__ == "__main__":
         kzkx=kzkx_planar(rts,rk)
         pyplot.plot(rts,kzkx,'k')
         pyplot.annotate(str(rk),
-                        xy=(14.5,kzkx[-1]),
+                        xy=(15.0,kzkx[-1]),
                         xytext=(16.,annotate_text[i]),
                         arrowprops=dict(width=0.1,headwidth=0,facecolor='black', shrink=0.05) )
     pyplot.axis([0,15,0.0,1.1])
@@ -36,32 +37,40 @@ if __name__ == "__main__":
 
     pyplot.figure()
 
-    rts = arange(0,0.2,0.001)
+    rt_min=0
+    rt_max=0.05
+    rts = arange(rt_min,rt_max,0.001)
     # r_k < 1 situations
-    rks = [0.01,0.05, 0.1, 0.3, 0.5,1.0]
-    # r_k > 1 situations
-    #rks = [1.,2.,3.,5.,7.,10.,20.,30.,100000.]
+    rks = [0.05,0.04,0.03,0.02,0.01]
+    annotate_text=linspace(0.85,2.0,len(rks))
 
     for i, rk in enumerate(rks):
         kzkx=kzkx_honeycomb(rts,rk)
-        pyplot.plot(rts,kzkx,'k')
-    pyplot.axis([0,0.2,0.0,2.0])
-    pyplot.title('Honeycomb Geometry')
+        xpts=[rts[j] for j in xrange(len(kzkx)) if kzkx[j]>1]
+        ypts=[kzkx[j] for j in xrange(len(kzkx)) if kzkx[j]>1]
+        ypts_tail = ypts[-1]
+        pyplot.plot(xpts,ypts,'k')
+        pyplot.annotate(str(rk),
+                        xy=(rt_max,ypts_tail),
+                        xytext=(rt_max+0.001,annotate_text[i]),
+                        arrowprops=dict(width=0.1,headwidth=0,facecolor='black', shrink=0.05) )
+    pyplot.axis([rt_min,rt_max,0.9,2.0])
+    pyplot.title('Honeycomb Geometry, decreasing $r_k$')
     pyplot.xlabel(r'$r_t$')
     pyplot.ylabel(r'$ k_z $ / $ k_x $')
 
     pyplot.figure()
-    rts = arange(0,0.2,0.001)
+    rts = arange(rt_min,rt_max,0.001)
     # r_k < 1 situations
     #rks = [0.01,0.05, 0.1, 0.3, 0.5,1.0]
     # r_k > 1 situations
-    rks = [1.,2.,3.,5.,7.,10.,20.,30.,100000.]
+    rks = [5.,10.,20.,30.,100000.]
 
     for i, rk in enumerate(rks):
         kzkx=kzkx_honeycomb(rts,rk)
         pyplot.plot(rts,kzkx,'k')
-    pyplot.axis([0,0.2,0.0,2.0])
-    pyplot.title('Honeycomb Geometry')
+    pyplot.axis([rt_min,rt_max,0.9,2.0])
+    pyplot.title('Honeycomb Geometry, increasing $r_k$')
     pyplot.xlabel(r'$r_t$')
     pyplot.ylabel(r'$ k_z $ / $ k_x $')
     pyplot.show()
