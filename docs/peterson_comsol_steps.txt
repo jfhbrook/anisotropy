@@ -1,0 +1,27 @@
+﻿1D axi-symmetric
+Comsol >> heat transfer >> conduction >> transient
+specify line: 0 0.0006 0.00062 0.1
+subdomain properties
+needle heat source Qv = 5.3052e5 W/m3 * (1 – flc2hs(t-30, 0.01))
+init 23.5C
+Mesh >> Free mesh parameterss >> subdomain >> max mesh size: 1e-5 1e-7 1e-5 leads to 14,256 elements
+max time step size 0.01s
+range(0,0.01,1) range(2,1,60)
+5 minutes to solve
+
+
+3D model
+
+3D transient heat transfer
+Draw specify block (0.2, 0.2, 0.02) offset (-0.1, -0.1, -0.1). Here 0.02 is the variable thickness.
+Draw specify block (0.2, 0.2, 0.18) offset (-0.1, -0.1, -0.08). 
+Draw specify cylinder (r=0.0005, h=0.1, offset z = -0.05.
+Draw specify points (x=zeros, y=zeros, z=0, 0.01, 0.02 0.03 0.04 0.05)
+Subdomain settings
+1: k=0.2, rho = 200, cp = 2050
+2: k=0.1, rho = 200, cp = 2050
+3: k=160, rho = 8000, cp = 460 Q = 6.355e5 (0.5 W/m) for 1-mm steel needle)
+all: init = 0
+Solver parameters: range(0,0.1,1) range (2,2,10) range(20,10,1000)
+Free mesh parameters: 
+subdomain 3: max size 0.0003, growth 1.1, press remesh.
