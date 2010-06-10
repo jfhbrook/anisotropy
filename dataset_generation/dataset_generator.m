@@ -1,4 +1,4 @@
-function dataset=dataset_generator
+function dataset_generator
     %generates the dataset. Parameters hidden here!
 
     % PARAMETERS %
@@ -8,8 +8,8 @@ function dataset=dataset_generator
     anglemin=0; %angles in degrees
     anglemax=90;
     angleres=5; %smaller is better
-
     dimension=2; %number of directions of anisotropy
+    savepath="../data/dataset.mat"
     %============%
 
     %In this particular case, it doesn't make sense for dim>3
@@ -32,7 +32,9 @@ function dataset=dataset_generator
     for i=1:size(dataset),
         dataset{i}={X1(i), eval(KtoEval)};
     end
-     
+
+exec(["save " savepath "dataset"])
+
 end
 
 function list=xsList(n)
