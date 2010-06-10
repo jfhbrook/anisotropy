@@ -1,0 +1,3 @@
+These are some tools meant to help with writing MATLAB in a functional style. They mostly came about as a way to get around the limitations MATLAB has when taking multiple arguments and returning multiple results, each of unknown number. For an example of how some of these are used, check out data_generator.m from the anisotropy project.
+
+Note: I originally wrote functions called amap() and cmap(), but instead one should use the built-in functions arrayfun() and cellfun() which do the same things but have crappier names.
