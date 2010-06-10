@@ -15,8 +15,12 @@ function dataset=dataset_generator
                   int2str([1:dimension]') ...
                   areplicate(dimension,",")' ]))];
 
+    %generates the required meshgrids to build up Ks
     toeval = ["[" matrixlist "]=meshgrid(" cjoin(creplicate(dimension,"krange"),',') ");\n"];
+    %still only part-way there
     toeval = [toeval "{" matrixlist "}"];
     disp(toeval)
+
+    %next step will be to actually generate the necessary matrices!
     
 end
