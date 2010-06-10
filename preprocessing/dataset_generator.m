@@ -1,26 +1,45 @@
 function dataset=dataset_generator
     %generates the dataset. Parameters hidden here!
 
-    % PARAMETERS
+    % PARAMETERS %
     kmin=0.15;
     kmax=0.45;
-    kres=0.25;
-    dimension=3;
+    kres=0.25; %smaller is better!
+    anglemin=0; %angles in degrees
+    anglemax=90;
+    angleres=5; %smaller is better
+
+    dimension=2; %number of directions of anisotropy
+    %============%
+
+    %In this particular case, it doesn't make sense for dim>3
+    assert(dimension <= 3)
 
     krange=kmin:kres:kmax;
+    anglerange=(pi/180).*[anglemin:angleres:anglemax]; %angles now in rads
 
-    %generates a string akin to "[X1,X2,X3]"
-    matrixlist=[ ...
-    init(flatten([areplicate(dimension,"X")' ...
-                  int2str([1:dimension]') ...
-                  areplicate(dimension,",")' ]))];
+    % evaluates string akin to "[X1,X2,X3,X4]=ndgrid(anglerange,krange,krange,krange);"
+    % TODO: Learn up about the subtle differences between meshgrid and ndgrid,
+    % make sure they don't matter
+    eval(['[' xsList(dimension+1) ']=ndgrid(anglerange,' argRep(dimension,'krange') ');']);
 
-    %generates the required meshgrids to build up Ks
-    toeval = ["[" matrixlist "]=meshgrid(" cjoin(creplicate(dimension,"krange"),',') ");\n"];
-    %still only part-way there
-    toeval = [toeval "{" matrixlist "}"];
-    disp(toeval)
+    %Creates empty cell structures to hold the data in
+    dataset=cell(size(X1,1)*size(X1,2)); %assumes X1 was created
 
-    %next step will be to actually generate the necessary matrices!
-    
+    %creates a string akin to 'diag([X2(i),X2(i),X3(i)])'
+    KtoEval=['diag([' argRep(4-dimension,'X2(i)') ',' ajoin(['X3(i)';'X4(i)'](1:dimension-1,:),',') '])'];
+
+    for i=1:size(dataset),
+        dataset{i}={X1(i), eval(KtoEval)};
+    end
+     
 end
+
+function list=xsList(n)
+    %generates a string akin to "X1,X2,X3,X4" with n elements
+    list=[init(flatten([areplicate(n,'X')' int2str([1:n]') areplicate(n,',')' ]))];
+end
+
+function list=argRep(n,arg)
+    %generates a string akin to "k,k,k,k" with n elements
+    list = cjoin(creplicate(n,arg),',');
