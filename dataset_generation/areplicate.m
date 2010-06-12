@@ -5,6 +5,6 @@ function list=areplicate(n,a)
         list(1,i)=a;
     end
     if ischar(a),
-        list=amap(@char, list);
+        list=arrayfun(@char, list);
     end
 end

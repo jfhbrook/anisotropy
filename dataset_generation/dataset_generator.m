@@ -9,7 +9,7 @@ function dataset_generator
     anglemax=90;
     angleres=5; %smaller is better
     dimension=2; %number of directions of anisotropy
-    savepath="../data/dataset.mat"
+    savepath='../data/dataset.mat';
     %============%
 
     %In this particular case, it doesn't make sense for dim>3
@@ -27,13 +27,15 @@ function dataset_generator
     dataset=cell(size(X1,1)*size(X1,2)); %assumes X1 was created
 
     %creates a string akin to 'diag([X2(i),X2(i),X3(i)])'
-    KtoEval=['diag([' argRep(4-dimension,'X2(i)') ',' ajoin(['X3(i)';'X4(i)'](1:dimension-1,:),',') '])'];
+    KtoEval=['diag([' argRep(4-dimension,'X2(i)') ',' ajoin(feval(@(x) x(1:dimension-1,:), ['X3(i)';'X4(i)']),',') '])'];
 
     for i=1:size(dataset),
         dataset{i}={X1(i), eval(KtoEval)};
     end
 
-exec(["save " savepath "dataset"])
+disp('saving dataset...');
+
+eval(['save ' savepath 'dataset'])
 
 end
 
@@ -45,3 +47,4 @@ end
 function list=argRep(n,arg)
     %generates a string akin to "k,k,k,k" with n elements
     list = cjoin(creplicate(n,arg),',');
+end
