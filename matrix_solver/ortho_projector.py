@@ -2,7 +2,7 @@
 
 from numpy import array,dot
 
-class orthogonal_projection:
+class ortho_projection:
     def of(self,x):
         try:
             return self._proj(x,self._onto)
@@ -31,4 +31,4 @@ if __name__=="__main__":
     print "Projecting "+str(v)+" onto "+str(e1)+":"
 
     # Look Ma!
-    print orthogonal_projection().of(v).onto(e1)
+    print ortho_projection().of(v).onto(e1)
