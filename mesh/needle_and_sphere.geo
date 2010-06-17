@@ -3,15 +3,18 @@ r_n = 0.00025; //radius of needle probe, meters
 l_n = 0.1; //length of needle probe, meters
 rot_angle = Pi/4; //angle of rotation of needle probe, radians
 
+l_c_cv = 0.03; //characteristic length of mesh near sphere
+l_c_n = 0.000125; //characteristic length of mesh near needle
+
 //Pts that define the sphere
 
-Point(1) = {0, 0, 0};
-Point(2) = {r_cv, 0, 0};
-Point(3) = {0, r_cv, 0};
-Point(4) = {0, 0, r_cv};
-Point(5) = {-r_cv, 0, 0};
-Point(6) = {0, -r_cv, 0};
-Point(7) = {0, 0, -r_cv};
+Point(1) = {0, 0, 0, l_c_cv};
+Point(2) = {r_cv, 0, 0, l_c_cv};
+Point(3) = {0, r_cv, 0, l_c_cv};
+Point(4) = {0, 0, r_cv, l_c_cv};
+Point(5) = {-r_cv, 0, 0, l_c_cv};
+Point(6) = {0, -r_cv, 0, l_c_cv};
+Point(7) = {0, 0, -r_cv, l_c_cv};
 
 //xy plane
 Circle(8) = {2,1,3};
@@ -55,11 +58,11 @@ Volume(37) = {36}; //<----------------------------------------Ctrl Volume
 
 //Pts to define the needle
 //Need to refine this model but will stick to solid steel assumption for now
-Point(39) = {-l_n/2, 0, 0};
-Point(40) = {-l_n/2, r_n, 0};
-Point(41) = {-l_n/2, 0, r_n};
-Point(42) = {-l_n/2, -r_n, 0};
-Point(43) = {-l_n/2, 0, -r_n};
+Point(39) = {-l_n/2, 0, 0, l_c_n};
+Point(40) = {-l_n/2, r_n, 0, l_c_n};
+Point(41) = {-l_n/2, 0, r_n, l_c_n};
+Point(42) = {-l_n/2, -r_n, 0, l_c_n};
+Point(43) = {-l_n/2, 0, -r_n, l_c_n};
 
 Circle(43) = {40,39,41};
 Circle(44) = {41,39,42};
