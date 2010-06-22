@@ -2,11 +2,15 @@
 % Generated in part by COMSOL 3.5a (COMSOL 3.5.0.608, $Date: 2009/05/11 07:38:49 $)
 % the rest of it modified by Joshua Holbrook
 
-function mesh_generate(saveroot,angle)
-    #Some parameters we won't want to iterate through
-    rsnow=0.4
-    rneedle=0.00025
-    lneedle=0.1
+function mesh_generate(angle)
+    % mesh_generate(angle)
+    % generates a mesh for the given angle. 
+
+    % Some parameters we won't want to iterate through
+    rsnow=0.4;
+    rneedle=0.00025;
+    lneedle=0.1;
+    saveroot='./';
 
     flreport('off');
 
@@ -75,5 +79,5 @@ function mesh_generate(saveroot,angle)
 
     fem=multiphysics(fem);
 
-    save [saveroot '-' date '-' num2str(angle)] fem
+    save([saveroot 'mesh-' date '-' num2str(angle) '.mat'], 'fem')
 end
