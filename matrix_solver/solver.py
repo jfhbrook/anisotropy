@@ -18,6 +18,11 @@ def solver(X):
     """Takes a 3x3 matrix of column vectors X and solves for the K matrix."""
     pass
     #return leastsq(lambda K: (1./X).T*K*(1./X) - 1, eye(3)) #very incorrect
+    def fxn(X):
+        #X being a matrix with column vectors
+        # when returns 0, v'Kv=k where v is x/norm(x), 
+        # and k is norm(x) (alternately, x'Kx=|x|^(3/2))
+        return array([dot(x/norm(x),dot(K,x/norm(x))) for x in X.T])-array([norm(x) for x in X.T])
 
 def unsolver(K,Xdirs):
     """Takes a 3x3 K matrix and a 3x3 matrix of column direction vectors X and returns component.
