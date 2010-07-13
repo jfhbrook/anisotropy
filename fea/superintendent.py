@@ -27,10 +27,12 @@ for (host,a) in izip(cycle(hosts),angles):
 
 # I haven't done the string subs here yet.
 for host in hosts:
-    bash_cmd = "ssh %(host)s %(command)s \"%(angles)s\" \n" % \
+    setup = "ssh %(host)s tar -xzf /archive/u1/uaf/holbrook/fea.tgz -C /scratch/holbrook/" % \
+             {'host': host}
+    foreman = "ssh %(host)s %(command)s \"%(angles)s\" \n" % \
                {'host': host, 
-                'command': '$SCRATCH/anisotropy/foreman.sh',
+                'command': '$SCRATCH/fea/foreman.sh',
                 'angles': repr(list(angles))}
-    system(bash_cmd) # It's my understanding that system 
-                     # is going to be deprecated. TOO BAD
-                     # this is easy
+    system(setup)   # It's my understanding that system 
+    system(foreman) # is going to be deprecated. TOO BAD
+                    # this is easy
