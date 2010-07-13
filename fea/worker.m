@@ -1,7 +1,7 @@
 %worker.m
 %works the comsol machinery
 
-function worker(angles,ks,params)
+function worker(angles)
 
     flreport('off');
 
