@@ -5,7 +5,8 @@ Gives the workers jobs to do
 """
 
 from numpy import linspace
-from itertools import cycle, repeat
+from itertools import cycle, izip, repeat
+from os import system
 
 #Some parameters most convenient to have in python
 angles = linspace(0,90,10)
@@ -26,7 +27,10 @@ for (host,a) in izip(cycle(hosts),angles):
 
 # I haven't done the string subs here yet.
 for host in hosts:
-    bash_cmd = "ssh %(host)s %(command)s %(angles)s" % \
+    bash_cmd = "ssh %(host)s %(command)s \"%(angles)s\" \n" % \
                {'host': host, 
                 'command': '$SCRATCH/anisotropy/foreman.sh',
-                'angles': repr(angles)}
+                'angles': repr(list(angles))}
+    system(bash_cmd) # It's my understanding that system 
+                     # is going to be deprecated. TOO BAD
+                     # this is easy
