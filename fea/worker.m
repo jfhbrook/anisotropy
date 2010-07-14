@@ -5,7 +5,8 @@ function worker(angles)
 
     flreport('off');
 
-    ks = linspace(0.2,0.4,8);
+    %ks = linspace(0.2,0.4,8);
+    ks = linspace(0.2,0.4,2);
     [kxy,kz] = meshgrid(ks,ks);
     % Some parameters we won't want to iterate through
     params=struct('rsnow', 0.4, ...
@@ -20,6 +21,7 @@ function worker(angles)
                   'time', [colon(0,0.1,1) colon(2,2,10) colon(20,10,100) colon(200,100,1000)], ...
                   'saveroot', './');
 
+    %note: angles in degrees!
     for angle=angles,
         mesh = mesher(angle,params);
         solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);

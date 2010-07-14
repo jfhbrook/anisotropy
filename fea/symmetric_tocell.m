@@ -16,6 +16,7 @@ function a=symmetric_tocell(A)
     for m=1:size(A,1),
         for element=A(1:m,m)' %Takes upper-triangular section of mth column
             a{size(a,1)+1,1}=element;
+        end
     end
 
 end
