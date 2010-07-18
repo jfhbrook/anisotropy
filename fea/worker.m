@@ -2,6 +2,8 @@
 %works the comsol machinery
 
 function worker(angles)
+%worker(angles)
+%Runs FEA jobs for the supplied list of angles.
 
     flreport('off');
 
