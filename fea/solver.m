@@ -121,7 +121,7 @@ function answer=solver(kxy,kz,fem,params)
                'recover','off', ...
                'dl',8, ...
                'edim',0, ...
-               'solnum','end');
+               'solnum','all');
 
     % Integrate
     T_surf_avg=postint(fem,'T/area', ...
@@ -132,5 +132,5 @@ function answer=solver(kxy,kz,fem,params)
                'solnum','end');
 
 
-    answer={T_thermistor,T_surf_avg};
+    answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
 end
