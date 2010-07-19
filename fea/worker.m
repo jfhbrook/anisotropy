@@ -27,6 +27,6 @@ function worker(angles)
     for angle=angles,
         mesh = mesher(angle,params);
         solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
-        save([params.saveroot 'solution-' date '-' num2str(angle)],solutions,angle,ks,params);
+        save([params.saveroot 'solution-' date '-' num2str(angle)],'solutions','angle','ks','params');
     end
 end
