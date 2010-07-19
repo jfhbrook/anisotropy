@@ -2,13 +2,15 @@ function p=lagrange(x,w)
     %Returns the Lagrange interpolating polynomial of the datapoints (x,y)
     %A (mostly) direct port of scipy.interpolate.lagrange() for matlab
     %I'd prefer using scipy, but the python situation on ARSC blows. >:(
-    %Also, this is short, so it was easier
+    %Also, this is short, so it was easier.
+    %NOTE: If x or w contain NaNs or +/-Infs, the results of this polynomial
+    %will be nonsense!
     M = length(x);
     p = [0];
     for j=1:M,
         pt = w(j);
         for k=1:M,
-            if k != j,
+            if k ~= j,
                 fac = x(j)-x(k);
                 pt = conv(pt,[1,-x(k)])/fac;
             end
