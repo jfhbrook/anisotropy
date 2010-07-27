@@ -7,6 +7,7 @@ Gives the workers jobs to do
 from numpy import linspace
 from itertools import cycle, izip, repeat
 from os import system
+from re import sub
 
 #Some parameters most convenient to have in python
 angles = linspace(0,90,10)
@@ -24,10 +25,10 @@ for (host,a) in izip(cycle(hosts),angles):
 for host in hosts:
     setup = "ssh %(host)s tar -xzf /archive/u1/uaf/holbrook/fea.tgz -C /scratch/holbrook/" % \
              {'host': host}
-    foreman = "ssh %(host)s %(command)s \"%(angles)s\" \n" % \
+    foreman = "ssh %(host)s %(command)s %(angles)s &" % \
                {'host': host, 
-                'command': '$SCRATCH/fea/foreman.sh',
-                'angles': repr(list(angles))}
+                'command': '/scratch/holbrook/fea/foreman.sh',
+                'angles': sub('[ \t]+', '', repr(list(angles)))}
     system(setup)   # It's my understanding that system 
     system(foreman) # is going to be deprecated. TOO BAD
-                    # this is easy
+    #print foreman                # this is easy
