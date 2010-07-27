@@ -10,14 +10,9 @@ from os import system
 
 #Some parameters most convenient to have in python
 angles = linspace(0,90,10)
-simdir = '$SCRATCH/anisotropy/fea'
-
-#See some other file for the matlab-only options
-matlab_opts = '''
-'''
 
 #A subset of hosts I have passwordless ssh to
-hosts=['hookbill', 'magpie', 'mallard', 'puffin', 'ruddy', 'wood']
+hosts=['mallard', 'poseidon', 'puffin', 'ruddy', 'wood', 'zeuss']
 
 #Mapping? :)
 problem_sets=dict(zip(hosts,repeat([],6)))
