@@ -27,7 +27,7 @@ function answer=solver(kxy,kz,fem,params)
     % Heat capacities
     equ.C = {params.cp_snow,params.cp_needle};
     % Wattage
-    equ.Q = {0,params.q_needle/pi/(params.r_needle)^2};
+    equ.Q = {0,params.q_needle/pi/(params.rneedle)^2};
     % Heat conductivities
     equ.k = {symmetric_tocell(diag([kxy,kxy,kz])),params.k_needle};
     equ.ind = [1,2];
