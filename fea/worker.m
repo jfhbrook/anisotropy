@@ -23,7 +23,7 @@ function worker(angles)
                       'k_needle', 160, ...
                       'time', [logspace(0.1,1,15) logspace(1,3,15)]);
         mesh = NaN*angles;
-        solutions = num2cell(NaN*kxy);
+        solutions = cellfun(@(x) num2cell(NaN*kxy), num2cell(angles));
         save feasols;
     else,
         load feasols;
@@ -36,10 +36,10 @@ function worker(angles)
             end
             % fea
             for j=1:size(solutions,1)*size(solutions,2),
-                if isnan(solutions{j}),
-                    solutions{j} = solver(kxy(j),kz(j),mesh,params);
+                if (isnan(solutions{i}{j}) && size(solutions{i}{j}) ~= 3),
+                    solutions{i}{j} = solver(kxy(j),kz(j),mesh,params);
                     % curve fit
-                    solutions{j} = {solutions{j} fitter(solutions{j}{1}(1,:),solutions{j}{1}(2,:))};
+                    solutions{i}{j} = {solutions{i}{j} fitter(solutions{i}{j}{1}(1,:),solutions{i}{j}{1}(2,:))};
                     save feasols;
                 else,
                     fprintf "Already did that one.";
