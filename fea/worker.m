@@ -23,7 +23,7 @@ function worker(angles)
                       'k_needle', 160, ...
                       'time', [logspace(0.1,1,15) logspace(1,3,15)]);
         mesh = num2cell(NaN*angles);
-        solutions = cellfun(@(x) num2cell(NaN*kxy), num2cell(angles), 'UniformOutput', false);
+        solutions = cellfun(@(x) cellfun(@(y) {y}, num2cell(NaN*kxy), 'UniformOutput', false), num2cell(angles), 'UniformOutput', false);
         save feasols;
     else,
         load feasols;
