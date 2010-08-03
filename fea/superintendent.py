@@ -31,7 +31,7 @@ if __name__=="__main__":
 
     # I haven't done the string subs here yet.
     for host in hosts:
-        setup = "ssh %(host)s '. ~/.profile && tar -xzf /archive/u1/uaf/holbrook/fea.tgz -C /scratch/holbrook/'" % \
+        setup = "ssh %(host)s '. ~/.profile && tar -xzf /archive/u1/uaf/holbrook/fea.tgz -C /scratch/holbrook/' && tar -xzf /archive/u1/uaf/holbrook/arsc_user.tgz -C /scratch/holbrook/" % \
                  {'host': host}
         foreman = "ssh %(host)s %(command)s %(angles)s &" % \
                    {'host': host, 

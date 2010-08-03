@@ -35,7 +35,7 @@ function worker(angles)
                 save feasols;
             end
             % fea
-            for j=1:shape(solutions,1)*shape(solutions,2),
+            for j=1:size(solutions,1)*size(solutions,2),
                 if (solutions{j}==NaN),
                     solutions{j} = solver(kxy(j),kz(j),mesh,params);
                     % curve fit
