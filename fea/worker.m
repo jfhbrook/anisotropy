@@ -30,13 +30,13 @@ function worker(angles)
         %note: angles in degrees!
         for i=1:length(angles),
             % mesh
-            if (mesh(i)==NaN),
+            if isnan(mesh(i)),
                 mesh(i) = mesher(angles(i),params);
                 save feasols;
             end
             % fea
             for j=1:size(solutions,1)*size(solutions,2),
-                if (solutions{j}==NaN),
+                if isnan(solutions{j}),
                     solutions{j} = solver(kxy(j),kz(j),mesh,params);
                     % curve fit
                     solutions{j} = {solutions{j} fitter(solutions{j}{1}(1,:),solutions{j}{1}(2,:))};
