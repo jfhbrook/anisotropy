@@ -23,7 +23,7 @@ echo $comPID > $lockfile
 while [ -f $lockfile ]; do
     sleep 10m #we don't need to check THAT often... 
     #checks for the existence of a segfault
-    if "tail -n 2 $logfile | grep -c 'Segmentation fault'" ; then
+    if `tail -n 2 $logfile | grep -c 'Segmentation fault'` ; then
         echo "Sumbitch segfaulted! Restarting..." > $logfile
         nohup comsol -np 4 matlab -ml -nodesktop -ml -nosplash -mlr "worker($@)" >> $logfile &
         comPID=$!
