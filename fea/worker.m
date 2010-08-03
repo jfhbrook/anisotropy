@@ -22,7 +22,7 @@ function worker(angles)
                       'q_needle', 0.5, ...
                       'k_needle', 160, ...
                       'time', [logspace(0.1,1,15) logspace(1,3,15)]);
-        mesh = NaN*angles;
+        mesh = cellfun(NaN*angles);
         solutions = cellfun(@(x) num2cell(NaN*kxy), num2cell(angles));
         save feasols;
     else,
@@ -30,8 +30,8 @@ function worker(angles)
         %note: angles in degrees!
         for i=1:length(angles),
             % mesh
-            if isnan(mesh(i)),
-                mesh(i) = mesher(angles(i),params);
+            if isnan(mesh{i}),
+                mesh{i} = mesher(angles(i),params);
                 save feasols;
             end
             % fea
