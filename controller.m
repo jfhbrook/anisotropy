@@ -1,7 +1,7 @@
 %controller.m
 %does the controlling
 
-angles = 10:10:90;
+angles = 0:10:90;
 %angles = [0];
 ks = linspace(0.2,0.4,8);
 
@@ -27,5 +27,6 @@ saveroot='./solutions';
 for angle=angles,
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
+    solutions = cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{0}, 'UniformOutput', true);
     save([saveroot 'solution-' date '-' num2str(angle)],'solutions','angle','ks','params');
 end

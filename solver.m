@@ -27,7 +27,7 @@ function answer=solver(kxy,kz,fem,params)
     % Heat capacities
     equ.C = {params.cp_snow,params.cp_needle};
     % Wattage
-    equ.Q = {0,params.q_needle};
+    equ.Q = {0,params.q_needle/pi/(params.rneedle)^2};
     % Heat conductivities
     equ.k = {symmetric_tocell(diag([kxy,kxy,kz])),params.k_needle};
     equ.ind = [1,2];
@@ -121,7 +121,7 @@ function answer=solver(kxy,kz,fem,params)
                'recover','off', ...
                'dl',8, ...
                'edim',0, ...
-               'solnum','end');
+               'solnum','all');
 
     % Integrate
     T_surf_avg=postint(fem,'T/area', ...
@@ -131,6 +131,5 @@ function answer=solver(kxy,kz,fem,params)
                'edim',2, ...
                'solnum','end');
 
-
-    answer={T_thermistor,T_surf_avg};
+    answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
 end
