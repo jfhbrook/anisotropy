@@ -5,7 +5,7 @@ function answer=solver(kxy,kz,fem,params)
     %solver(kxy,kz,mesh,params)
     %uses comsol to pump out a solution using a given mesh-mat and a k-matrix in comsol format.
 
-    fprintf(['solving for kxy=' num2str(kxy) ' and kz=' num2str(kz) '...\n']);
+    fprintf ['solving for kxy=' num2str(kxy) ' and kz=' num2str(kz) '...\n'];
     % Application mode 1
     clear appl
     appl.mode.class = 'GeneralHeat';
@@ -27,7 +27,7 @@ function answer=solver(kxy,kz,fem,params)
     % Heat capacities
     equ.C = {params.cp_snow,params.cp_needle};
     % Wattage
-    equ.Q = {0,params.q_needle/pi/(params.rneedle)^2};
+    equ.Q = {0,params.q_needle};
     % Heat conductivities
     equ.k = {symmetric_tocell(diag([kxy,kxy,kz])),params.k_needle};
     equ.ind = [1,2];
@@ -121,7 +121,7 @@ function answer=solver(kxy,kz,fem,params)
                'recover','off', ...
                'dl',8, ...
                'edim',0, ...
-               'solnum','all');
+               'solnum','end');
 
     % Integrate
     T_surf_avg=postint(fem,'T/area', ...
@@ -132,5 +132,5 @@ function answer=solver(kxy,kz,fem,params)
                'solnum','end');
 
 
-    answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
+    answer={T_thermistor,T_surf_avg};
 end

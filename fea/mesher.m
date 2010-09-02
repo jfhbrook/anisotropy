@@ -6,7 +6,7 @@ function fem=mesher(angle,params)
     % mesh_generate(angle)
     % generates a mesh for the given angle. 
 
-    fprintf(['meshing for angle=' num2str(angle) '...\n']);
+    fprintf ['meshing for angle=' num2str(angle) '...\n'];
     flclear fem
 
     % COMSOL version
