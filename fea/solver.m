@@ -5,7 +5,7 @@ function answer=solver(kxy,kz,fem,params)
     %solver(kxy,kz,mesh,params)
     %uses comsol to pump out a solution using a given mesh-mat and a k-matrix in comsol format.
 
-    fprintf ['solving for kxy=' num2str(kxy) ' and kz=' num2str(kz) '...\n'];
+    fprintf(['solving for kxy=' num2str(kxy) ' and kz=' num2str(kz) '...\n']);
     % Application mode 1
     clear appl
     appl.mode.class = 'GeneralHeat';

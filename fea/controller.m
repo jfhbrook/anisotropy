@@ -1,13 +1,13 @@
 %controller.m
 %does the controlling
 
-%angles = linspace(0,90,10);
-angles = [0];
+angles = 10:10:90;
+%angles = [0];
 ks = linspace(0.2,0.4,8);
 
 [kxy,kz] = meshgrid(ks,ks);
 
-flreport('off');
+%flreport('off');
 
 % Some parameters we won't want to iterate through
 params=struct('rsnow', 0.4, ...
@@ -21,11 +21,11 @@ params=struct('rsnow', 0.4, ...
               'k_needle', 160, ...
               'time', [colon(0,0.1,1) colon(2,2,10) colon(20,10,100)]);
 
-saveroot='./';
+saveroot='./solutions';
 
 
 for angle=angles,
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
-    save([saveroot 'solution-' date '-' num2str(angle)],solutions,angle,ks,params);
+    save([saveroot 'solution-' date '-' num2str(angle)],'solutions','angle','ks','params');
 end
