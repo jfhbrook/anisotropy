@@ -31,3 +31,6 @@ for angle=angles,
     solutions = cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{0}, 'UniformOutput', true);
     save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
 end
+
+% Emails me when everything's done
+system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit\'s done!" josh.holbrook@gmail.com');
