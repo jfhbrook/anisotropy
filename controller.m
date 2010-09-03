@@ -33,4 +33,4 @@ for angle=angles,
 end
 
 % Emails me when everything's done
-system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit\'s done!" josh.holbrook@gmail.com');
+system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit''s done!" josh.holbrook@gmail.com');
