@@ -21,7 +21,7 @@ params=struct('rsnow', 0.4, ...
               'k_needle', 160, ...
               'time', [logspace(0.1,1,15) logspace(1,3,15)]);
 
-saveroot='./solutions';
+saveroot=['./solutions-' date '/'];
 
 
 for angle=angles,
@@ -29,5 +29,5 @@ for angle=angles,
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
     fprintf('Fitting solutions...\n');
     solutions = cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{0}, 'UniformOutput', true);
-    save([saveroot 'solution-' date '-' num2str(angle)],'solutions','angle','ks','params');
+    save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
 end
