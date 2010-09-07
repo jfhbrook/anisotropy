@@ -28,7 +28,7 @@ for angle=angles,
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
     fprintf('Fitting solutions...\n');
-    solutions = {cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{1}, 'UniformOutput', true) solutions{1} solutions{2} };
+    solutions = {cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{1}, 'UniformOutput', false) solutions{1} solutions{2} };
     save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
 end
 
