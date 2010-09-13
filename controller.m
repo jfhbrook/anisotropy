@@ -3,7 +3,7 @@
 
 angles = 0:10:90;
 %angles = [0];
-ks = linspace(0.2,0.4,8);
+ks = linspace(0.2,0.4,6);
 
 [kxy,kz] = meshgrid(ks,ks);
 
@@ -25,6 +25,9 @@ saveroot=['./solutions-' date '/'];
 
 
 for angle=angles,
+??? Index exceeds matrix dimensions.
+
+Error in ==> @(tsd)fitter(tsd(1,:),tsd(2,:),params.q_needle)
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
     fprintf('Fitting solutions...\n');
