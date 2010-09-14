@@ -4,6 +4,7 @@
 angles = 0:10:90;
 %angles = [0];
 ks = linspace(0.2,0.4,6);
+%ks = [1]
 
 [kxy,kz] = meshgrid(ks,ks);
 
@@ -25,15 +26,14 @@ saveroot=['./solutions-' date '/'];
 
 
 for angle=angles,
-??? Index exceeds matrix dimensions.
-
-Error in ==> @(tsd)fitter(tsd(1,:),tsd(2,:),params.q_needle)
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
+    solutions{1}
     fprintf('Fitting solutions...\n');
+    %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
     solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
     save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
-end    solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
+end
 
 % Emails me when everything's done
 system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit''s done!" josh.holbrook@gmail.com');
