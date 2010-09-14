@@ -31,9 +31,9 @@ Error in ==> @(tsd)fitter(tsd(1,:),tsd(2,:),params.q_needle)
     mesh = mesher(angle,params);
     solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
     fprintf('Fitting solutions...\n');
-    solutions = {cellfun(@(tsd) fitter(tsd(1,:),tsd(2,:),params.q_needle), solutions{1}, 'UniformOutput', false) solutions{1} solutions{2} };
+    solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
     save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
-end
+end    solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
 
 % Emails me when everything's done
 system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit''s done!" josh.holbrook@gmail.com');
