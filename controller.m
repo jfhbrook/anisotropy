@@ -1,7 +1,7 @@
 %controller.m
 %does the controlling
 
-angles = 0:10:90;
+angles = 0:15:90;
 %angles = [0];
 ks = linspace(0.2,0.4,6);
 %ks = [1]
@@ -27,11 +27,19 @@ saveroot=['./solutions-' date '/'];
 
 for angle=angles,
     mesh = mesher(angle,params);
-    solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
-    solutions{1}
-    fprintf('Fitting solutions...\n');
+    try
+        solutions = arrayfun(@(x,y) solver(x,y,mesh,params), kxy,kz, 'UniformOutput', false);
+        save solutions
+        fprintf('Fitting solutions...\n');
     %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
-    solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
+        solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false) solutions{1} solutions{2} };
+        fprintf('Omigosh, a solution set is actually done!');
+        system('echo "A solution just finished on" `hostname` | mutt -s "Hey man your shit''s broke!" josh.holbrook@gmail.com');
+    catch
+        system('echo "Shit broke on" `hostname` | mutt -s "Hey man your shit''s broke!" josh.holbrook@gmail.com');
+    end
+    solutions
+    mkdir(saveroot);
     save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
 end
 
