@@ -36,7 +36,7 @@ for angle=angles,
         fprintf('Omigosh, a solution set is actually done!');
         system('echo "A solution just finished on" `hostname` | mutt -s "Hey man your shit''s broke!" josh.holbrook@gmail.com');
     catch
-        system('echo "Shit broke on" `hostname` | mutt -s "Hey man your shit''s broke!" josh.holbrook@gmail.com');
+        system('echo "Shit broke on" `hostname` | mutt -s "A solution got did!" josh.holbrook@gmail.com');
     end
     solutions
     mkdir(saveroot);
