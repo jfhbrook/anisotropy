@@ -1,4 +1,5 @@
 function k = fitter(t,T,params)
+
     logt = log(t(t>1));
     T = T(t>1);
 
@@ -13,9 +14,6 @@ function k = fitter(t,T,params)
         end
     end
 
-    %plot(logt,T,'*');
-    %hold on;
-    %plot(logt, x(1)*logt + x(2));
     k = (params.q_needle)/(4*pi*x(1));
 
 end
