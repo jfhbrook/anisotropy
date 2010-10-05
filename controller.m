@@ -33,7 +33,7 @@ for angle=angles,
         save solutions
         fprintf('Fitting solutions...\n');
     %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
-        solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
+        solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
         fprintf('Omigosh, a solution set is actually done!');
         system('echo "A solution just finished on" `hostname` | mutt -s "A solution got did!" josh.holbrook@gmail.com');
     catch
