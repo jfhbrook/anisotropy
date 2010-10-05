@@ -4,7 +4,7 @@
 %angles = 0:15:90;
 angles = [0];
 %ks = linspace(0.2,0.4,6);
-ks = [1];
+ks = [0.3];
 
 [kxy,kz] = meshgrid(ks,ks);
 
