@@ -1,17 +1,17 @@
 %controller.m
 %does the controlling
 
-angles = 0:15:90;
-%angles = [0];
-ks = linspace(0.2,0.4,6);
-%ks = [1]
+%angles = 0:15:90;
+angles = [0];
+%ks = linspace(0.2,0.4,6);
+ks = [1];
 
 [kxy,kz] = meshgrid(ks,ks);
 
 %flreport('off');
 
 % Some parameters we won't want to iterate through
-% WARNING: q_needle was 635500 in my last run! ;__;
+% WARNING: q_needle was 635500 in my last run! ;__;(t>0
 params=struct('rsnow', 0.4, ...
               'rneedle', 0.00025, ...
               'lneedle', 0.1, ...
@@ -33,7 +33,7 @@ for angle=angles,
         save solutions
         fprintf('Fitting solutions...\n');
     %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
-        solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params.q_needle), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
+        solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),params), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
         fprintf('Omigosh, a solution set is actually done!');
         system('echo "A solution just finished on" `hostname` | mutt -s "A solution got did!" josh.holbrook@gmail.com');
     catch
