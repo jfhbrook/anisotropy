@@ -1,10 +1,11 @@
 function answers=assembler(directory)
     cd(directory);
     d = dir();
-    load(d(3).name);
-    answers = [solutions]
-    for i=4:length(d),
+    answers = [];
+    for i=3:length(d),
+        disp(['Opening ' d(i).name '...']);
         load(d(i).name);
         answers = [answers, solutions];
     end
+    cd('..');
 end
