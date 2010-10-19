@@ -21,7 +21,7 @@ function fem=mesher(angle,params)
 
     % Geometry
     g1=sphere3(num2str(params.rsnow),'pos',{'0','0','0'},'axis',{'0','0','1'},'rot','0');
-    g2=cylinder3(num2str(params.rneedle),num2str(params.lneedle),'pos',{num2str(-params.lneedle/2),'0','0'},'axis',{'1','0','0'},'rot',num2str(angle));
+    g2=cylinder3(num2str(params.rneedle),num2str(params.lneedle),'pos',{num2str(-params.lneedle/2),'0','0'},'axis',{'1','0','0'},'rot','0');
     parr={point3(0,0,0)};
     g3=geomcoerce('point',parr);
     parr={point3(params.rsnow,0,0)};

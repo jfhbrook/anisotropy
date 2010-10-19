@@ -7,7 +7,9 @@ function a=symmetric_tocell(A)
     %test for symmetry
     for i=1:size(A,1),
         for j=i:size(A,1),
-            assert(A(i,j)==A(j,i),['Dawg that matrix aint square (A(' int2str(i) int2str(j) ') != A(' int2str(j) int2str(i) ') ! )']);
+            if (A(i,j)~=A(j,i)),
+                disp(['Warning: Dawg that matrix aint square (A(' int2str(i) int2str(j) ')=' num2str(A(i,j)) ' != A(' int2str(j) int2str(i) ')=' num2str(A(j,i)) ' ! )']);
+            end
         end
     end
 
