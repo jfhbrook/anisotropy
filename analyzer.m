@@ -91,4 +91,3 @@ end
 xlabel('angle (degrees)');
 ylabel('k_{zz}/k_{xy}');
 zlabel('k_{meas}/k_{xy}');
-

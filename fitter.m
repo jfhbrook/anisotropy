@@ -13,9 +13,6 @@ function k = fitter(t,T,rset,params)
         end
     end
 
-    %plot(logt,T,'*');
-    %hold on;
-    %plot(logt, x(1)*logt + x(2));
     k = (params.q_needle)/(4*pi*x(1));
 
 end
