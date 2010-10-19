@@ -5,11 +5,14 @@
 %load solutions-19-Sep-2010/solutions-all.mat;
 
 %Things I already know :)
-ks = linspace(0.2, 0.4, 6);
-ks = [0.2,0.4];
-[kxy, kz] = meshgrid(ks, ks);
+%ks = linspace(0.2, 0.4, 6);
+%ks = [0.2,0.4];
+%[kxy, kz] = meshgrid(ks, ks);
+[kzy, kz] = meshgrid(0.3, 0.5);
+ks = 1;
 angles = 0:15:90;
-angles = [0 90];
+angles = 0:5:90;
+%angles = [0 90];
 
 %For an obvious color gradient, from red to blue right now.
 colores = @(i,n) [sin((i/n)*pi/2), 0, cos((i/n)*pi/2)];
