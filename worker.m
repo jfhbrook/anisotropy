@@ -38,7 +38,7 @@ function worker(kxy,kz)
         save('angles.mat', 'angles');
         solutions
         mkdir(saveroot);
-        save([saveroot 'solution-' num2str(angle)],'solutions','angle','ks','params');
+        save([saveroot 'solution-' num2str(angle)],'solutions','angle','kxy','kz','params');
     end
 
     % Emails me when everything's done

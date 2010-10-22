@@ -1,5 +1,6 @@
 %analyzer
 %Does some analyzing of the simulation results
+%breaks for [kxy,kz] != meshgrid(ks,ks)
 
 %Solutions location
 %load solutions-19-Sep-2010/solutions-all.mat;
@@ -8,10 +9,10 @@
 %ks = linspace(0.2, 0.4, 6);
 %ks = [0.2,0.4];
 %[kxy, kz] = meshgrid(ks, ks);
-[kzy, kz] = meshgrid(0.3, 0.5);
-ks = 1;
-angles = 0:15:90;
-angles = 0:5:90;
+%[kzy, kz] = meshgrid(0.3, 0.5);
+%ks = 1;
+%angles = 0:15:90;
+%angles = 0:5:90;
 %angles = [0 90];
 
 %For an obvious color gradient, from red to blue right now.
@@ -59,7 +60,7 @@ for theta=1:length(angles)
         disp(['Warning: average surface temps are a bit high at theta=' num2str(angles(theta))] );
         disp(tavgs);
     end
-    %This simulation should *probably* be done on the same basis as the
+    This simulation should *probably* be done on the same basis as the
     if theta == length(angles)
         figure;
         hold on;
@@ -85,7 +86,9 @@ figure;
 hold on;
 [kgrid, anggrid] = meshgrid(ks, angles);
 for n=1:length(ks)
-    plot3(reshape(anggrid',[],1), reshape(kgrid'/ks(n),[],1), reshape(kms{n}',[],1), '*-', 'color', colores(n, length(ks)));
+    x = reshape(anggrid',[],1), reshape(kgrid'/ks(n),[],1)
+    y = reshape(kms{n}',[],1)
+    plot3(x, y, '*-', 'color', colores(n, length(ks)));
 end
 %legend(arrayfun(@(x) num2str(x),ks, 'UniformOutput', false));
 xlabel('angle (degrees)');

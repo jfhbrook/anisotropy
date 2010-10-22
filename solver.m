@@ -134,7 +134,7 @@ function answer=solver(kxy,kz,fem,theta,params)
 
     answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
     %angles = params.angles(2:length(params.angles));
-    fprintf([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
-    system([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
+    %fprintf([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
+    %system([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
     %save('angles.m', 'angles');
 end
