@@ -8,7 +8,7 @@ from numpy import array, meshgrid, unique, floor, abs
 table = tablib.Dataset()
 #This having-to-extract-spaces stuff? Not gudt!
 #Note: This csv has been pre-sorted with gnumeric.
-table.csv = re.sub(' ', '', open('data.csv').read())
+table.csv = re.sub(' ', '', open('data_stripped.csv').read())
 
 # fyi
 # > print( table.headers )
