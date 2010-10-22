@@ -1,11 +1,3 @@
 *~
 *.lock
 *.log
-supervise
-proposal
-road_map
-*.tex
-*.png
-*.pdf
-*.aux
-*.log
