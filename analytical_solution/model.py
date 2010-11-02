@@ -26,6 +26,7 @@ def Tavg(r0, k_x, k_y, t):
 
     return array([quad(lambda th: f(r0, k_x, k_y, th, time), 0, 2*pi)[0] / quad(lambda th: g(r0, k_x, k_y, th), 0, 2*pi)[0] for time in t])
 
+#Do I even need this?
 def rot(th, axis):
     from numpy.linalg import norm
     from numpy import sin, cos, eye, outer, cross
@@ -46,13 +47,15 @@ def rot(th, axis):
 def proj(threespace, twospace):
     #Using the normalized two-space as
     from numpy import diag
-    from numpy.linalg import norm
+    from numpy.linalg import norm, eig
     twospace = dot(twospace, diag([1.0/norm(twospace.T[i]) for i in xrange(twospace.shape[0])]))
     print(twospace)
-    return dot(twospace, 
-               diag(dot(array([1,1,1]), 
-                        dot(pad(twospace, threespace.shape), 
-                            threespace))[0:twospace.shape[0]]) )
+    #kind of a lisp-ish indent pattern, eh? >_<
+    #Could probably make this more efficient.
+    return eig(dot(twospace, 
+                   diag(dot(array([1,1,1]), 
+                            dot(pad(twospace, threespace.shape), 
+                                threespace))[0:twospace.shape[0]])))
 
 def pad(matrix, mn):
     #Pads matrix to be mxn by adding zeros to right and bottom
