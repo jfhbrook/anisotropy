@@ -1,30 +1,38 @@
 from math import pi
 from numpy import log, sin, cos, sqrt, array, arange, linspace, dot
 from functools import reduce
-#from stevia import proj
 #from matplotlib import pyplot as plt
+
+#TODO:
+# 1) angles = arange(some bullshit)
+# 2) Rotate xz plane along y by angle degrees
+# 3) Find 2-d problem for x'z' plane
+# 4) Find that k-meas as functions of different k_x and k_y
+# 5) Output those solutions!
 
 def elliptical(fxn, ecc):
     from scipy.integrate import quad #Do I want quad?
     from math import pi
     from numpy import sin, cos, sqrt
+    if type(fxn) == int:
+        fxn = lambda ecc, th: fxn
     return quad(lambda th: fxn(ecc,th) *
-                                sqrt( cos(th)**2.0 + (ecc*sin(th))**2.0 )  ,
-                0, 2*pi)
+                               sqrt( cos(th)**2.0 + (ecc*sin(th))**2.0 ),
+                0, 2*pi)[0]
 
-def Tavg(r0, k_x, k_y, t):
+def Tavg(k_x, k_y, q, t):
     """
-    given scalar r0, k_x, k_y and 1-d time, this returns T(t). Or rather,
-    something slightly different, but proportional.
+    given scalar r0, k_x, k_y and 1-d time, this returns a curve with the same 
+    slope at Tavg(t) for long T. May refactor.
     """
-    def r2(r0, k_x, k_y, theta):
-        return r0**2.*(cos(theta)**2. + (k_x/k_y)*sin(theta)**2)
-    def f(r0, k_x, k_y, theta, t):
-        return (1./k_x) * log(4*k_x*t/r2(r0,k_x, k_y,theta))*sqrt(r2(r0, k_x, k_y, theta))
-    def g(r0, k_x, k_y, theta):
-        return sqrt(r2(r0, k_x, k_y, theta))
+    return (4*pi*k_x/q)*array([elliptical(log(t) , k_y/k_x)/elliptical(1, k_y/k_x) for time in t])
 
-    return array([quad(lambda th: f(r0, k_x, k_y, th, time), 0, 2*pi)[0] / quad(lambda th: g(r0, k_x, k_y, th), 0, 2*pi)[0] for time in t])
+def kmeas(Tavg, t, k_x, k_y, q):
+    from numpy import polyfit
+    """
+    Does a quick linear curve fit 
+    """
+    return (q/4/pi/k_x)*polyfit(t, log(Tavg), 1)[0]
 
 #Do I even need this?
 def rot(th, axis):
@@ -58,7 +66,9 @@ def proj(threespace, twospace):
                                 threespace))[0:twospace.shape[0]])))
 
 def pad(matrix, mn):
-    #Pads matrix to be mxn by adding zeros to right and bottom
+    """
+    Pads matrix to be mxn by adding zeros to right and bottom
+    """
     from numpy import hstack, vstack, zeros
     (dh, dw) = tuple(array(mn) - matrix.shape)
     return hstack((
@@ -67,8 +77,10 @@ def pad(matrix, mn):
     ))
 
 def trim(matrix, mn):
-    #Trims matrix by dropping right and bottom edges
-    #Breaks for vectors :S
+    """
+    Trims matrix by dropping right and bottom edges
+    Breaks for vectors :S
+    """
     return matrix[0:mn[0], 0:mn[1]]
 
 if __name__=="__main__":
