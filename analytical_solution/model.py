@@ -3,13 +3,6 @@ from numpy import log, sin, cos, sqrt, array, arange, linspace, dot
 from functools import reduce
 #from matplotlib import pyplot as plt
 
-#TODO:
-# 1) angles = arange(some bullshit)
-# 2) Rotate xz plane along y by angle degrees
-# 3) Find 2-d problem for x'z' plane
-# 4) Find that k-meas as functions of different k_x and k_y
-# 5) Output those solutions!
-
 def elliptical(fxn, ecc):
     from scipy.integrate import quad #Do I want quad?
     from math import pi
@@ -84,11 +77,23 @@ def trim(matrix, mn):
     return matrix[0:mn[0], 0:mn[1]]
 
 if __name__=="__main__":
-    from numpy import eye, arange
-    I = eye(3)
-    I[2,2] = 0
-    #Generates some matrices with a dimension dropped out
-    for theta in pi*arange(90)/180:
-        R = rot(theta, 'x')
-        print( reduce(dot, [R, I, R.T]) )
+    from numpy import diag, arange, meshgrid
+    from math import pi
+    angles = arange(90) #Lots angles :D
+    ks = arange(0.2, 0.05, 0.4)
+    [k_xy, k_z] = meshgrid(ks, ks)
+    results = []
 
+    #TODO:
+    # 1) angles = arange(some bullshit)
+    # 2) Rotate xz plane along y by angle degrees
+    # 3) Find 2-d problem for x'z' plane
+    # 4) Find that k-meas as functions of different k_x and k_y
+    # 5) Output those solutions!
+
+
+    for th in angles:
+        #Need some kxy, kz action.
+        #Generate angular rotation action
+        #Generate k_meas
+        #results.push([angle, k_xy, k_z, k_meas])
