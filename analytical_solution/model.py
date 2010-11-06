@@ -20,12 +20,12 @@ def Tavg(k_x, k_y, q, t):
     """
     return (4*pi*k_x/q)*array([elliptical(log(t) , k_y/k_x)/elliptical(1, k_y/k_x) for time in t])
 
-def kmeas(Tavg, t, k_x, k_y, q):
+def kmeas(k_x, k_y, q, t):
     from numpy import polyfit
     """
     Does a quick linear curve fit 
     """
-    return (q/4/pi/k_x)*polyfit(t, log(Tavg), 1)[0]
+    return (q/4/pi/k_x)*polyfit(t, log(Tavg(k_x, k_y, q, t)), 1)[0]
 
 #Do I even need this?
 def rot(th, axis):
@@ -77,23 +77,35 @@ def trim(matrix, mn):
     return matrix[0:mn[0], 0:mn[1]]
 
 if __name__=="__main__":
-    from numpy import diag, arange, meshgrid
+    from numpy import arange, diag, logspace, meshgrid
     from math import pi
+
     angles = arange(90) #Lots angles :D
-    ks = arange(0.2, 0.05, 0.4)
+
+    ks = arange(0.2, 0.05, 0.4) # Some ks
     [k_xy, k_z] = meshgrid(ks, ks)
-    results = []
+    k_xy = k_xy.flatten()
+    k_z = k_z.flatten()
+
+    q = 0.5 #Like in sims
+    t = hstack(( logspace(0.1,1.0,15),
+                 logspace(1.0,3.0,15) ))
 
     #TODO:
     # 1) angles = arange(some bullshit)
-    # 2) Rotate xz plane along y by angle degrees
     # 3) Find 2-d problem for x'z' plane
     # 4) Find that k-meas as functions of different k_x and k_y
     # 5) Output those solutions!
 
-
     for th in angles:
-        #Need some kxy, kz action.
-        #Generate angular rotation action
-        #Generate k_meas
-        #results.push([angle, k_xy, k_z, k_meas])
+        for i in xrange(ks.shape[0]):
+            (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
+                                 rot(pi/180*th, 'y') )
+            results.append([ th,
+                             k_xy,
+                             k_z,
+                             k_xp,
+                             k_yp,
+                             kmeas(k_xp, k_yp, q, t)])
+
+    print(results)
