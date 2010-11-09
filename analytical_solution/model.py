@@ -60,6 +60,7 @@ def proj(threespace, twospace):
     twospace = dot(twospace, diag([1.0/norm(twospace.T[i]) for i in xrange(twospace.shape[0])]))
     #kind of a lisp-ish indent pattern, eh? >_<
     #Could probably make this more efficient.
+    # BUG IN HERE MOST LIKELY
     return eig(dot(twospace, 
                    diag(dot(array([1,1,1]), 
                             dot(pad(twospace, threespace.shape), 
