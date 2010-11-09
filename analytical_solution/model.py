@@ -94,6 +94,8 @@ if __name__=="__main__":
     [k_xy, k_z] = meshgrid(ks, ks)
     k_xy = k_xy.flatten()
     k_z = k_z.flatten()
+    #print(k_xy)
+    #print(k_z)
 
     q = 0.5 #Like in sims
     t = hstack(( logspace(0.1,1.0,15),
@@ -102,11 +104,12 @@ if __name__=="__main__":
     results = []
     progress = ProgressBar()
     for th in progress(angles):
+        #print(rot(pi/180*th, 'z'))
         #print('Angle: '+ str(th))
         for i in xrange(ks.shape[0]):
             #print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
             (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
-                                 rot(pi/180*th, 'y')[1::,1::] )
+                                 rot(pi/180*th, 'z')[1::,1::] )
             #print('k_xp = '+str(k_xp))
             #print('k_yp = '+str(k_yp))
             results.append([ th,
