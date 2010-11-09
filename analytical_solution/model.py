@@ -52,37 +52,15 @@ def rot(th, axis):
 
 #Want to port some of these ideas to proj, but I suck at stuff
 #Probably don't even actually want to do this, really, but whatevs
-def proj(threespace, twospace):
+def proj(matrix, rot):
     #print('Projecting onto twospace...')
     #Using the normalized two-space as
-    from numpy import diag
-    from numpy.linalg import norm, eig
-    twospace = dot(twospace, diag([1.0/norm(twospace.T[i]) for i in xrange(twospace.shape[0])]))
-    #kind of a lisp-ish indent pattern, eh? >_<
-    #Could probably make this more efficient.
-    # BUG IN HERE MOST LIKELY
-    return eig(dot(twospace, 
-                   diag(dot(array([1,1,1]), 
-                            dot(pad(twospace, threespace.shape), 
-                                threespace))[0:twospace.shape[0]])))[0]
-
-def pad(matrix, mn):
-    """
-    Pads matrix to be mxn by adding zeros to right and bottom
-    """
-    from numpy import hstack, vstack, zeros
-    (dh, dw) = tuple(array(mn) - matrix.shape)
-    return hstack((
-        vstack((matrix,zeros((dh,matrix.shape[1])) )),
-        zeros((mn[0],dw))
-    ))
-
-def trim(matrix, mn):
-    """
-    Trims matrix by dropping right and bottom edges
-    Breaks for vectors :S
-    """
-    return matrix[0:mn[0], 0:mn[1]]
+    from numpy import eye, hstack, newaxis
+    return tuple(reduce( dot, [ hstack(( eye(2), array([0, 0])[:, newaxis] )),
+                                rot,
+                                matrix,
+                                rot.T,
+                                array([1, 1, 1]) ]))
 
 if __name__=="__main__":
     from numpy import arange, diag, logspace, meshgrid
@@ -110,7 +88,7 @@ if __name__=="__main__":
         for i in xrange(ks.shape[0]):
             #print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
             (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
-                                 rot(pi/180*th, 'y')[::2,::2] )
+                                 rot(pi/180*th, 'y'))
             #print('k_xp = '+str(k_xp))
             #print('k_yp = '+str(k_yp))
             results.append([ th,
