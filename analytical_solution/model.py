@@ -85,7 +85,7 @@ if __name__=="__main__":
     for th in progress(angles):
         #print(rot(pi/180*th, 'z'))
         #print('Angle: '+ str(th))
-        for i in xrange(kxy.shape[0]):
+        for i in xrange(k_xy.shape[0]):
             #print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
             (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
                                  rot(pi/180*(th), 'y'))
