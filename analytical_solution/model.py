@@ -1,3 +1,4 @@
+import json
 from math import pi
 from numpy import log, sin, cos, sqrt, array, arange, hstack, linspace, dot
 from functools import reduce
@@ -98,7 +99,7 @@ if __name__=="__main__":
     t = hstack(( logspace(0.1,1.0,15),
                  logspace(1.0,3.0,15) ))
 
-    results = [[]]
+    results = []
     progress = ProgressBar()
     for th in progress(angles):
         #print('Angle: '+ str(th))
@@ -109,12 +110,12 @@ if __name__=="__main__":
             #print('k_xp = '+str(k_xp))
             #print('k_yp = '+str(k_yp))
             results.append([ th,
-                             k_xy,
-                             k_z,
+                             k_xy[i],
+                             k_z[i],
                              k_xp,
                              k_yp,
                              kmeas(k_xp, k_yp, q, t)])
             #print('Done.')
-    for r in results:
-        ', '.join(map(str, r))
+    for row in results:
+        print(', '.join(map(str, row)))
 
