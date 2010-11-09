@@ -115,5 +115,6 @@ if __name__=="__main__":
                              k_yp,
                              kmeas(k_xp, k_yp, q, t)])
             #print('Done.')
-    #print(results)
+    for r in results:
+        ', '.join(map(str, r))
 
