@@ -31,7 +31,7 @@ def kmeas(k_x, k_y, q, t):
     Does a quick linear curve fit 
     """
     #print('Finding k_meas...')
-    return (q/4/pi/k_x)*polyfit(t, log(Tavg(k_x, k_y, q, t)), 1)[0]
+    return (q/4/pi)*polyfit(log(t), Tavg(k_x, k_y, q, t), 1)[0]
 
 #Do I even need this?
 def rot(th, axis):
@@ -67,11 +67,10 @@ if __name__=="__main__":
     from math import pi
     from progressbar import ProgressBar
 
-    #angles = arange(90) #Lots angles :D
-    angles = [90]
+    angles = range(0, 91) # Lots angles :D
 
     ks = arange(0.2, 0.4, 0.05) # Some ks
-    [k_xy, k_z] = meshgrid(ks, ks)
+    (k_xy, k_z) = meshgrid(ks, ks)
     k_xy = k_xy.flatten()
     k_z = k_z.flatten()
     #print(k_xy)
@@ -82,27 +81,23 @@ if __name__=="__main__":
                  logspace(1.0,3.0,15) ))
 
     results = []
-    #progress = ProgressBar()
-    #for th in progress(angles):
-    for th in angles:
-        print(rot(pi/180*th, 'z'))
-        print('Angle: '+ str(th))
-        for i in xrange(ks.shape[0]):
-            print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
+    progress = ProgressBar()
+    for th in progress(angles):
+        #print(rot(pi/180*th, 'z'))
+        #print('Angle: '+ str(th))
+        for i in xrange(kxy.shape[0]):
+            #print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
             (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
-                                 rot(pi/180*(90 - th), 'y')) # 90-th because of
-                                                             # previously-held
-                                                             # convention in
-                                                             # other work
-            print('k_xp = '+str(k_xp))
-            print('k_yp = '+str(k_yp))
+                                 rot(pi/180*(th), 'y'))
+            #print('k_xp = '+str(k_xp))
+            #print('k_yp = '+str(k_yp))
             results.append([ th,
                              k_xy[i],
                              k_z[i],
                              k_xp,
                              k_yp,
                              kmeas(k_xp, k_yp, q, t)])
-            print('Done.')
+            #print('Done.')
     for row in results:
         print(', '.join(map(str, row)))
 
