@@ -110,7 +110,7 @@ if __name__=="__main__":
         for i in xrange(ks.shape[0]):
             #print('k_xy = '+str(k_xy[i])+' and k_z = '+str(k_z[i])+': ')
             (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
-                                 rot(pi/180*th, 'z')[1::,1::] )
+                                 rot(pi/180*th, 'y')[::2,::2] )
             #print('k_xp = '+str(k_xp))
             #print('k_yp = '+str(k_yp))
             results.append([ th,
