@@ -1,0 +1,102 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{euler}
+
+\title{Research}
+\author{Joshua Holbrook}
+
+\begin{document}
+    \section{Background}
+      \subsection{Measurement of Snow's Thermal Conductivity}
+      \subsection{Problems and Complication with Snow Measurements}
+        \subsubsection{Fragile}
+          GHP measurements difficult
+        \subsubsection{Convective Heat Transfer}
+          Due to porous nature of snow.
+        \subsubsection{Phase-Change Heat Transfer}
+          Sublimation and condensation add yet another mode of HT.
+        \subsubsection{Complex Anisotropy}
+          See below. Note, also ever-changing due to phase-changes.
+      \subsection{Needle Probe Theory}
+      \subsection{Anisotropy Theory}
+        \subsubsection{Directional Anisotropy}
+            Constant K-matrix. Note that directional anisotropy may actually be discrete anisotropy in the form of alternating layers of higher and lower heat conductivity.
+            \marginpar{I should show how these alternating layers converge on a anisotropic \([K]\) in the limit as thickness goes to zero.}
+        \subsubsection{Positional Anisotropy}
+          \paragraph{discrete}
+            Discrete layers that are large enough to cause issues.
+          \paragraph{continuous}
+            Suppose linear gradients.
+    \section{Major Posed Questions (There are others)}
+      \subsection{Predicting \(k_{zz}\) From \(k_{xy}\)}
+Is directional anisotropy significant in snow? How does this directional anisotropy interact with any large-scale discrete and/or continuous positional anisotropy? 
+If directional anisotropy is significant, what should we do about it? One suggestion is to develop a correction factor.
+      \subsection{Measuring \([K]\)}
+        If directional anisotropy is significant in snow, then how may we measure it? There are a number of sub-questions here. First, how many measurements do we need, theoretically? Second, can we get away with fewer measurements by making some simplifying assumptions (for example, assuming knowledge of the xy normal vector)?
+      \subsection{Explaining GHP/Needle Method Discrepancies}
+        Needle probe measurements are consistently lower than similar measurements with a hot plate. Can the patterns we see be explained, at least in part, by directional anisotropy?
+    \section{Proposed Method for Finding \([K]\)}
+      \subsection{Fourier's Equation}
+      \subsection{Symmetric, Positive Definite Matrix}
+        This means we can introduce:
+        \begin{itemize}
+          \item what's basically Lame's Ellipsoid.
+          \item A parallel to the Cauchy Stress Vector
+          \item Mohr's circle as well, if you introduce ``shear conductivity''. Which, honestly, is a little silly.
+        \end{itemize}
+        Any one of these, or even other techniques, may be used for some solving action. It also means that, naively, we need 6 measurements to precisely pinpoint directional anisotropy, assuming no positional anisotropy.
+      \subsection{Discuss Solving for \([K]\) in Lame's Ellipsoid}
+        (This is, honestly, all supposition for now.)
+    \section{Modeling}
+      \subsection{Model Choices, Assumptions, Etc.}
+        \subsubsection{Spherical CV?}
+        \subsubsection{Positional Anisotropy}
+          \begin{itemize}
+            \item Initially ignore
+            \item Compare to ``equivalent'' thin-layer model
+            \item Compare to model with positional gradient in z
+            \item (Compare to model with positional gradient in x?)
+          \end{itemize}            
+        \subsubsection{\(k_{xy} = k_x = k_y \ne k_z\)}
+        \subsubsection{Some range for \(k_{xy}\)}
+          (Apparently, 0.3 is a magic number. ;))
+        \subsubsection{Some range for \(k_z\)}
+        \subsubsection{\(\theta \in [0, \frac{\pi}{2} ]\)}
+        \subsubsection{Needle Probe Geometry Assumptions}
+        \subsubsection{CV boundary temperature monitoring}
+          (Makes sure boundary effects aren't skewing data)
+        \subsubsection{Model both heating AND cooling!}
+      \subsection{``Backing Out'' \([K]\)}
+        \subsubsection{How do we get \(k_v\)?}
+          \paragraph{What represents the ``long-time solution?''}
+            There will be numerical differentiation, which (based on some initial experimentation) will be rife with obnoxious NOISE. How do we clear this up? We'll need to find the domain where \(T'' = 0\) and we'll need the average value for \(T'\).
+        \subsubsection{Given \(k_v\) measurements}
+          Will likely curve fit results to Lame's Ellipsoid (using \(1/k_v\) in \(v\) direction of measurement) and see how the results compare, and see how well the ellipsoid actually fits. Hell, it might not even really be the best way to do this.
+          What I could ask is: If one knows an arbitrary collection of axial components of stress vectors, can we find the stress tensor? This approach depends on our measurements being equivalent to this, for \([k]\), which isn't necessarily known. It may be worth reading up on theory to see if this pans out analytically.
+      \subsection{Results Comparisons}
+        \begin{itemize}
+          \item Directional anisotropy results with positionally-influenced snow block models
+          \item Needle measurements vs. GHP measurements
+        \end{itemize}
+    \section{Laboratory Experiments}
+      \subsection{Models}
+        \begin{itemize}
+          \item Thin layers model (foam and silicone?)
+            I've come up with some theoretical k-values action based on geometry for layers and honeycomb. Need to write up!
+          \item Thick layers model?
+          \item gradient model?
+        \end{itemize}
+      \subsection{Measurement}
+        \subsubsection{Needle Probes}
+        \subsubsection{GHP}
+      \subsection{How do things compare?}
+        \subsubsection{Model vs. Reality}
+        \subsubsection{Needle vs. GHP}
+        \subsubsection{Directional vs. Positional, etc}
+        \subsubsection{Role of \(k_{xy}/k_z\) on results}
+    \section{IRL}
+      \subsection{``Field measurements are non-trivial.'' --Jerry Johnson}
+        This probably means that, unless I have lots of extra time, I shouldn't tackle this. Even if I do, it's gonna be a whole 'nother ball game.
+      \subsection{Ramifications}
+        This is where I revisit the original questions and see what I can answer.
+\end{document}
