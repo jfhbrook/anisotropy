@@ -23,6 +23,9 @@ table.append(col = ['kmeas_n']
                    + map(lambda x,y: str(floor(1000*float(x)/float(y))/1000),
                          table['kmeas'], table['kxy']) )
 
+#json for jabbascripts
+print(table.json)
+
 #Note, dtype is string. Will have to convert.
 nptable = array(table._data)
 

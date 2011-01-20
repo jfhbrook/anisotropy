@@ -1,0 +1,2 @@
+ks = [0.2, 0.4];
+[kxy, kz] = meshgrid(ks, ks);
