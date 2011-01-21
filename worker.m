@@ -26,9 +26,9 @@ function worker(kxy,kz)
     for angle=angles,
         try
             solutions = arrayfun(@(x,y) solver(x,y,mesh,angle,params), kxy,kz, 'UniformOutput', false);
-            %save solutions
-            %fprintf('Fitting solutions...\n');
-            %solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),0.999,params), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
+            save solutions
+            fprintf('Fitting solutions...\n');
+            solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),0.999,params), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
             fprintf('Omigosh, a solution set is actually done!');
             system('echo "A solution just finished on" `hostname` | mutt -s "A solution got did!" josh.holbrook@gmail.com');
         catch exception
@@ -37,8 +37,8 @@ function worker(kxy,kz)
         angles = angles(2:length(angles));
         save('angles.mat', 'angles');
         %solutions
-        %mkdir(saveroot);
-        %save([saveroot 'solution-' num2str(angle)],'solutions','angle','kxy','kz','params');
+        mkdir(saveroot);
+        save([saveroot 'solution-' num2str(angle)],'solutions','angle','kxy','kz','params');
     end
 
     % Emails me when everything's done
