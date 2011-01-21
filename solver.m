@@ -30,7 +30,7 @@ function answer=solver(kxy,kz,fem,theta,params)
     equ.Q = {0,params.q_needle/pi/(params.rneedle)^2};
     % Heat conductivities
     arr = [cos(theta*pi/180), 0, sin(theta*pi/180); 0, 1, 0; -sin(theta*pi/180), 0, cos(theta*pi/180)]; %rotation matrix
-    equ.k = {symmetric_tocell(arr*diag([kxy,kxy,kz])*(arr')),params.k_needle}
+    equ.k = {symmetric_tocell(arr*diag([kxy,kxy,kz])*(arr')),params.k_needle};
     equ.ind = [1,2];
     appl.equ = equ;
     fem.appl{1} = appl;
@@ -42,7 +42,7 @@ function answer=solver(kxy,kz,fem,theta,params)
     fem.units = units;
 
     % Coupling variable elements
-    clear elemcpl
+    clear elemcpl/export/scratch/holbrook/anisotropy_fea
     % Integration coupling variables
     clear elem
     elem.elem = 'elcplscalar';
@@ -125,16 +125,19 @@ function answer=solver(kxy,kz,fem,theta,params)
                'solnum','all');
 
     % Integrate
-    T_surf_avg=postint(fem,'T/area', ...
+    T_surf_avg=postint(fem,'T/export/scratch/holbrook/anisotropy_fea/export/scratch/holbrook/anisotropy_fea/area', ...
                'unit','', ...
                'recover','off', ...
                'dl',[1,2,3,4,10,11,12,13], ...
                'edim',2, ...
                'solnum','end');
 
-    answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
+    %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
     %angles = params.angles(2:length(params.angles));
     %fprintf([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
     %system([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
+
+    flsave(['fem-' num2str(theta) '-' num2str(kxy) '-' num2str(kz) '.mph']);
+
     %save('angles.m', 'angles');
 end
