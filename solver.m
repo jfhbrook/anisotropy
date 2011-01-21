@@ -97,7 +97,7 @@ function answer=solver(kxy,kz,fem,theta,params)
                     'mcase',[0 1]);
 
     % Save current fem structure for restart purposes
-    % fem0=fem;
+    fem0=fem;
 
     % Plot solution
     %{
@@ -125,19 +125,19 @@ function answer=solver(kxy,kz,fem,theta,params)
                'solnum','all');
 
     % Integrate
-    T_surf_avg=postint(fem,'T/export/scratch/holbrook/anisotropy_fea/export/scratch/holbrook/anisotropy_fea/area', ...
+    T_surf_avg=postint(fem,'T', ...
                'unit','', ...
                'recover','off', ...
                'dl',[1,2,3,4,10,11,12,13], ...
                'edim',2, ...
                'solnum','end');
 
-    %answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
-    %angles = params.angles(2:length(params.angles));
+    answer={[fem.sol.tlist; T_thermistor],T_surf_avg};
+    angles = params.angles(2:length(params.angles));
     %fprintf([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
     %system([ '''' kxy '; ' kz '; ' theta '; ' fem.sol.tlist '; ' T_thermistor '; ' T_surf_avg ''' >> results.txt' ]);
 
-    flsave(['fem-' num2str(theta) '-' num2str(kxy) '-' num2str(kz) '.mph']);
+    %flsave(['fem-' num2str(theta) '-' num2str(kxy) '-' num2str(kz) '.mph']);
 
-    %save('angles.m', 'angles');
+    save('angles.m', 'angles');
 end
