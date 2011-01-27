@@ -1,59 +1,60 @@
-\documentclass{uafthesis}
+\documentclass[letterpaper]{uafthesis}
 
-\special{papersize=8.5in, 11in}
-\usepackage{ppl} %paladino font
+\usepackage{ppl} % Bitches love the Paladino font.
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx, float} % Graphics stuff
+\usepackage{verbatim} % Mostly for the comment environment.
+\usepackage{chapterbib} % The grad school likes bibliographies per-chapter.
 
-\usepackage{amsmath, graphicx, array}
-\usepackage{chapterbib}
+\input custom-macros.tex
+
+\includeonly{introduction, ch_1}
 
 \begin{document}
-
-%% wtf is this shit again?
-%\input abbrevs_TU.tex 
 
 \title{The Measurement of Anisotropic Thermal Conductivity of Snow With Needle Probes}
 \author{Joshua Holbrook}
 
 \degreeyear{2011}
 \degreemonth{May}
-\degree{Master of Mechanical Engineering}
-\numberofmembers{3}
+\degree{Master of Science}
+\numberofmembers{3} % Make sure this is right! The grad school hates empty
+                    % signature lines.
 \prevdegrees{B.S.}
 \college{College of Engineering and Mines}
 
 \makesig
 \maketitle
 
-%% Must use \input, not \include
+% Wondering when to use `input' and when to use `include?'
+% read http://en.wikibooks.org/wiki/LaTeX/Basics#Big_Projects .
 \begin{abstract}
   \input abstract.tex
 \end{abstract}
 
+
+%Table of Contents and such
 \tableofcontents
 \listoffigures
 \listoftables
 \listofothermaterials
 \listofappendices
 
-%% Must use \input, not \include
 \begin{acknowledgements}
   \input acknowledgements.tex
 \end{acknowledgements}
 
-%% Quotepage is optional and gratuitous.  Use it.
-%% Must use \input, not \include
 \begin{quotepage}
   \input quotepage.tex
 \end{quotepage}
 
-%% Now it is cooler, for later purposes, to use \include
-\include{intro}
-\include{chapter1_bib}
-\include{chapter2_bib}
+\include{introduction}
+\include{ch_1}
+\include{ch_2}
 \include{conclusions}
 
 \appendix
-\include{appendix1}
-\include{appendix2}
+\include{appendix_1}
+\include{appendix_2}
 
 \end{document}
