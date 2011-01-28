@@ -1,24 +1,118 @@
-\chapter{Needle Probes: How Do They Work?}
-\label{sec:ch1}
+\chapter{Analytical Musings}
+\section{The Isotropic Case}
 
-\bigskip
+The isotropic case solves the following equation:
 
-\section*{Abstract}
-\label{sec:ch1_abstract}
+\begin{equation*}
+-k\nabla^2 T = \rho C\frac{\partial T}{\partial t}
+\end{equation*}
 
-Hustle and bustle, baby!
+From Carslaw \& Jaeger, pg. 261, the analytical solution to the problem with an infinite line source is:
 
-\section{Introduction}
-\label{sec:ch1_introduction}
+\begin{equation}
+\label{isotropic_ei}
+T(r,t) = - \frac{q}{4\pi K}\Ei\left(-\frac{r^2}{4Kt}\right)
+\end{equation}
 
-Let's discuss needle probes.
+Note that this solution comes from casting the problem into cylindrical coordinates, and that temperature is independent of \(z\).
 
-\section{Needle Probes}
-\label{sec:ch1_needle_probes}
+Solving for the exponential integral is non-trivial.  Typically, we instead use an approximation for small \(r/t\),
 
-Fukken needle probes
+\begin{equation}
+\label{isotropic_case}
+T(r,t) = \frac{q}{4\pi K}\ln\left(\frac{4Kt}{r^2}\right) - \frac{\gamma q}{4\pi K}
+\end{equation}
 
-\section{Conclusions}
-\label{sec:ch1_conclusions}
+Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve that for \(K\). We will be working with \ref{isotropic_case} for the remainder of this analysis, though it could easily be applied to \ref{isotropic_ei} as well.
 
-In conclusion, needle probes.
+\section{Coordinate Transformation}
+
+In two dimensions, without loss of generality, the anisotropic case can be posed like so:
+
+\begin{equation}
+-\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 && k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
+\end{equation}
+
+Because the isotropic solution casts the problem into cylindrical coordinates such that \(T\) is independent of \(z\), if we do the same thing here. That is, we may remove the \(z\) components of \([K]\) and solve the corresponding 2-D equation in polar coordinates. Moreover, we may choose \(x\) and \(y\) such that the 2-D \([K]\) matrix has zeros on the off-diagonal--hence, without loss of generality.
+
+In order to apply the isotropic solution to this anisotropic case, we would like to apply a coordinate transformation such that we can transform the problem into an isotropic case with respect to some \(x' = a_x x\) and \(y' = a_y y\). Without loss of generality, suppose \(a_x = 1\). Now:
+
+\begin{align*}
+\frac{dx'}{dx} &= 1\\
+\frac{dy'}{dy} &= a_y\\
+\frac{\partial f}{\partial x} &= \frac{\partial f}{\partial x'}\frac{dx'}{dx}\\
+    &= \frac{\partial f}{\partial x'}\\
+\frac{\partial f}{\partial y} &= \frac{\partial f}{\partial y'}\frac{dy'}{dy}\\
+    &= a_y\frac{\partial f}{\partial y'}\\
+\nabla T &= \frac{\partial T}{\partial x'} \e_{x'} + a_y\frac{\partial T}{\partial y'} \e_{y'} \\
+[K]\nabla T &= k_x\frac{\partial T}{\partial x'} \e_{x'} + k_ya_y\frac{\partial T}{\partial y'} \e_{y'}\\
+\nabla \cdot \left([K]\nabla T\right) &= k_x\frac{\partial^2 T}{\partial {x'}^2} + k_ya_y^2\frac{\partial^2 T}{\partial {y'}^2}\\
+\end{align*}
+
+Now, suppose we set the right side equal to the equivalent isotropic expression:
+\begin{equation*}
+k\left(\frac{\partial^2 T}{\partial {x'}^2} + \frac{\partial^2 T}{\partial {y'}^2} \right) = k_x\frac{\partial^2 T}{\partial {x'}^2} + k_ya_y^2\frac{\partial^2 T}{\partial {y'}^2}
+\end{equation*}
+
+As a result,
+
+\begin{align*}
+k &= k_x\\ a_y &= \sqrt{\frac{k_x}{k_y}}\\
+\end{align*}
+
+Therefore, the following coordinate transformation will allow us to apply the
+isotropic solutions to an isotropic case with \(k = k_x\):
+
+\begin{equation}
+    \label{coord_trans}
+    \begin{pmatrix}x' \\ y'\end{pmatrix} =
+    \begin{bmatrix}1 & 0\\ 0 & \sqrt{\frac{k_x}{k_y}} \end{bmatrix}\begin{pmatrix}x \\ y\end{pmatrix}
+\end{equation}
+
+\section{What Are We Measuring, Anyway?}
+
+Using equation \ref{coord_trans}, we may apply the isotropic solution:
+
+\begin{equation}
+    -k_x \nabla^2 T = \rho C\frac{\partial T}{\partial t}
+\end{equation}
+
+and get the following result (for sufficiently large \(t/r'\)):
+
+\begin{equation}
+T(r',t) = \frac{q}{4\pi k_x}\ln\left(\frac{4k_xt}{r'^2}\right) - \frac{\gamma q}{4\pi k_x}
+\end{equation}
+
+When measuring for the anisotropic case, I argue that we are effectively measuring the temperature at some \(r = r_{\textrm{0}}\)---either on the surface of the needle, or some small distance away from the needle.
+
+Applying this technique to the anisotropic case, we find that we must also transform \(r_{xy} = \cos(\theta) \hat{e}_x + \sin(\theta) \hat{e}_y \) into \(r_{x'y'}\):
+
+\begin{align*}
+    \begin{pmatrix}r_{x'} \\ r_{y'}\end{pmatrix} &=
+    \begin{bmatrix}1 & 0\\ 0 & \sqrt{\frac{k_x}{k_y}} \end{bmatrix}\begin{pmatrix}r_0\cos(\theta) \\ r_0\sin(\theta)\end{pmatrix}\\
+    &= r_0\left(\cos(\theta) \e_x + \sqrt{\frac1{k_y}} \e_y \right)\\
+\end{align*}
+\begin{equation}
+    \norm{r}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
+\end{equation}
+
+This means that the temperature around the needle should now vary as a function of \(\theta\), unlike in the isotropic case. Now, since the needle only measures a single value, it seems logical to suggest that the measured quantity is an average temperature---say, the average surface temperature of the probe.  This may be expressed like so:
+
+\begin{equation}
+T_{\textrm{avg}}(t) = \frac{ \int_0^{2\pi} T(r,t) rd\theta }
+                           { \int_0^{2\pi} rd\theta}
+\end{equation}
+
+I ended up simplifying it such that, where
+
+\begin{equation}
+\mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi
+\end{equation}
+
+we have
+
+\begin{equation}
+\frac{4\pi k_x}{q} \frac{\mathcal{E}(\ln(t), \frac{k_y}{k_x})}{\mathcal{E}(1, \frac{k_y}{k_x})}
+\end{equation}
+
+\end{document}
