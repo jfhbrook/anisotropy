@@ -42,13 +42,14 @@ def unique(col):
 # This function converts those to absolute seconds, and rebuilds the
 # table appropriately.
 def hms_to_s(data):
-# This bit here converts hhmm to seconds and adds to s.
-# It doesn't account for changes in the julian days.
-# Just don't test @ midnight, I guess.
+    # This bit here converts hhmm to seconds and adds to s.
+    # It doesn't account for changes in the julian days.
+    # Just don't test @ midnight, I guess.
     def convert(hourmin, sec):
         return 3600* + hourmin//100 + 60* hourmin%100 + sec
 
-    seive = lambda st: (st != 'hourmin') and (st != 'sec')
+    def sieve(st):
+        return (st != 'hourmin') and (st != 'sec')
 
     sec = map(lambda t: convert(t[0], t[1]), 
                    zip(data['hourmin'], data['sec']))
@@ -59,14 +60,25 @@ def hms_to_s(data):
     new_headers = ['sec']+filter(seive, data.headers)
     return tablib.Dataset(*new_data, headers=new_headers)
 
+#Untested.
+def tab_filter(data, header, testfxn):
+    for (i, pt) in enumerate(data[header]):
+        if !testfxn(pt):
+            del data[i]
+    return data
 
-def tab_filter(data, header, valfxn):
+
+#stub
+def tab_plot(data, x_header):
+    pass
+    #from matplotlib.pyplot import plot
+    #plot(x,y) with labels
+
 
 if __name__=='__main__':
     data = hms_to_s(import_raw_data('CR10_final_storage_1308.csv'))
 
     print unique(data['day'])
 
-    print(data.headers)
-    for row in data.data[:5]:
-        print(row)
+    #untested.
+    print tab_filter(data, 'day', lambda dy: dy==44)
