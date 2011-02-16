@@ -98,6 +98,13 @@ def tab_plot(data, x_header, y_headers = None ):
 
 if __name__=='__main__':
 
+    #note2self:
+    # > import datetime
+    # > datetime.date.fromordinal(44)
+    # datetime.date(1, 2, 13)
+    # > datetime.toordinal(_)
+    # 44
+
     data = tab_filter(hms_to_s(import_raw_data('CR10_final_storage_1308.csv')),
                       'day',
                       lambda dy: dy==44)
