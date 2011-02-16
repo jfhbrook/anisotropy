@@ -46,7 +46,7 @@ def hms_to_s(data):
     # It doesn't account for changes in the julian days.
     # Just don't test @ midnight, I guess.
     def convert(hourmin, sec):
-        return 3600* + hourmin//100 + 60* hourmin%100 + sec
+        return 60*(hourmin%100) + sec #+ 3600*(hourmin//100 )
 
     def sieve(st):
         return (st != 'hourmin') and (st != 'sec')
@@ -55,30 +55,53 @@ def hms_to_s(data):
                    zip(data['hourmin'], data['sec']))
 
     new_data = zip(sec, *map( lambda h: data[h],
-                               filter(seive, data.headers) ))
-
-    new_headers = ['sec']+filter(seive, data.headers)
+                               filter(sieve, data.headers) ))
+    new_headers = ['sec']+filter(sieve, data.headers)
     return tablib.Dataset(*new_data, headers=new_headers)
+
 
 #Untested.
 def tab_filter(data, header, testfxn):
+    new_data = [];
     for (i, pt) in enumerate(data[header]):
-        if !testfxn(pt):
-            del data[i]
+        if testfxn(pt):
+            new_data.append(data[i])
+    return tablib.Dataset(*new_data, headers=data.headers)
+
+def tab_pprint(data):
+    width = 2 + max(map(lambda st: len(st), data.headers))
+
+    def padder(st):
+        l = len(str(st))
+        return st + (width-l)*" " if l <= width else st[:width]
+
+    print " | ".join(map(padder,data.headers))
+    print "-"*((width+2)*len(data.headers)-1)
+    for row in data:
+        print " | ".join(map(padder,map(str,row)))
+
+#Untested.
+def tab_plot(data, x_header, y_headers = None ):
+    import matplotlib.pyplot as pyplot
+
+    headers = filter(lambda h: h != x_header, data.headers if y_headers == None else y_headers)
+
+    xs = [ data[x_header] for i in range(len(headers)) ]
+    ys = [ data[header] for header in headers]
+
+    pyplot.plot(*reduce(lambda a, b: a+b, zip(xs,ys)))
+    pyplot.xlabel(x_header)
+    pyplot.ylabel('Everything Else')
+    pyplot.show()
     return data
 
 
-#stub
-def tab_plot(data, x_header):
-    pass
-    #from matplotlib.pyplot import plot
-    #plot(x,y) with labels
-
-
 if __name__=='__main__':
-    data = hms_to_s(import_raw_data('CR10_final_storage_1308.csv'))
 
-    print unique(data['day'])
+    data = tab_filter(hms_to_s(import_raw_data('CR10_final_storage_1308.csv')),
+                      'day',
+                      lambda dy: dy==44)
 
-    #untested.
-    print tab_filter(data, 'day', lambda dy: dy==44)
+    tab_pprint(data)
+
+    #tab_plot(data, 'sec', ["needletemp", "reftemp"])
