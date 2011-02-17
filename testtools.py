@@ -96,6 +96,29 @@ def tab_plot(data, x_header, y_headers = None ):
     return data
 
 
+#A class of tools for splitting data up
+class Splitters(object):
+
+    @staticmethod
+    def hot_and_cold(data):
+        from scipy.optimize import curvefit
+
+        split = curvefit(lambda x, a: a[1]*(1 if (x > a[0]) else 0) + a[2],
+                          data['sec'],
+                          data['volts'],
+                          ( 0.5*(data['sec'][0]+data['sec'][1]),
+                            data['volts'][0],
+                            0))[0]
+        print split
+        print data[:10]
+        hot = data[:split]
+        print hot
+        cold = data[split:]
+        print cold
+        return { 'hot': tablib.Dataset(hot, data.headers),
+                 'cold': tablib.Dataset(cold, data.headers) }
+
+
 if __name__=='__main__':
 
     #note2self:
@@ -109,6 +132,6 @@ if __name__=='__main__':
                       'day',
                       lambda dy: dy==44)
 
-    tab_pprint(data)
+    tab_plot(Splitters.hot_and_cold(data)['hot'], 'sec', ['needletemp'])
 
-    #tab_plot(data, 'sec', ["needletemp", "reftemp"])
+    #tab_plot(data, 'sec', ["volts"])
