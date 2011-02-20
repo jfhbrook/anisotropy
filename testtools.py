@@ -142,6 +142,6 @@ if __name__=='__main__':
                       'day',
                       lambda dy: dy==44)
 
-    tab_plot(Splitters.hot_and_cold(data)['hot'], 'sec', ['needletemp'])
+    tab_pprint(Splitters.hot_and_cold(data)['hot'])
 
     #tab_plot(data, 'sec', ["volts"])
