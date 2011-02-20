@@ -101,22 +101,32 @@ class Splitters(object):
 
     @staticmethod
     def hot_and_cold(data):
-        from scipy.optimize import curvefit
+        from numpy import array, floor
+        from scipy.optimize import curve_fit
+       
 
-        split = curvefit(lambda x, a: a[1]*(1 if (x > a[0]) else 0) + a[2],
-                          data['sec'],
-                          data['volts'],
-                          ( 0.5*(data['sec'][0]+data['sec'][1]),
-                            data['volts'][0],
-                            0))[0]
-        print split
-        print data[:10]
-        hot = data[:split]
-        print hot
-        cold = data[split:]
-        print cold
-        return { 'hot': tablib.Dataset(hot, data.headers),
-                 'cold': tablib.Dataset(cold, data.headers) }
+        def fit(x, a, b, c):
+            #print len(x)
+            y = map(lambda x: (b if (x-a) > 0 else 0) - c, x)
+            #print len(y)
+            return array(y)
+
+        #print len(data['sec'])
+        #print len(data['volts'])
+
+        split = int(floor(curve_fit(fit,
+                                    data['sec'],
+                                    data['volts'],
+                                    ( 0.5*(data['sec'][0]+data['sec'][1]),
+                                      data['volts'][0],
+                                      0 ))[0][0]))
+
+        hot = tablib.Dataset( *data[slice(None, split, None)], 
+                              headers=data.headers)
+        cold = tablib.Dataset( *data[slice(split, None, None)],
+                              headers=data.headers)
+        return { 'hot': hot,
+                 'cold': cold }
 
 
 if __name__=='__main__':
