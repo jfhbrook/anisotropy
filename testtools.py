@@ -60,7 +60,6 @@ def hms_to_s(data):
     return tablib.Dataset(*new_data, headers=new_headers)
 
 
-#Untested.
 def tab_filter(data, header, testfxn):
     new_data = [];
     for (i, pt) in enumerate(data[header]):
@@ -80,25 +79,58 @@ def tab_pprint(data):
     for row in data:
         print " | ".join(map(padder,map(str,row)))
 
-#Untested.
-def tab_plot(data, x_header, y_headers = None ):
+
+def tab_plot(data, x_header, y_headers = None, fit=None ):
     import matplotlib.pyplot as pyplot
 
     headers = filter(lambda h: h != x_header, data.headers if y_headers == None else y_headers)
 
-    xs = [ data[x_header] for i in range(len(headers)) ]
+    xs = [ data[x_header] for header in headers ]
     ys = [ data[header] for header in headers]
 
-    pyplot.plot(*reduce(lambda a, b: a+b, zip(xs,ys)))
+
+    if (fit != None):
+        from numpy import arange, exp, log, polyval
+        more_xs = arange(data[x_header][1],data[x_header][-1])
+        more_ys = polyval(fit,log(more_xs))
+        xs+=[more_xs]
+        ys+=[more_ys]
+
+    pyplot.semilogx(*reduce(lambda a, b: a+b, zip(xs,ys)))
     pyplot.xlabel(x_header)
     pyplot.ylabel('Everything Else')
     pyplot.show()
     return data
 
 
+#Repeats code from hms_to_s, or whatever I called that fxn.
+#Ideally, I would generalize the ideas of, "do something with
+#these columns, generate THIS column" and "Get rid of these
+#columns.
+def relative_time(data, h_abs="sec", h_rel="sec"):
+    from numpy import array
+
+    t_actual = data[h_abs]
+    t_zero = t_actual[0]
+
+    t_relative = list(array(t_actual) - t_zero)
+
+    def sieve(st):
+        return (st != h_abs)
+
+    new_data = zip(t_relative, *map( lambda h: data[h],
+                                     filter(sieve, data.headers) ))
+
+    new_headers = [h_rel]+filter(sieve, data.headers)
+
+    return tablib.Dataset(*new_data, headers=new_headers)
+
+
+
 #A class of tools for splitting data up
 class Splitters(object):
 
+    #You change your mind like a girl changes clothes!
     @staticmethod
     def hot_and_cold(data):
         from numpy import array, floor
@@ -129,6 +161,11 @@ class Splitters(object):
                  'cold': cold }
 
 
+def linreg(data, xheader = 'sec', yheader = 'needletemp' ):
+    from numpy import polyfit, log
+    return polyfit(log(data[xheader][1:]), data[yheader][1:], 1)
+
+
 if __name__=='__main__':
 
     #note2self:
@@ -142,6 +179,8 @@ if __name__=='__main__':
                       'day',
                       lambda dy: dy==44)
 
-    tab_pprint(Splitters.hot_and_cold(data)['hot'])
+    hot = relative_time(Splitters.hot_and_cold(data)['hot'])
 
-    #tab_plot(data, 'sec', ["volts"])
+    #tab_pprint(hot)
+    fit = linreg(hot)
+    tab_plot(hot, 'sec', y_headers=["needletemp"], fit=fit)
