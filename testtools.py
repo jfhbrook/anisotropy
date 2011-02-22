@@ -158,8 +158,7 @@ class Splitters(object):
                               headers=data.headers)
         cold = tablib.Dataset( *data[slice(split, None, None)],
                               headers=data.headers)
-        return { 'hot': hot,
-                 'cold': cold }
+        return ( hot, cold )
 
 
 def linreg(data, xheader = 'sec', yheader = 'needletemp' ):
@@ -180,14 +179,36 @@ def q(data):
 
     return ((volts/1000)**2.0 / r_h) / (l*r_r**2.0)
 
+
 def heating_curve(data):
     const = linreg(data)
     return q(data)/4.0/pi/const
 
+
 def cooling_curve(cool_data, hot_data):
     const = linreg(cool_data)
     return -q(hot_data)/4/pi/const
+
+
+#applies mcgaw cooling curve. Untested.
+def mcgaw(data, k_hot, q_hot, hot_period):
+    from math import exp, log
+
+    correction = 4*pi*q_hot*k_hot*log( (exp(data['sec'][-1])+ hot_period) /
+                                       hot_period)
+    data['needletemp'] = map( lambda x: x - correction, data['needletemp'])
+
+    return data
     
+
+#Haven't been able to find this paper. Whatever.
+def lachenbruch(data, dt):
+    from numpy import exp, log
+
+    data['needletemp'] = list(log(exp(data['needletemp']) - dt))
+
+    return data
+
 
 if __name__=='__main__':
 
@@ -202,8 +223,9 @@ if __name__=='__main__':
                       'day',
                       lambda dy: dy==44)
 
-    hot = relative_time(Splitters.hot_and_cold(data)['hot'])
+    (hot, cold) = map(relative_time, 
+                      Splitters.hot_and_cold(data))
 
     #tab_pprint(hot)
-    fit = linreg(hot)
+    #fit = linreg(hot)
     tab_plot(hot, 'sec', y_headers=["needletemp"], fit=fit)
