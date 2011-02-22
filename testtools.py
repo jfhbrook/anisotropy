@@ -1,6 +1,7 @@
 from __future__ import division
 
 import tablib
+from math import pi
 
 # csv.reader and tablib aren't smart enough to read in numbers as numbers.
 # Therefore, I map this over the strings in the rows spat out by csv.reader.
@@ -34,7 +35,6 @@ def import_raw_data(filename):
     return data
 
 def unique(col):
-    #get unique days
     return list(set(col))
 
 
@@ -66,6 +66,7 @@ def tab_filter(data, header, testfxn):
         if testfxn(pt):
             new_data.append(data[i])
     return tablib.Dataset(*new_data, headers=data.headers)
+
 
 def tab_pprint(data):
     width = 2 + max(map(lambda st: len(st), data.headers))
@@ -165,6 +166,28 @@ def linreg(data, xheader = 'sec', yheader = 'needletemp' ):
     from numpy import polyfit, log
     return polyfit(log(data[xheader][1:]), data[yheader][1:], 1)
 
+
+def q(data):
+    from numpy import average
+
+    # I'm not sure what these constants mean, but based on the equation
+    # I can make a pretty good guess!
+    r_r = 10.6 #needle radius?
+    r_h = 142.2 #resistance?
+    l = 0.120 #needle length?
+
+    volts = average(data['volts'])
+
+    return ((volts/1000)**2.0 / r_h) / (l*r_r**2.0)
+
+def heating_curve(data):
+    const = linreg(data)
+    return q(data)/4.0/pi/const
+
+def cooling_curve(cool_data, hot_data):
+    const = linreg(cool_data)
+    return -q(hot_data)/4/pi/const
+    
 
 if __name__=='__main__':
 
