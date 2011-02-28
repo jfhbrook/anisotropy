@@ -160,6 +160,12 @@ class Splitters(object):
                               headers=data.headers)
         return ( hot, cold )
 
+    @staticmethod
+    def manual(data, header, value):
+        a = tab_filter(data, header, lambda x: x < value)
+        b = tab_filter(data, header, lambda x: x >= value)
+        return (a, b)
+
 
 def linreg(data, xheader = 'sec', yheader = 'needletemp' ):
     from numpy import polyfit, log
@@ -180,14 +186,14 @@ def q(data):
     return ((volts/1000)**2.0 / r_h) / (l*r_r**2.0)
 
 
-def heating_curve(data):
+def heating_curve(data, q):
     const = linreg(data)
-    return q(data)/4.0/pi/const
+    return q/4.0/pi/const
 
 
-def cooling_curve(cool_data, hot_data):
+def cooling_curve(cool_data, q):
     const = linreg(cool_data)
-    return -q(hot_data)/4/pi/const
+    return -q/4/pi/const
 
 
 #applies mcgaw cooling curve. Untested.
@@ -196,9 +202,21 @@ def mcgaw(data, k_hot, q_hot, hot_period):
 
     correction = 4*pi*q_hot*k_hot*log( (exp(data['sec'][-1])+ hot_period) /
                                        hot_period)
-    data['needletemp'] = map( lambda x: x - correction, data['needletemp'])
+    newtemps = map( lambda x: x - correction, data['needletemp'])
 
-    return data
+    new_data = [];
+    new_headers = data.headers
+
+    for header in data.headers:
+        if header == 'needletemp':
+            new_data.append(newtemps)
+        else:
+            new_data.append(data[header])
+
+    print new_data[:10]
+    print len(data.headers)
+
+    return tablib.Dataset(*new_data, headers=new_headers)
     
 
 #Haven't been able to find this paper. Whatever.
@@ -219,13 +237,37 @@ if __name__=='__main__':
     # > datetime.toordinal(_)
     # 44
 
+    # Grab the particular dataset we want
     data = tab_filter(hms_to_s(import_raw_data('CR10_final_storage_1308.csv')),
                       'day',
                       lambda dy: dy==44)
 
-    (hot, cold) = map(relative_time, 
-                      Splitters.hot_and_cold(data))
+    #tab_plot(data, 'sec', y_headers=["needletemp", "volts"])
 
-    #tab_pprint(hot)
-    #fit = linreg(hot)
-    tab_plot(hot, 'sec', y_headers=["needletemp"], fit=fit)
+    #Hot/Cold split has poor convergence.
+    #(hot, cold) = map(relative_time, Splitters.hot_and_cold(data))
+
+    #Manual split
+    (hot, cold) = map(relative_time, Splitters.manual(data, 'sec', 725))
+
+    #tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
+    #tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
+
+    #Choose the "good" part of the hot table.
+    hot = tab_filter(hot, 'sec', lambda t: t > 4.2)
+
+    tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
+
+    #Find all the parts from the hot part needed to do the cool part
+    q_hot = q(hot)
+    k_hot = heating_curve(hot, q_hot)
+    hot_period = hot['sec'][-1]
+
+    #apply the McGaw correction
+    cold = mcgaw(cold, k_hot, q_hot, hot_period)
+    tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
+    cold = tab_filter(cold, 'sec', lambda t: t > 3.2)
+
+    k_cold = cooling_curve(cold, q_hot)
+    print(k_hot, k_cold)
+
