@@ -139,13 +139,8 @@ class Splitters(object):
        
 
         def fit(x, a, b, c):
-            #print len(x)
             y = map(lambda x: (b if (x-a) > 0 else 0) - c, x)
-            #print len(y)
             return array(y)
-
-        #print len(data['sec'])
-        #print len(data['volts'])
 
         split = int(floor(curve_fit(fit,
                                     data['sec'],
@@ -181,28 +176,30 @@ def q(data):
     r_h = 142.2 #resistance?
     l = 0.120 #needle length?
 
-    volts = average(data['volts'])
+    volts = float(average(data['volts']))
 
-    return ((volts/1000)**2.0 / r_h) / (l*r_r**2.0)
+    return ((volts/1000)**2.0 * r_h) / (l*r_r**2.0)
 
 
 def heating_curve(data, q):
-    const = linreg(data)
-    return q/4.0/pi/const
+    const = linreg(data)[0]
+    return q/4.0/pi/float(const)
 
 
 def cooling_curve(cool_data, q):
-    const = linreg(cool_data)
-    return -q/4/pi/const
+    const = linreg(cool_data)[0]
+    return -q/4/pi/float(const)
 
 
 #applies mcgaw cooling curve. Untested.
 def mcgaw(data, k_hot, q_hot, hot_period):
-    from math import exp, log
+    from math import exp, log, pi
 
     correction = 4*pi*q_hot*k_hot*log( (exp(data['sec'][-1])+ hot_period) /
                                        hot_period)
+
     newtemps = map( lambda x: x - correction, data['needletemp'])
+
 
     new_data = [];
     new_headers = data.headers
@@ -213,8 +210,8 @@ def mcgaw(data, k_hot, q_hot, hot_period):
         else:
             new_data.append(data[header])
 
-    print new_data[:10]
-    print len(data.headers)
+    #transposition!
+    new_data = zip(*new_data)
 
     return tablib.Dataset(*new_data, headers=new_headers)
     
@@ -254,9 +251,9 @@ if __name__=='__main__':
     #tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
 
     #Choose the "good" part of the hot table.
-    hot = tab_filter(hot, 'sec', lambda t: t > 4.2)
+    hot = tab_filter(hot, 'sec', lambda t: t > 4.5)
 
-    tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
+    #tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
 
     #Find all the parts from the hot part needed to do the cool part
     q_hot = q(hot)
@@ -265,9 +262,10 @@ if __name__=='__main__':
 
     #apply the McGaw correction
     cold = mcgaw(cold, k_hot, q_hot, hot_period)
-    tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
-    cold = tab_filter(cold, 'sec', lambda t: t > 3.2)
+    #tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
+    cold = tab_filter(cold, 'sec', lambda t: t > 4.0)
 
     k_cold = cooling_curve(cold, q_hot)
-    print(k_hot, k_cold)
+    print 'k_hot: ', k_hot
+    print 'k_cold: ', k_cold
 
