@@ -198,6 +198,10 @@ def mcgaw(data, k_hot, q_hot, hot_period):
     correction = 4*pi*q_hot*k_hot*log( (exp(data['sec'][-1])+ hot_period) /
                                        hot_period)
 
+    print data['sec'][-1]
+    print hot_period
+    print correction
+
     newtemps = map( lambda x: x - correction, data['needletemp'])
 
 
@@ -206,6 +210,7 @@ def mcgaw(data, k_hot, q_hot, hot_period):
 
     for header in data.headers:
         if header == 'needletemp':
+            print "ding!"
             new_data.append(newtemps)
         else:
             new_data.append(data[header])
@@ -223,49 +228,3 @@ def lachenbruch(data, dt):
     data['needletemp'] = list(log(exp(data['needletemp']) - dt))
 
     return data
-
-
-if __name__=='__main__':
-
-    #note2self:
-    # > import datetime
-    # > datetime.date.fromordinal(44)
-    # datetime.date(1, 2, 13)
-    # > datetime.toordinal(_)
-    # 44
-
-    # Grab the particular dataset we want
-    data = tab_filter(hms_to_s(import_raw_data('CR10_final_storage_1308.csv')),
-                      'day',
-                      lambda dy: dy==44)
-
-    #tab_plot(data, 'sec', y_headers=["needletemp", "volts"])
-
-    #Hot/Cold split has poor convergence.
-    #(hot, cold) = map(relative_time, Splitters.hot_and_cold(data))
-
-    #Manual split
-    (hot, cold) = map(relative_time, Splitters.manual(data, 'sec', 725))
-
-    #tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
-    #tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
-
-    #Choose the "good" part of the hot table.
-    hot = tab_filter(hot, 'sec', lambda t: t > 4.5)
-
-    #tab_plot(hot, 'sec', y_headers=["needletemp"], fit=linreg(hot))
-
-    #Find all the parts from the hot part needed to do the cool part
-    q_hot = q(hot)
-    k_hot = heating_curve(hot, q_hot)
-    hot_period = hot['sec'][-1]
-
-    #apply the McGaw correction
-    cold = mcgaw(cold, k_hot, q_hot, hot_period)
-    #tab_plot(cold, 'sec', y_headers=["needletemp"], fit=linreg(cold))
-    cold = tab_filter(cold, 'sec', lambda t: t > 4.0)
-
-    k_cold = cooling_curve(cold, q_hot)
-    print 'k_hot: ', k_hot
-    print 'k_cold: ', k_cold
-
