@@ -1,10 +1,12 @@
 \chapter{Introduction}
 \label{sec:introduction}
+\bigskip
 
 \section{Motivation: Why Do Scientists Care?}
 \label{sec:introduction:motivation}
 
 \marginpar{Expand on this? Cite research tackling this problem through other means?}
+
 The thermal properties of snow are of interest to scientists studying Arctic and
 sub-Arctic climates because, during the long, cold winters in this region,
 snow's thermal behavior plays a critical role in determining the net energy
@@ -23,8 +25,9 @@ transfer, affecting this heat transfer.}
 \end{figure}
 
 This energy transfer is critical in accurate climate models for these cold
-regions, therefore the effective thermal conductivity of the snow is a very
+regions, therefore the effective thermal conductivity of snow is a very
 important factor for these models.
+
 
 \section{Needle Probes: Basic Principles}
 \label{sec:introduction:needles}
@@ -71,5 +74,104 @@ these situations, effective thermal conductivity may be calculated.
 The specifics of these solutions are explored more thoroughly in chapter
 \ref{sec:analytical-np}.
 
+\section{Difficulties with the Needle Probe Method}
+
+It should be noted that the needle probe method is not without its caveats. For
+instance, it was shown that convection can and will occur in natural snowpack
+(CITE). In addition to the fact that convection in snowpack can change the
+entire assumed heat transfer dynamic, heating the needle itself can cause this
+convection to occur. This means that, when measurements are taken, there will
+not only be ``transient'' regions due to early-time behavior, but also regions
+where convection becomes a major force. Practically, this means that linear
+portions (with respect to \(\ln(t)\)) must be found in between these regions
+of instability.
+
 \section{Snow Metamorphic Principles}
 \label{sec:introduction:metamorphic}
+
+The structure of a snowpack is strongly influenced by outside environmental
+factors. Immediately after falling from the sky, snow begins to metamporphose as
+it compacts under its own weight. In addition to this, temperature gradients
+cause snow to sublimate and re-form in different regions of the snowpack, in a
+process called vapor transport. Vapor transport is best known for causing
+depth hoar, but occurs throughout the snowpack. Other events, such as
+freeze-thaw events, may also change the form of snow. All these metamorphic
+processes on snow cause it to form regions of varying thermal conductivity. In
+some cases, these regions may form sharp, distinct layers, while in other cases
+they may form a gradient.
+
+\section{Anisotropic Aggregate Behavior in Snow}
+
+At a macroscale, alternating regions of low-conductivity and high-conductivity
+material may act, in the aggregate, as a single material of anisotropic thermal
+conductivity---In other words, the effective thermal conductivity parallel to
+the orientation of the layers may be different than the effective thermal
+conductivity orthogonal to the layers.
+
+For example, suppose a composite exists of alternating layers, each of thickness
+\(l\) and with conductivities \(k_1\) and \(k_2\), as in figure
+\ref{fig:ex_laminate}:
+
+\begin{verbatim}
+INSERT AN ACTUAL FIGURE JOSH
+--------------
+     k_1
+--------------
+     k_2
+--------------
+\end{verbatim}
+
+In the vertical direction, the effective thermal conductivity is
+\(\frac12(k_1 + k_2)\). However, in the horizontal direction the effective
+thermal conductivity is \(\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\).
+
+An analogous analysis could be applied to a number of geometries.
+
+
+\section{Measuring Anisotropic Thermal Conductivity}
+
+This aggregate anisotropy brings a number of questions:
+
+\begin{itemize}
+\item Can anisotropic thermal conductivity in snow be measured with the needle
+probe technique at all? If so, how accurately, and how many measurements would
+one need?
+\item How severe is anisotropy in snow? Is the amount of anisotropy
+significant?
+\item Is anisotropy in snow predictable? That is, could one take a single
+measurement and extrapolate from it the anisotropic thermal conductivity?
+\item Can anisotropy in snow explain historical differences between various
+thermal conductivity measurements of snow using both the guarded hot plate and
+needle probe techniques?
+\end{itemize}
+
+This document aims mostly to answer the first question. Developing a way
+to measure anisotropic thermal conductivity with needle probes should enable
+future researchers in answering the other questions. However, these other
+questions will also, in part, be addressed.
+
+\section{Outline}
+\marginpar{What should I call this section anyway?}
+
+\marginpar{This is terrible. I really need to rewrite it.}
+
+I will discuss:
+
+\begin{enumerate}
+
+\item The differential equations associated with adapting the isotropic needle
+probe technique to the anisotropic case, as well as analytical approaches to
+solving them.
+
+\item The use of finite element models in COMSOL to find numerical solutions to
+the problem
+
+\item Techniques for testing the predictions of the these approaches with
+both snow and engineered anisotropic situations
+
+\item The results of the analytical and numerical approaches as compared to the
+measurements of engineered cases and initial results of snow measurements, and
+interpretations of said results
+
+\item ``Loose ends,'' and where to go next.
+\end{enumerate}
