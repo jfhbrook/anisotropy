@@ -14,10 +14,10 @@ difficult.
 \section{Geometry and Domain Properties}
 
 \begin{table}[h]
-\begin{tabular}
 \label{tab:constants}
+\centering
 \caption{Constants Used in Numerical Models}
-\end{tabular}{r | l}
+\begin{tabular}{r | l}
 \hline
 radius of needle & \(0.25\) mm\\
 length of needle & \(10\) cm\\
@@ -61,6 +61,58 @@ k_{xy} & 0 & 0\\
 \end{bmatrix}
 \end{equation}
 
-\section{Geometry-Based Parameter Studies Using Comsol 3.5a}
+\section{Geometry-Based Parameter Studies Using COMSOL 3.5a}
+
+Unfortunately, COMSOL 3.5a did not have the facilities necessary to implement a
+geometry-changing multi-parameter study as required from the GUI alone. However,
+COMSOL 3.5a did have facilities for scripting with MATLAB. Unfortunately, I
+found the facility to be poorly-documented, and, at least with the particular
+install hosted by ARSC, buggy and prone to crashing.
+
+MATLAB code written to implement the parameter study was largely auto-generated
+by COMSOL, by building a base model in COMSOL 3.5a and exporting to an m-file.
+Much of the hand-written code was merely to handle errors and to allow saving
+of completed studies during execution such that the data wouldn't be lost due to
+a segmentation fault.
+
+\begin{verbatim}
+Code here
+\end{verbatim}
+
+\section{Automatic Calculation of Conductivity from Simulated Time/Temperature Data}
+
+\begin{verbatim}
+Code here
+\end{verbatim}
+
+\section{Organization and Serialization of Results}
+
+Simulation results were saved in a .mat file, which is MATLAB's native
+serialization format. Results were organized into a nested cell array which
+mirrored the format of two MATLAB matrices k\_xy and k\_z:
+
+\begin{verbatim}
+Show and explain code which cellfuns it up
+\end{verbatim}
+
+The data stored in each slot of the nested array was itself a cell array
+containing the simulation results, as shown in figure \ref{fig:cellarray}:
+
+% Bastardization of tabular use.
+\begin{figure}
+\label{fig:cellarray}
+
+\centering
+\begin{tabular}{| c | c | c |}
+\hline
+\(k_\textrm{meas}\) & \( \left[ \textrm{time}, \textrm{temperature} \right]^T\) & Average surface temperature of sphere\\
+\hline
+\end{tabular}
+\caption{Contents of the cell array.}
+\end{figure}
+
+\section{Post-Simulation Analysis with MATLAB}
+
+\section{Code Architecture and Use}
 
 % \section{Verification with Analytical Approach}
