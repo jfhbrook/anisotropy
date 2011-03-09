@@ -29,10 +29,10 @@ function worker(kxy,kz)
             save solutions
             fprintf('Fitting solutions...\n');
             solutions = {cellfun(@(tsd) {fitter(tsd{1}(1,:),tsd{1}(2,:),0.999,params), tsd{1}, tsd{2}}, solutions, 'UniformOutput', false)};
-            fprintf('Omigosh, a solution set is actually done!');
-            system('echo "A solution just finished on" `hostname` | mutt -s "A solution got did!" josh.holbrook@gmail.com');
+            fprintf('A solution set just completed.');
+            system('echo "A solution set finished on" `hostname` | mutt -s "A solution set completed." josh.holbrook@gmail.com');
         catch exception
-            system(['echo "Shit broke on" `hostname` | mutt -s "Hey man your shit''s broke!--' exception.message '" josh.holbrook@gmail.com']);
+            system(['echo "Exception occurred on" `hostname` | mutt -s "Exception ocurred--' exception.message '" josh.holbrook@gmail.com']);
         end
         angles = angles(2:length(angles));
         save('angles.mat', 'angles');
@@ -42,6 +42,6 @@ function worker(kxy,kz)
     end
 
     % Emails me when everything's done
-    system('echo "You should check out your results on" `hostname` | mutt -s "Hey man your shit''s done!" josh.holbrook@gmail.com');
+    system('echo "Results completed on " `hostname` | mutt -s "Results Completed" josh.holbrook@gmail.com');
     system('touch down');
 end
