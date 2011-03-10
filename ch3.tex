@@ -411,9 +411,38 @@ further study.
 
 \section{Automatic Calculation of Conductivity from Simulated Time/Temperature Data}
 
-\begin{verbatim}
-Code here
-\end{verbatim}
+Results from COMSOL were automatically fitted against the linear model with
+respect to \(\ln(t)\) by ``dropping'' early \((t,T)\) datapoints until the
+correlation coefficient of the remaining points was sufficiently high. Then, a
+linear curvefit was applied to these remaining points. Finally, the slope was
+used to calculate \(k_{\textrm{meas}}\).
+
+\small
+\begin{minted}{matlab}
+function k = fitter(t,T,rset,params)
+    logt = log(t(t>1));
+    T = T(t>1);
+
+    disp('Finding linear portion...');    
+    for i=1:length(logt)-1
+        C = corrcoef(logt(i:length(logt)), T(i:length(T)));
+        r = sqrt(C(2,1));
+        if r > rset %adjust this to get 'good' values
+            disp([ 'linear fitting to ' ...
+                   num2str((length(logt)-i)) ...
+                   ' points from t=' num2str(exp(logt(i))) ...
+                   ' to t=' ...
+                   num2str(exp(logt(length(logt)))) ...
+                   '...']);
+            x = polyfit(logt(i:length(logt)),T(i:length(T)), 1);
+            break
+        end
+    end
+
+    k = (params.q_needle)/(4*pi*x(1));
+end
+\end{minted}
+\normalsize
 
 \section{Organization and Serialization of Results}
 
