@@ -32,7 +32,7 @@ function worker(kxy,kz)
             fprintf('A solution set just completed.');
             system('echo "A solution set finished on" `hostname` | mutt -s "A solution set completed." josh.holbrook@gmail.com');
         catch exception
-            system(['echo "Exception occurred on" `hostname` | mutt -s "Exception ocurred--' exception.message '" josh.holbrook@gmail.com']);
+            system(['echo "Exception occurred on" `hostname` | mutt -s "Exception occurred--' exception.message '" josh.holbrook@gmail.com']);
         end
         angles = angles(2:length(angles));
         save('angles.mat', 'angles');
