@@ -42,7 +42,7 @@ function answer=solver(kxy,kz,fem,theta,params)
     fem.units = units;
 
     % Coupling variable elements
-    clear elemcpl/export/scratch/holbrook/anisotropy_fea
+    clear elemcpl
     % Integration coupling variables
     clear elem
     elem.elem = 'elcplscalar';
