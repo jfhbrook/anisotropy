@@ -100,6 +100,13 @@ The values of \(k_x\) and \(k_y\) may be found by finding the components of
 \([K]\) that are in the \(xy\) plane, and then finding the eigenvalues of the
 resulting components.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/eigenstuff.png}
+\label{fig:eigenstuff}
+\caption{An informal demonstration of how the 3-D problem may be projected onto a 2-D domain.}
+\end{figure}
+
 \marginpar{This needs to be formalized. I have python code somewhere, which may
 also be a good thing to take snippets of.}
 
@@ -107,9 +114,17 @@ also be a good thing to take snippets of.}
 \section{Coordinate Transformation}
 \label{sec:analytical-np:transformation}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/coordinate_transformation.png}
+\label{fig:coord_trans}
+\caption{A 2-dimensional linear coordinate transformation.}
+\end{figure}
+
 In order to apply the isotropic solution to this anisotropic case, we would like
 to apply a coordinate transformation such that we can transform the problem into
-an isotropic case with respect to some \(x' = a_x x\) and \(y' = a_y y\).
+an isotropic case with respect to some \(x' = a_x x\) and \(y' = a_y y\), as in
+figure \ref{fig:coord_trans}.
 Without loss of generality, suppose \(a_x = 1\).
 
 \begin{align}

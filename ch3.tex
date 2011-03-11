@@ -14,6 +14,15 @@ difficult.
 \section{Geometry and Domain Properties}
 \label{sec:numerical-np:domain}
 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/domain.png}
+\label{fig:domain}
+\caption{A COMSOL screenshot showing the geometry of the finite element model.}
+\end{figure}
+
+
 \begin{table}[h]
 \label{tab:constants}
 \centering
@@ -34,7 +43,7 @@ density of snow & \(200\) kg/\(\textrm{m}^3\)\\
 \end{table}
 
 The needle was simulated as a long, thin steel cylinder embedded in the center
-of a sphere of snow. While most of the dimensions and material properties were
+of a sphere of snow, as in figure \ref{fig:domain}. While most of the dimensions and material properties were
 held constant (see Table \ref{tab:constants}), the anisotropic conductivity of
 the snow was parameterized in the form of a \(3\times3\) symmetric, positive
 definite matrix.  In practice, this was done by specifying a diagonal matrix
@@ -559,5 +568,12 @@ containing the simulation results, as shown in figure \ref{fig:cellarray}:
 \section{Post-Simulation Analysis with MATLAB}
 
 \section{Code Architecture and Use}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/35892_elem_1097s.png}
+\label{fig:comsol}
+\caption{A side-view of COMSOL's results. Colors indicate temperature.}
+\end{figure}
 
 % \section{Verification with Analytical Approach}
