@@ -75,12 +75,14 @@ def rot(th, axis):
 def proj(matrix, rot):
     #print('Projecting onto twospace...')
     #Using the normalized two-space as
-    from numpy import eye, hstack, newaxis
-    return tuple(reduce( dot, [ hstack(( eye(2), array([0, 0])[:, newaxis] )),
-                                rot,
-                                matrix,
-                                rot.T,
-                                array([1, 1, 1]) ]))
+    from numpy import eye, hstack, vstack, newaxis
+    from numpy.linalg import eig
+    return tuple(eig(reduce( dot, [ vstack((
+                                        hstack(( eye(2), array([0, 0])[:, newaxis] )),
+                                        array([0, 0, 0]))),
+                                    rot,
+                                    matrix,
+                                    rot.T ]))[0])[0:2]
 
 ###
 ### Importing data
