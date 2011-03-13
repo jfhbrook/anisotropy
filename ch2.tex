@@ -186,6 +186,14 @@ When measuring for the anisotropic case, I argue that we are effectively
 measuring the temperature at some \(r = r_{\textrm{0}}\)---either on the surface
 of the needle, or some small distance away from the needle.
 
+This approach isn't without its problems. For example, it supposes that the
+isotherms are all circles in the transformed geometry, but if a finite-sized
+needle was actually being modeled in the problem then the isotherms near the
+(elliptically-shaped in the transformed domain) needle would be elliptical as
+well, and only isotherms sufficiently far away would be round. However, this
+approach allows us to keep using the \(\ln()\) approximation, while a solution
+given a finite needle would likely require the use of Bessel functions.
+
 Applying this technique to the anisotropic case, we find that we must also
 transform \(r_{xy} = \cos(\theta) \hat{e}_x + \sin(\theta) \hat{e}_y \)
 into \(r_{x'y'}\):
@@ -206,20 +214,105 @@ average temperature---say, the average surface temperature of the probe.  This
 may be expressed like so:
 
 \begin{equation}
-T_{\textrm{avg}}(t) = \frac{ \int_0^{2\pi} T(r,t) rd\theta }
-                           { \int_0^{2\pi} rd\theta}
+\label{eq:tavg}
+T_{\textrm{avg}}(t) = \frac{4\pi k_x}{q} \frac{\mathcal{E}(\ln(t), \frac{k_y}{k_x})}{\mathcal{E}(1, \frac{k_y}{k_x})}
 \end{equation}
 
-I ended up simplifying it such that, where
+where:
 
 \begin{equation}
 \mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi
 \end{equation}
 
-we have
+This was implemented in python with the following functions:
 
-\begin{equation}
-\frac{4\pi k_x}{q} \frac{\mathcal{E}(\ln(t), \frac{k_y}{k_x})}{\mathcal{E}(1, \frac{k_y}{k_x})}
-\end{equation}
+\small
+\begin{minted}{python}
+def elliptical(fxn, ecc):
+    from scipy.integrate import quad
+    from math import pi
+    from numpy import sin, cos, sqrt
+
+    #API trickery.
+    from types import FunctionType, BuiltinFunctionType
+    if type(fxn) != FunctionType and type(fxn) != BuiltinFunctionType:
+        fxn2 = lambda ecc, th: fxn
+    else:
+        fxn2 = fxn
+
+    #The heavy lifting.
+    return quad(lambda th: fxn2(ecc,th) *
+                               sqrt( cos(th)**2.0 + (ecc*sin(th))**2.0 ),
+                0, 2*pi)[0]
+
+def Tavg(k_x, k_y, q, t):
+    """
+    given scalar r0, k_x, k_y and 1-d time, this returns a curve with the same 
+    slope at Tavg(t) for long T. May refactor.
+    """
+    return (4*pi*k_x/q)*array([elliptical(log(time) , k_x/k_y)/
+           elliptical(1, k_x/k_y) for time in t])
+\end{minted}
+\normalsize
+
+Note that the elliptical integrals are numerically evaluated.
 
 \section{Finding Measured Conductivity as a Function of Needle Orientation}
+
+In order to extract the measured \(k\) value, we fit a function of the form
+\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}. In particular, the following
+python function was defined:
+
+\small
+\begin{minted}{python}
+def kmeas(k_x, k_y, q, t):
+    from numpy import polyfit
+    """
+    Does a quick linear curve fit 
+    """
+    return (q/4/pi)*polyfit(log(t), Tavg(k_x, k_y, q, t), 1)[0]
+\end{minted}
+\normalsize
+
+Then, all that is left is to evaluate the functions at various combinations of
+\(k_xy\), \(k_z\) and \(\theta\):
+
+\small
+\begin{minted}{python}
+if __name__=="__main__":
+
+    from numpy import diag, logspace, meshgrid
+    from math import pi
+    from progressbar import ProgressBar
+
+    angles = range(0, 91) # Lots angles :D
+
+    ks = arange(0.2, 0.4, 0.05) # Some ks
+    (k_xy, k_z) = meshgrid(ks, ks)
+    k_xy = k_xy.flatten()
+    k_z = k_z.flatten()
+
+    q = 0.5 #Like in sims
+    t = hstack(( logspace(0.1,1.0,15),
+                 logspace(1.0,3.0,15) ))
+
+    results = []
+    progress = ProgressBar()
+    for th in progress(angles):
+        for i in xrange(k_xy.shape[0]):
+            (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
+                                 rot(pi/180*(90-th), 'y'))
+            results.append([ th,
+                             k_z[i]/k_xy[i],
+                             kmeas(k_xp, k_yp, q, t)/k_xy[i]])
+    for row in results:
+        print(', '.join(map(str, row)))
+\end{minted}
+\normalsize
+
+``proj(matrix, rotation)'' implements equation \ref{eq:projection}, where 
+``matrix'' and ``rotation'' are used to construct \([K]\). After iterating
+through all the values, this procedure prints to stdout in .csv format, so that
+a table of values may be generated and piped to a text file for future analysis.
+
+
