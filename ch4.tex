@@ -1,16 +1,65 @@
 \chapter{Real-Life Measurements}
 
-\section{Basic Isotropic Needle Probe Measurements}
+\section{Introduction}
+
+idkmybffjill
+
+\section{Needle Probe Measurement Fundamentals}
+
+Needle probe measurements were taken using an apparatus borrowed from the Cold
+Regions Research and Engineering Laboratory, illustrated in figure
+\ref{fig:apparatus}. Encased in a Pelican case for protection are a Campbell
+CR10X data logger, a relay switch, a 12v gel cell for the CR10X and a series of
+D-cells to power the heating coils in the needle. The program that came with the
+data logger uses the relay switch to control the heat flux from the needle, and
+records temperature data from the needle's thermocouple, as well as the voltage
+across the heating element, over the course of a five minute heating curve and
+a ten minute cooling curve.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\textwidth]{fig/apparatus.png}
 \label{fig:apparatus}
-\caption{Illustration of apparatus.}
+\caption{Extruded illustration of the needle probe apparatus. Major parts are labelled.}
 \end{figure}
 
-The hardware
+The apparatus is controlled using a touchpad that enables one to communicate
+with the data logger using Campbell ``star-codes.'' Initiating a test is a
+matter of clearing and setting some registers using these star-codes. For
+example, to clear the first register, one would type ``* 6 A D 1''.
 
+\marginpar{source star codes?}
+
+Once testing is complete, data may be uploaded from the data logger using
+Campbell's PC200X software and a particular series of cables and devices, as
+shown in figure \ref{fig:cable}. In order, from datalogger to computer, they
+are:
+
+\marginpar{Source PC200X?}
+
+\begin{enumerate}
+\item A DE-9 cable
+\item an SC32A optically isolating RS-232 interface
+\item A DB-25-to-DE-9 serial cable
+\item A DE-9 Null Modem cable
+\item (Optional) A DE-9-to-USB cable
+\end{enumerate}
+
+Given the correct cables and ports, one may be able to decrease the number of
+cables to two, plus the SC32A interface.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig/cable.jpg}
+\label{fig:cable}
+\caption{The cables used to communicate with the datalogger.}
+\end{figure}
+
+
+
+
+
+\section{Snow Conductivity Measurements}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/equipment.jpg}
@@ -30,13 +79,6 @@ The hardware
 \includegraphics[width=0.8\textwidth]{fig/snowpack.jpg}
 \label{fig:snowpack}
 \caption{A close-up shot of tested snowpack.}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.6\textwidth]{fig/cable.jpg}
-\label{fig:cable}
-\caption{The cables used to communicate with the datalogger.}
 \end{figure}
 
 The data
