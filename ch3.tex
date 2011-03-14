@@ -443,7 +443,7 @@ domain as in figure \ref{fig:comsol}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/35892_elem_1097s.png}
+\includegraphics[width=0.6\textwidth]{fig/35892_elem_1097s.png}
 \label{fig:comsol}
 \caption{A side-view of COMSOL's results. Colors indicate temperature.}
 \end{figure}
@@ -482,6 +482,12 @@ function k = fitter(t,T,rset,params)
 end
 \end{minted}
 \normalsize
+
+Interestingly enough, MATLAB actually comes with an exponential integral
+function, though it's defined differently in MATLAB than it is in this context.
+A failed approach involved trying to fit the data points directly against the
+exponential integral solution. However, the convergence properties of this
+approach were less than ideal.
 
 \section{Calculation and Serialization of Results}
 
@@ -752,7 +758,7 @@ for t=1:length(angles),
         fprintf([ num2str(angles(t)) ', ' num2str(Kxy(pt)) ', ' num2str(Kz(pt)) ', ' num2str(answers{t}{pt}{1}) '\n']);
     end
 end
-\end{matlab}
+\end{minted}
 \normalsize
 
 This allowed for plotting and analysis of the data using other tools, such as
@@ -761,3 +767,11 @@ access to the global namespace. The reasons for this are described in the
 comments.
 
 \section{Conclusions}
+
+COMSOL 3.5a was used to run three-dimensional simulations of thermal conduction
+in the needle probe problem, in concert with MATLAB for automation and
+post-processing. Much of the work involved working around the limitations and
+instability of COMSOL 3.5a. Regardless of these problems, the method generated
+useful information on predicted thermal conductivity measurements from a heating
+curve approach given an anisotropy and a needle orientation with respect to this
+needle orientation.
