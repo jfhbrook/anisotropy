@@ -224,101 +224,22 @@ where:
 \mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi
 \end{equation}
 
-This was implemented in python with the following functions:
-
-\small
-\begin{minted}{python}
-def elliptical(fxn, ecc):
-    from scipy.integrate import quad
-    from math import pi
-    from numpy import sin, cos, sqrt
-
-    #API trickery.
-    from types import FunctionType, BuiltinFunctionType
-    if type(fxn) != FunctionType and type(fxn) != BuiltinFunctionType:
-        fxn2 = lambda ecc, th: fxn
-    else:
-        fxn2 = fxn
-
-    #The heavy lifting.
-    return quad(lambda th: fxn2(ecc,th) *
-                               sqrt( cos(th)**2.0 + (ecc*sin(th))**2.0 ),
-                0, 2*pi)[0]
-
-def Tavg(k_x, k_y, q, t):
-    """
-    given scalar r0, k_x, k_y and 1-d time, this returns a curve with the same 
-    slope at Tavg(t) for long T. May refactor.
-    """
-    return (4*pi*k_x/q)*array([elliptical(log(time) , k_x/k_y)/
-           elliptical(1, k_x/k_y) for time in t])
-\end{minted}
-\normalsize
-
-Note that the elliptical integrals are numerically evaluated.
+This was implemented in python with the ``elliptical'' and ``Tavg'' functions
+in Appendix \ref{apx:analytical-np}. The elliptical integrals are numerically evaluated using a quadrature method.
 
 \section{Finding Measured Conductivity as a Function of Needle Orientation}
 
 In order to extract the measured \(k\) value, we fit a function of the form
-\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}. In particular, the following
-python function was defined:
-
-\small
-\begin{minted}{python}
-def kmeas(k_x, k_y, q, t):
-    from numpy import polyfit
-    """
-    Does a quick linear curve fit 
-    """
-    return (q/4/pi)*polyfit(log(t), Tavg(k_x, k_y, q, t), 1)[0]
-\end{minted}
-\normalsize
+\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}, in the ``kmeas'' function, also
+in Appendix \ref{apx:analytical-np}.
 
 Then, all that is left is to evaluate the functions at various combinations of
-\(k_xy\), \(k_z\) and \(\theta\):
-
-\small
-\begin{minted}{python}
-if __name__=="__main__":
-
-    from numpy import diag, logspace, meshgrid
-    from math import pi
-    from progressbar import ProgressBar
-
-    angles = range(0, 91) # Lots angles :D
-
-    ks = arange(0.2, 0.4, 0.05) # Some ks
-    (k_xy, k_z) = meshgrid(ks, ks)
-    k_xy = k_xy.flatten()
-    k_z = k_z.flatten()
-
-    q = 0.5 #Like in sims
-    t = hstack(( logspace(0.1,1.0,15),
-                 logspace(1.0,3.0,15) ))
-
-    results = []
-    progress = ProgressBar()
-    for th in progress(angles):
-        for i in xrange(k_xy.shape[0]):
-            (k_xp, k_yp) = proj( diag([k_xy[i], k_xy[i], k_z[i]]),
-                                 rot(pi/180*(90-th), 'y'))
-            results.append([ th,
-                             k_z[i]/k_xy[i],
-                             kmeas(k_xp, k_yp, q, t)/k_xy[i]])
-    for row in results:
-        print(', '.join(map(str, row)))
-\end{minted}
-\normalsize
-
-``proj(matrix, rotation)'' implements equation \ref{eq:projection}, where 
-``matrix'' and ``rotation'' are used to construct \([K]\). After iterating
-through all the values, this procedure prints to stdout in .csv format, so that
-a table of values may be generated and piped to a text file for future analysis.
+\(k_xy\), \(k_z\) and \(\theta\), which is done with the ``__main__'' procedure
+in Appendix \ref{apx:analytical-np}. After iterating through all the values,
+this procedure prints to stdout in .csv format, so that a table of values may be generated and piped to a text file for future analysis.
 
 \section{Conclusions}
-
-\section{Introduction}
-\label{sec:analytical-np:intro}
+\label{sec:analytical-np:conclusion}
 
 An analytical approach to studying anisotropic thermal conductivity with needle
 probes is more difficult than with the isotropic case. However, by using
@@ -326,6 +247,6 @@ coordinate projections to pose the problem in two dimensions, and by applying
 coordinate transformations to the domain, one may apply the accepted isotropic
 theory to the anisotropic case with minimal modification.  By numerically
 evaluating the predicted temperature distribution over time, one may find the
-expected conductivity measurement given the theory holds for anisotropic
+expected cmonductivity measurement given the theory holds for anisotropic
 materials.
 
