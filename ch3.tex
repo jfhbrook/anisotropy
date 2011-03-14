@@ -438,7 +438,15 @@ end
 \normalsize
 
 In some runs, the fem structure was exported back to the COMSOL format for
-further study.
+further study, such as viewing the temperature distribution over the entire
+domain as in figure \ref{fig:comsol}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/35892_elem_1097s.png}
+\label{fig:comsol}
+\caption{A side-view of COMSOL's results. Colors indicate temperature.}
+\end{figure}
 
 \section{Automatic Calculation of Conductivity from Simulated Time/Temperature Data}
 
@@ -475,14 +483,10 @@ end
 \end{minted}
 \normalsize
 
-\section{Organization and Serialization of Results}
-
-Simulation results were saved in a .mat file, which is MATLAB's native
-serialization format. Results were organized into a nested cell array which
-mirrored the format of two MATLAB matrices k\_xy and k\_z:
+\section{Calculation and Serialization of Results}
 
 These functions were called by ``worker.m,'' which was used to run multiple
-tests and save the results.
+tests and save the results:
 
 %% WORKER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \small
@@ -494,6 +498,21 @@ function worker(kxy,kz)
     load('angles.mat', 'angles');
     angles
     [kxy,kz] = meshgrid(kxy,kz);
+
+\end{minted}
+\normalsize
+
+Here, we can see ``worker.m'' loading a list of angles from an ``angles.mat''
+file, which is MATLAB's native serialization format. This is because COMSOL
+tended to segfault with relative regularity. So, a
+solution was written where angles would be serialized such that the
+process could continue on the last unfinished angle. Unfortunately, because the
+process wasn't written to recover previously-solved conductivities at that
+angle, the process could only handle a small subset of conductivity combinations
+during a given run.
+
+\small
+\begin{minted}{matlab}
 
     %flreport('off');
 
@@ -510,6 +529,20 @@ function worker(kxy,kz)
                   'angles', angles );
 
     saveroot=['./solutions-' date '/'];
+
+\end{minted}
+\normalsize
+
+The commented-out ``flreport'' gives one the option of suppressing graphical
+output from COMSOL. This is useful if one wants to run COMSOL in a headless
+manner. Unfortunately, COMSOL 3.5a on the ARSC systems has extreme difficulties
+running in headless batch mode.
+
+Then, the ``params'' structure mentioned earler was defined. Finally, a path in
+which to save serialized solutions is defined.
+
+\small
+\begin{minted}{matlab}
 
     mesh = mesher(0,params);
     for angle=angles,
@@ -531,6 +564,28 @@ function worker(kxy,kz)
                      '| mutt -s "Exception occurred--' exception.message ...
                      '" josh.holbrook@gmail.com' ]);
         end
+
+\end{minted}
+\normalsize
+
+This section of code iterates through all the different test combinations. The
+reason that this code couldn't recover solved conductivity combinations after
+a segmentation fault is because of the use of ``arrayfun,'' which acts similarly
+to the ``map()'' functions seen in other languages, such as perl and python.
+
+As a result of these manipulations, the results would be organized into a nested
+cell array which mirrored the format of the two MATLAB matrices k\_xy and k\_z,
+as reflected in the use of ``arrayfun.'' The data stored in each slot of the
+nested array was itself a cell array containing the simulation results, as shown
+in figure \ref{fig:cellarray}.
+
+This section of code also has exception handling, as there would often be issues
+trying to run code during development. Mutt, the command-line email program, was
+used to email the author as an ad-hoc logging and notification system, as
+otherwise runtime errors could go unnoticed for hours if not days.
+
+\small
+\begin{minted}{matlab}
         angles = angles(2:length(angles));
         save('angles.mat', 'angles');
         %solutions
@@ -547,10 +602,18 @@ function worker(kxy,kz)
 end
 \end{minted}
 \normalsize
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The data stored in each slot of the nested array was itself a cell array
-containing the simulation results, as shown in figure \ref{fig:cellarray}:
+After successfully calculating results for a given angle, the ``angles'' list
+was modified and re-saved to ``angles.mat.'' Then, the simulation results were
+saved in another .mat file. Each angle, in the end, had its own .mat file. 
+
+Finally, a file named ``down'' was created to signal that the process was
+complete. This is a technique that was inspired by the daemontools suite of
+process management tools. In fact, it was originally intended to be used with
+something like daemontools to manage the process, though in the end this proved
+to be mostly unnecessary.
+
+\marginpar{http://cr.yp.to/daemontools.html}
 
 % Bastardization of tabular use.
 \begin{figure}
@@ -565,15 +628,134 @@ containing the simulation results, as shown in figure \ref{fig:cellarray}:
 \caption{Contents of the cell array.}
 \end{figure}
 
+\section{Executing Simulations}
+
+Various ``runs'' of simulations could then be executed with a combination of a
+small master MATLAB routine and a bash command. For example, one suite ran
+looked like this on the MATLAB side:
+
+\small
+\begin{minted}{matlab}
+%suitefour.m
+angles = [5 10 15];
+save('angles.mat', 'angles');
+kxy = [0.3];
+kz = [0.1, 0.5];
+worker(kxy, kz);
+\end{minted}
+\normalsize 
+
+and was invoked like this:
+
+\small
+\begin{minted}{bash}
+while :; do comsol matlab -np 4 -mlr 'suitefour.m'; done
+\end{minted}
+\normalsize
+
+This command would repeat over and over until the loop is cancelled with a
+ctrl-D, which would insure that, if the comsol command crashed while running,
+that it would restart and pick up its own pieces as best it could.
+
 \section{Post-Simulation Analysis with MATLAB}
 
-\section{Code Architecture and Use}
+The resulting .mat files would be organized in a folder like so (minus the
+notes.txt, which was added for human-readable metadata purposes):
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.4\textwidth]{fig/35892_elem_1097s.png}
-\label{fig:comsol}
-\caption{A side-view of COMSOL's results. Colors indicate temperature.}
-\end{figure}
+\small
+\begin{verbatim}
+josh@pidgey:~/anisotropy_fea/solutions-09-Nov-2010$ ls
+notes.txt       solution-30.mat  solution-90.mat
+solution-0.mat  solution-60.mat
 
-% \section{Verification with Analytical Approach}
+\end{verbatim}
+\normalsize
+
+A procedure called ``assembler.m'' was written to gather the results of these
+.mat files and put them in a cell structure where index corresponds to
+angle:
+
+\small
+\begin{minted}{matlab}
+function answers=assembler(directory)
+    cd(directory);
+    d = dir();
+    answers = [];
+    for i=3:length(d),
+        disp(['Opening ' d(i).name '...']);
+        load(d(i).name);
+        answers = [answers, solutions];
+    end
+    cd('..');
+end
+\end{minted}
+\normalsize
+
+Given that the results were saved to a variable called ``answers,'' another
+procedure called ``analyzer'' could be applied to them.  Unlike the other
+MATLAB procedures, ``analyzer'' was not functional in nature, and relied on
+the pre-existence of certain parameters.
+
+A number of analyses, some of more use than others, could then be applied to the
+data. For example, this procedure was used to make sure that boundary conditions
+were acceptable for the long-time solution:
+
+
+\small
+\begin{minted}{matlab}
+disp('Figuring out T_surf_avg at time T:');
+%figure;
+%hold on;
+for theta=1:length(angles)
+    tavgs = cellfun(@(prison) prison{3}, answers{theta});
+    try
+        assert(all(all(tavgs< 0.001)));
+    catch
+        disp(['Warning: average surface temps are a bit high at theta=' num2str(angles(theta))] );
+        disp(tavgs);
+    end
+    if theta == length(angles)
+        figure;
+        hold on;
+        contourf(kxy,kz,tavgs);
+        colorbar;
+        colormap('pink');
+        title('Average Surface Temperature at End of Heating Curve Simulation for a representative angle');
+        xlabel('K_{xy}');
+        ylabel('K_{zz}');
+    end
+end
+\end{minted}
+\normalsize
+
+However, the organization of the data proved awkard, so instead, a procedure was
+written to convert the data into a csv:
+
+\small
+\begin{minted}{matlab}
+%tabulator
+%turns lame structures into some csv action
+
+%given params:
+%  answers
+%  angles
+%  kxy
+%  kz
+
+% Bad style, but I'm dealing with a cluttered namespace because I'm not functionalizing these.
+% This is because parameter passing is a pita. So, leave me alone.
+[Kxy, Kz] = meshgrid(kxy, kz);
+
+fprintf('angle, kxy, kz, kmeas \n');
+for t=1:length(angles),
+    for pt=1:size(Kxy,1)*size(Kxy,2),
+        fprintf([ num2str(angles(t)) ', ' num2str(Kxy(pt)) ', ' num2str(Kz(pt)) ', ' num2str(answers{t}{pt}{1}) '\n']);
+    end
+end
+\end{matlab}
+\normalsize
+
+This allowed for plotting and analysis of the data using other tools, such as
+python and Excel.
+
+\section{Conclusions}
