@@ -60,7 +60,6 @@ for theta=1:length(angles)
         disp(['Warning: average surface temps are a bit high at theta=' num2str(angles(theta))] );
         disp(tavgs);
     end
-    This simulation should *probably* be done on the same basis as the
     if theta == length(angles)
         figure;
         hold on;
