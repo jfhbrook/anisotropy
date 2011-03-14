@@ -743,7 +743,7 @@ written to convert the data into a csv:
 %  kz
 
 % Bad style, but I'm dealing with a cluttered namespace because I'm not functionalizing these.
-% This is because parameter passing is a pita. So, leave me alone.
+% This is because parameter passing is annoying.
 [Kxy, Kz] = meshgrid(kxy, kz);
 
 fprintf('angle, kxy, kz, kmeas \n');
@@ -756,6 +756,8 @@ end
 \normalsize
 
 This allowed for plotting and analysis of the data using other tools, such as
-python and Excel.
+python and Excel. Much like the ``analyzer'' procedure, this one also depends on
+access to the global namespace. The reasons for this are described in the
+comments.
 
 \section{Conclusions}
