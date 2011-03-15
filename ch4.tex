@@ -25,10 +25,24 @@ a ten minute cooling curve.
 
 The apparatus is controlled using a keypad that enables one to communicate
 with the data logger using Campbell ``star-codes.'' Initiating a test is a
-matter of clearing and setting some registers using these star-codes. For
-example, to clear the first register, one would type ``* 6 A D 1''.
+matter of clearing and setting some registers using these star-codes.
 
 \marginpar{source star codes?}
+
+In general, the apparatus is used like so:
+
+\begin{enumerate}
+\item Turn on device.
+\item Insert needle into medium being measured.
+\item Use star-codes to clear the first three registers. ``* 6 A'' accesses the
+registers, and ``D <n>'' toggles the nth register. For example, to clear
+the second register, press ``* 6 A D 2'' .
+\item Turn on the first register by pressing ``* 6 A D 1''. This makes the
+apparatus measure temperature.
+\item Turn on the second register by pressing ``* 6 A D 2''. This turns on the
+heating element, effectively starting the test.
+\item Wait 15 minutes for test to complete.
+\end{enumerate}
 
 Once testing is complete, data may be uploaded from the data logger using
 Campbell's PC200X software and a particular series of cables and devices, as
@@ -54,7 +68,6 @@ cables to two, plus the SC32A interface.
 \label{fig:cable}
 \caption{The cables used to communicate with the datalogger.}
 \end{figure}
-
 
 
 
