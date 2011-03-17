@@ -22,3 +22,6 @@ cold = tab_filter(relative_time(cold), 'sec', lambda t: 6 < t < 60)
 #tab_plot(cold, 'sec', y_headers=["needletemp"])
 
 print 'cooling,35,', cooling_curve(cold, q_fst)
+
+
+tab_plot(data, 'sec', y_headers=["needletemp"])
