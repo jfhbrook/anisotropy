@@ -46,7 +46,7 @@ def hms_to_s(data):
     # It doesn't account for changes in the julian days.
     # Just don't test @ midnight, I guess.
     def convert(hourmin, sec):
-        return 60*(hourmin%100) + sec #+ 3600*(hourmin//100 )
+        return 60*(hourmin%100) + sec + 3600*(hourmin//100 )
 
     def sieve(st):
         return (st != 'hourmin') and (st != 'sec')
