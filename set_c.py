@@ -18,8 +18,8 @@ data = relative_time(hms_to_s(tab_filter(data, 'day', lambda d: d==76)))
 q_fst = q(hot)
 
 
-hot = tab_filter(hot, 'sec', lambda t: 10 < t < 500)
-#tab_plot(hot, 'sec', y_headers=["needletemp"])
+hot = tab_filter(hot, 'sec', lambda t: 4 < t < 40)
+tab_plot(hot, 'sec', y_headers=["needletemp"])
 
 print 'heating,35,', heating_curve(hot, q_fst)
 
@@ -45,6 +45,29 @@ print 'heating,85,', heating_curve(hot, q_snd)
 
 cold = relative_time(cold)
 cold = tab_filter(cold, 'sec', lambda t: 10 < t < 75)
+#tab_plot(cold, 'sec', y_headers=["needletemp"])
 
 print 'cooling,85,', cooling_curve(cold, q_snd)
-tab_plot(cold, 'sec', y_headers=["needletemp"])
+
+data = relative_time(tab_filter(data, 'sec', lambda t: t > 2000))
+(trd, data) = Splitters.manual(data, 'sec', 900)
+#tab_plot(trd, 'sec', y_headers=["needletemp"])
+
+(hot, cold) = Splitters.manual(trd, 'sec', 360)
+#tab_plot(hot, 'sec', y_headers=["volts"])
+
+q_trd = q(hot)
+
+hot = tab_filter(hot, 'sec', lambda t: 8 < t < 58)
+#tab_plot(hot, 'sec', y_headers=["needletemp"])
+
+print 'heating,38,', heating_curve(hot, q_trd)
+
+
+cold = relative_time(cold)
+cold = tab_filter(cold, 'sec', lambda t: 7 < t < 70)
+#tab_plot(cold, 'sec', y_headers=["needletemp"])
+
+print 'cooling,38,', cooling_curve(cold, q_trd)
+
+tab_plot(data, 'sec', y_headers=["needletemp"])
