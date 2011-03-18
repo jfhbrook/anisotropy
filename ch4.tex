@@ -35,7 +35,7 @@ In general, the apparatus is used like so:
 \item Turn on device.
 \item Insert needle into medium being measured.
 \item Use star-codes to clear the first three registers. ``* 6 A'' accesses the
-registers, and ``D <n>'' toggles the nth register. For example, to clear
+registers, and ``D \(n\)'' toggles the \(n\)th register. For example, to clear
 the second register, press ``* 6 A D 2'' .
 \item Turn on the first register by pressing ``* 6 A D 1''. This makes the
 apparatus measure temperature.
@@ -69,10 +69,15 @@ cables to two, plus the SC32A interface.
 \caption{The cables used to communicate with the datalogger.}
 \end{figure}
 
+Data extracted from the Campbell data logger and converted from binary is in
+csv format.
 
+In practice, really easy to screw up. Write about future streamlining of process.
 
 
 \section{Snow Conductivity Measurements}
+
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/equipment.jpg}
