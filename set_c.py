@@ -91,7 +91,8 @@ cold = tab_filter(cold, 'sec', lambda t: 7 < t < 63)
 print 'cooling,38,', cooling_curve(cold, q_fth)
 
 
-fifth = relative_time(data)
+data = relative_time(data)
+(fifth, sixth) = Splitters.manual(data, 'sec', 900)
 #tab_plot(fifth, 'sec', y_headers=["needletemp"])
 
 (hot, cold) = Splitters.manual(fourth, 'sec', 360)
@@ -109,3 +110,23 @@ cold = tab_filter(cold, 'sec', lambda t: 13 < t < 70)
 #tab_plot(cold, 'sec', y_headers=["needletemp"])
 
 print 'cooling,45,', cooling_curve(cold, q_ffth)
+
+
+sixth = relative_time(tab_filter(sixth, 'sec', lambda t: t > 5300))
+#tab_plot(sixth, 'sec', y_headers=["needletemp"])
+
+(hot, cold) = Splitters.manual(fourth, 'sec', 360)
+#tab_plot(hot, 'sec', y_headers=["volts"])
+
+q_sixth = q(hot)
+
+hot = tab_filter(hot, 'sec', lambda t: 12 < t < 60)
+#tab_plot(hot, 'sec', y_headers=["needletemp"])
+
+print 'heating,90,', heating_curve(hot, q_sixth)
+
+cold = relative_time(cold)
+cold = tab_filter(cold, 'sec', lambda t: 12 < t < 60)
+#tab_plot(cold, 'sec', y_headers=["needletemp"])
+
+print 'cooling,90,', cooling_curve(cold, q_sixth)
