@@ -69,14 +69,73 @@ cables to two, plus the SC32A interface.
 \caption{The cables used to communicate with the datalogger.}
 \end{figure}
 
-Data extracted from the Campbell data logger and converted from binary is in
-csv format.
+Using PC200W, data may be pulled off the CR10X in a raw binary format and then
+converted to a CSV format. For this particular experiment, the columns from left
+to right represented:
 
-In practice, really easy to screw up. Write about future streamlining of process.
+    data.headers = ( 'logger_id'
+                   , 'day'
+                   , 'hourmin'
+                   , 'sec'
+                   , 'needletemp'
+                   , 'reftemp'
+                   , 'volts'
+                   , 'timer')
 
+
+\begin{enumerate}
+\item An instrument ID (not used).
+\item Ordinal day, out of 366. For example, March 17th is day 76.
+\item hh:mm portion of timestamp. For example, 6:30pm is represented as 1830.
+\item Seconds portion of timestamp.
+\item Needle temperature, in Celcius.
+\item Reference temperature, in Celcius.
+\item Voltage across needle probe, in millivolts.
+\item Experiment timer, in seconds.
+\end{enumerate}
+
+This csv data may be analyzed with either spreadsheet software, a series of
+scripts, or both. For this series of experiments, Excel and Gnumeric were used
+to verify the existence of data and to combine datasets, while python was used
+for the analysis.
+
+\marginpar{Organization?}
+Generally, each measurement also has some metadata associated with it. In
+particular, anisotropic measurements have an angle associated with them, and
+snow measurements also have a coordinate position on the snowpack associated
+with them. This means that, while taking measurements, one has to be careful to
+make sure that they can keep the proper metadata associated with each
+measurement. An unfortunate situation that can occur after a long series of
+measurements may recall memories of finishing an SAT section and realizing that
+you missed a question part-way through. \marginpar{appropriate?}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/pc200w.jpg}
+\label{fig:pc200w}
+\caption{A screenshot of PC200W, the software used to pull data off the CR10X data logger.}
+\end{figure}
+
+Unlike the case of numerical experiments, it is extremely important in
+real-world experiments, especially in the case of snow, to hand-inspect every
+time/temperature curve. This is because, unlike the numerical experiments, there
+is a significant chance that data will be garbage. In the case of snow in
+particular, convection is typically experienced near the end of the heating
+curve and the beginning of the cooling curve.
+
+\begin{verbatim}
+There needs to be a picture of a real-world curve.
+\end{verbatim}
 
 \section{Snow Conductivity Measurements}
 
+The first step in measuring proper snow is to make a vertical cut in the
+snowpack, as in figure \ref{fig:snowpack}.
+
+Snow is relatively difficult to work with due to the low structural integrity
+of the material.  The wire connecting the probe to the data logger is stiff
+enough a low temperatures that situating the needle without ruining the snowpack
+can be quite a challenge.
 
 \begin{figure}[h]
 \centering
