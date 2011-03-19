@@ -73,16 +73,6 @@ Using PC200W, data may be pulled off the CR10X in a raw binary format and then
 converted to a CSV format. For this particular experiment, the columns from left
 to right represented:
 
-    data.headers = ( 'logger_id'
-                   , 'day'
-                   , 'hourmin'
-                   , 'sec'
-                   , 'needletemp'
-                   , 'reftemp'
-                   , 'volts'
-                   , 'timer')
-
-
 \begin{enumerate}
 \item An instrument ID (not used).
 \item Ordinal day, out of 366. For example, March 17th is day 76.
@@ -103,15 +93,16 @@ for the analysis.
 Generally, each measurement also has some metadata associated with it. In
 particular, anisotropic measurements have an angle associated with them, and
 snow measurements also have a coordinate position on the snowpack associated
-with them. This means that, while taking measurements, one has to be careful to
-make sure that they can keep the proper metadata associated with each
+with them. These are measured with a protractor and a tape measure,
+respectively. This means that, while taking measurements, one has to be careful
+to make sure that they can keep the proper metadata associated with each
 measurement. An unfortunate situation that can occur after a long series of
 measurements may recall memories of finishing an SAT section and realizing that
 you missed a question part-way through. \marginpar{appropriate?}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{fig/pc200w.jpg}
+\includegraphics[width=0.8\textwidth]{fig/pc200w.png}
 \label{fig:pc200w}
 \caption{A screenshot of PC200W, the software used to pull data off the CR10X data logger.}
 \end{figure}
@@ -123,33 +114,18 @@ is a significant chance that data will be garbage. In the case of snow in
 particular, convection is typically experienced near the end of the heating
 curve and the beginning of the cooling curve.
 
-\begin{verbatim}
-There needs to be a picture of a real-world curve.
-\end{verbatim}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/measurement_graph.png}
+\label{fig:meas_graph}
+\caption{A plot of time vs. temperature from a real-world measurement of snow.
+Each curve must be analyzed by-hand to check for such effects as convection.}
+\end{figure}
 
 \section{Snow Conductivity Measurements}
 
-The first step in measuring proper snow is to make a vertical cut in the
+The first step in measuring proper snow was to make a vertical cut in the
 snowpack, as in figure \ref{fig:snowpack}.
-
-Snow is relatively difficult to work with due to the low structural integrity
-of the material.  The wire connecting the probe to the data logger is stiff
-enough a low temperatures that situating the needle without ruining the snowpack
-can be quite a challenge.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{fig/equipment.jpg}
-\label{fig:equipment}
-\caption{Equipment used to measure snow thermal conductivity.}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.4\textwidth]{fig/insitu_location.jpg}
-\label{fig:insitu_location}
-\caption{The location for in-situ tests.}
-\end{figure}
 
 \begin{figure}[h]
 \centering
@@ -158,13 +134,64 @@ can be quite a challenge.
 \caption{A close-up shot of tested snowpack.}
 \end{figure}
 
-The data
+Then, for every measurement, the needle was inserted into snow and a measurement
+was taken. Snow is relatively difficult to work with due to the low structural 
+integrity of the material.  The wire connecting the probe to the data logger is
+stiff enough a low temperatures that situating the needle without ruining the
+snowpack can be quite a challenge.
 
-The analysis
+Along with each conductivity measurement, the height from the ground---measured
+with a tape measure---and the angle of insertion---measured with a protractor
+and a plumb bob---were recorded as metadata.
+
+In addition, for each series of measurements at a particular region, the density
+of the snow was also measured with cardboard cylinder (used as a control volume)
+and a scale.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/equipment.jpg}
+\label{fig:equipment}
+\caption{Equipment used to measure snow thermal conductivity.}
+\end{figure}
+
+Data management was problematic, and techniques needed to be developed to handle
+it. To ensure that no data was lost, after every measurement data was copied and
+appended to the end of a version-controlled csv, and analyzed before the next
+measurement was complete. This allowed for mistakes to be caught and undone so
+that every measurement could be used. However, metadata management was still
+difficult.
+
+\begin{comment}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/insitu_location.jpg}
+\label{fig:insitu_location}
+\caption{The location for in-situ tests.}
+\end{figure}
+\end{comment}
 
 \section{Benchtop Tests with Glycerine}
 
-The box
+A standard used to benchmark needle probes is to measure the conductivity of a
+large Nalgene bottle full of glycerine and surrounded in insulating foam to
+mitigate changes in room temperature. Glycerine was chosen because, while it
+should have the same conductivity of water, does not readily convect. Moreover,
+glycerine does not leave an air gap between the needle and the surrounding
+medium like many porous materials, such as snow, will. Because of this, a method
+of testing anisotropic measurement by using alternating layers of
+more-conductive and less-conductive glycerine blends was devised.
+
+In order to effectively change the directions of anisotropy, a foam box for the
+nalgene bottle was built that could be rotated on an axis and clamped in place.
+The resulting angle from the horizontal can be measured with a protractor.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.4\textwidth]{fig/tilter.png}
+\label{fig:tilter}
+\caption{An illustration of the tilting apparatus.}
+\end{figure}
 
 \section{Anisotropic Glycerine}
 
@@ -175,7 +202,3 @@ low K layer
 high K layer
 
 tests of both materials alone
-
-\section{Snow Measurements}
-
-technique
