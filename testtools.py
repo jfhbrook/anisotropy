@@ -198,9 +198,9 @@ def mcgaw(data, k_hot, q_hot, hot_period):
     correction = 4*pi*q_hot*k_hot*log( (exp(data['sec'][-1])+ hot_period) /
                                        hot_period)
 
-    print data['sec'][-1]
-    print hot_period
-    print correction
+    #print data['sec'][-1]
+    #print hot_period
+    #print correction
 
     newtemps = map( lambda x: x - correction, data['needletemp'])
 
@@ -210,7 +210,7 @@ def mcgaw(data, k_hot, q_hot, hot_period):
 
     for header in data.headers:
         if header == 'needletemp':
-            print "ding!"
+            #print "ding!"
             new_data.append(newtemps)
         else:
             new_data.append(data[header])
