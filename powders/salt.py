@@ -71,4 +71,4 @@ cold = mcgaw(relative_time(cold), k_hot, q_hot, 360)
 cold = tab_filter(cold, 'sec', lambda t: 3 < t < 37)
 #tab_plot(cold, 'sec', y_headers=["needletemp"])
 
-print '"pure sugar" 2', k_hot, cooling_curve(cold, q_hot)
+print '"pure salt" 3', k_hot, cooling_curve(cold, q_hot)
