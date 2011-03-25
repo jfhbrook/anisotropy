@@ -429,10 +429,32 @@ end
 \normalsize
 
 However, the organization of the data proved awkard, so instead, a procedure was
-written to print the data in a csv format. This allowed for plotting and=
+written to print the data in a csv format. This allowed for plotting and
 analysis of the data using other tools, such as python and Excel. Much like the
 ``analyzer'' procedure, this one also depends on access to the global namespace.
 The reasons for this are described in the comments.
+
+\section{Convergence Study}
+
+A small, informal convergence study executed in order to get a general idea
+of how appropriate the model's chosen grid size is. A convergence study, in this
+context, consists of running the same model with different grid sizes and
+studying how the results change as a function of grid size.  The goal is to show
+that the problem converges on a particular solution when grid size is
+sufficiently refined. While this can't prove that the solution being converged
+to is the \emph{correct} solution, it can show that, given that the convergent
+solution is correct, that the model uses a sufficiently refined grid to get
+sufficiently accurate results.
+
+For this convergence study, a particular solution was chosen from the finite
+element parameter study and the mesh was refined to different levels. An
+analysis of these results should then give an idea of the convergence properties
+of the problem.
+
+One issue that occurs with such convergence studies is that refining the grid
+exponentially increases the difficulty of solving the resulting finite element
+model. In this instance, the grid could only be refined once without reaching
+a point where solving the problem became impractical.
 
 \section{Conclusions}
 
