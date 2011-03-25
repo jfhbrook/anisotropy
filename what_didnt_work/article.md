@@ -1,6 +1,39 @@
 # What Didn't Work
 
-## Introduction
+Science tends to report in the affirmative. Most papers and documentations focus
+on what *did* work, and what *was* shown as a result. However, much of science
+is the "error" in "trial and error." Here, I try to document some of the ideas
+that didn't work, or didn't end up being useful, and what could be learned from
+them.
+
+## Ellipsoid Measurement Space
+
+When I first looked at this problem, I conjectured that the "shape" of the
+measured conductivity space in spherical coordinates, where phi and theta
+mirrored real-world orientation and radius corresponded to measured
+conductivity, would have an ellipsoid shape. That is, I suspected that the
+equation
+
+    x'Kx = 1
+
+would hold, where x is ||1/k|| long and in the measured direction, and K is the
+conductivity matrix. However, this is **clearly** not the case.
+
+This is, in part, not the case *because* the needle isn't measuring conductivity
+*parallel* to the needle, but *orthogonal* to the needle, and some sort of
+average of said orthogonal conductivities at that.  In retrospect, this is
+obvious.
+
+I suppose the lesson here is to make sure you fully understand the problem
+before making wild conjecture.
+
+That said, this *is* a good method for conceptualizing eigenvalues, given that
+your matrix is symmetric and positive definite. It's called "Lame's Ellipsoid"
+in certain contexts, and is used in discussing equivalent energy states in
+certain dynamics problems and sometimes as an alternative to Mohr's Circle. In
+fact, Mohr's Circle itself helps visualize eigenvalues admirably, though in
+many problems outside material mechanics a shear component doesn't make sense.
+I mean, "shear conductivity?" What's that?
 
 ## Parallelism
 
