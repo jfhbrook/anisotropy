@@ -136,5 +136,4 @@ lightweight mixture of glycerine and rubbing alcohol. What happens, of course,
 is that the alcohol mixture floats on top of the unadulterated glycerine.
 
 This shouldn't have been a surprise, and yet it was. Interesting how that
-works.  Current plans call for using salt and sugar (in powder form, not in any
-solutions).
+works.  Instead, the experiments use straight table salt and table sugar.
