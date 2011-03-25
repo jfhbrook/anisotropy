@@ -1,11 +1,94 @@
-\chapter{Loose Ends and Future Work}
+\chapter{Loose Ends}
 
-\begin{enumerate}
-\item Issues with assumptions in the analytical approach
-\item Lack of good verification of numerical model
-\item Unweildy model due to use of COMSOL 3.5---Could easily be rebuilt in
-COMSOL 4.X
-\item Quantify inaccuracies in benchtop experiments?
-\item Make a better way to log angle for in-situ experiments
-\item Make more in-situ measurements
-\end{enumerate}
+\section{Introduction}
+
+This is clearly not the end of research on this method. While the groundwork has
+been laid, there are plenty of avenues which need more study. This section aims
+to describe those which the author thinks are important.
+
+\section{Assumptions in the Analytical Approach}
+
+In the analytical model presented here, the needle is assumed to be of zero
+thickness, and yet an average temperature over an ellipse is taken which
+represents the needle surface.  The model seems to work; however, there are
+other way to represent such a problem that may yield more accurate results. For
+example, one may be able to approach the problem in terms of a needle with a
+finite thickness, in which case the solution to the problem should be an
+infinite series of Bessel functions in the isotropic case. One may be able to
+tackle the problem from a finite-thickness needle approach for better results.
+
+\section{Numerical Model Rewrite}
+
+As mentioned previously, the numerical model is, while conceptually simple, made
+difficult by the limitations of COMSOL 3.5a and its interactions with MATLAB and
+the ARSC system.  It is the author's impression that COMSOL 4.1 has much better
+tools for conducting such parameter studies, and as such, a model rewrite in
+COMSOL 4.1 would likely be much easier to execute and to extend than the old
+COMSOL 3.5a/MATLAB model used in this research.
+
+Moreover, there are plenty of other finite element software packages capable of
+running such a study. For example, ABAQUS can likely handle such heat transfer
+problems without difficulty, and is scriptable in python (instead of MATLAB).
+In addition, ABAQUS, and its python API in particular, are well-documented.
+
+\section{Thorough Convergence Study}
+
+While a convergence study for the numerical model was undertaken, it was very
+informal, and executed for only one particular configuration of parameters. A
+more thorough investigation of the convergence properties of the numerical model
+should likely be undertaken.
+
+\section{Model Verification}
+
+While the analytical model and the numerical model show general agreement,
+neither model has been shown to be technically correct. Even if the numerical
+model is properly convergent, it has still not been shown to be converging on
+a \emph{correct value}.
+
+A suggested experiment which the author was unable to complete is this: First,
+find the analytical solution for a cylinder embedded in an infinite, 
+\emph{isotropic} medium. This solution should already exist in a reference, such
+as Carslaw and Yeager. Then, run a two-dimensional finite element model of the
+same problem, and show that the finite element model converges on the same
+solution as the analytical solution.
+
+While this would not prove that the full 3D model is converging on a correct
+solution, it \emph{would} show that this is so in simplified cases, and that the
+discontinuity in conductivites that occurs at the needle/snow boundary shouldn't
+be a concern. This experiment should quickly lend verification to the numerical
+model.
+
+\section{Improved Benchtop Method}
+
+The benchtop apparatus was based on the use of glycerine and agar gels for
+calibration. However, the current anisotropic benchtop method uses sugar and
+salt. This makes the proper layering of the materials difficult. Moreover, the
+device is limited to a tilt factor of \(30\) degrees from horizontal due to the
+location of the bottle's opening. Presumably, this method could be improved upon
+to allow for more accurate material layering and for an increased range of
+needle angles.
+
+In addition, the materials used only lend themselves to an anisotropy ratio of
+87\%. There is plenty of room for improvement, in terms of suitable materials.
+
+\section{Comprehensive In-Situ Measurements}
+
+The in-situ measurements presented in this document are very limited in scope.
+One could easily spend much more time taking more measurements on more snow at
+more angles, in order to better quantify the degrees of anisotropy in natural
+snowpacks.
+
+\section{A Method for Determining Anisotropic Thermal Conductivity From Measurements}
+
+While this document lays the groundwork for determining anisotropic thermal
+conductivity from measurements, a reliable method for converting measurements
+into anisotropic thermal conductivities has not been found. Were the data
+more reliable and less variable, one may be able to find the portion of the
+prediction curve(s) that best fit the data, but based on current measurements,
+this doesn't seem likely.
+
+One possibility is that, instead of focusing on the measured conductivities as a
+function of angle, that one should focus on the \emph{change} in measured
+conductivities with respect to angle. In fact, given low enough degrees of
+anisotropy, it may be sufficient to compare linearizations of these curves. Only
+with more research can this conjecture be shown to be valid.
