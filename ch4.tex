@@ -171,20 +171,45 @@ difficult.
 \end{figure}
 \end{comment}
 
-\section{Benchtop Tests with Glycerine}
+\section{Benchtop Tests}
 
 A standard used to benchmark needle probes is to measure the conductivity of a
 large Nalgene bottle full of glycerine and surrounded in insulating foam to
 mitigate changes in room temperature. Glycerine was chosen because, while it
 should have the same conductivity of water, does not readily convect. Moreover,
 glycerine does not leave an air gap between the needle and the surrounding
-medium like many porous materials, such as snow, will. Because of this, a method
-of testing anisotropic measurement by using alternating layers of
-more-conductive and less-conductive glycerine blends was devised.
+medium like many porous materials, such as snow, will. -
 
-In order to effectively change the directions of anisotropy, a foam box for the
-nalgene bottle was built that could be rotated on an axis and clamped in place.
-The resulting angle from the horizontal can be measured with a protractor.
+A method for testing anisotropic measurements by using alternating alternating
+layers of more-conductive and less-conductive materials was devised, based on
+this glycerine benchmark test. However, instead of glycerine, the materials
+used were table salt and table sugar.
+
+\section{Raw Materials for the Anisotropic Composite}
+
+Salt and sugar's conductivities alone were both measured using the needle probe
+apparatus. These measurements resulted in conductivities of
+\(0.225\) \(\textrm{W}/\textrm{m}^2/\textrm{K}\) and 
+\(0.106\) \(\textrm{W}/\textrm{m}^2/\textrm{K}\), respectively.
+
+\marginpar{Table in appendix!}
+
+Assuming alternating layers of equal thickness, the anisotropic thermal
+conductivities in the aggregate should be:
+
+\begin{align}
+k_{xy} &= \frac12 \left( k_{\textrm{salt}} + k_{\textrm{sugar}} \right) &= \boxed{0.166}\\
+k_z &= 2 \left( \frac1{k_{\textrm{salt}}} + \frac1{k_{\textrm{sugar}}} \right)^{-1} &= \boxed{0.144}\\
+\frac{k_z}{k_{xy}} &= \boxed{0.870}
+\end{align}
+
+Despite the conductivity of table salt being roughly twice that of sugar, the
+anisotropic conductivity ratio is fairly close to 1, meaning that the anisotropy
+of the experimental medium, while significant, is relatively weak. On the plus
+side, salt and sugar are relatively cheap media to work with.
+
+
+\section{Apparatus for Containing Anisotropic Composite}
 
 \begin{figure}[h]
 \centering
@@ -193,12 +218,22 @@ The resulting angle from the horizontal can be measured with a protractor.
 \caption{An illustration of the tilting apparatus.}
 \end{figure}
 
-\section{Anisotropic Glycerine}
+In order to effectively change the directions of anisotropy, a foam box for the
+nalgene bottle was built that could be rotated on an axis and clamped in place.
+The resulting angle from the horizontal can be measured with a protractor. The
+original plan called for using gels such as glycerine, such that the layers
+would self-level. However, because powders were used instead of gels, leveling
+had to be done by hand, usually with a spoon. The sugar was dyed green in order
+ to differentiate it from the salt.
 
-Layers
+\section{Measurement Procedure}
 
-low K layer
+Unlike the case of snow, keeping track of measurements was easier for a number
+of reasons: First, each measurement was handled at once. Second, each angle
+was measured multiple times, and completely finished before other angles were
+measured. Each angle measured was measured at least three times, and up to five
+or more if clean measurements proved elusive.
 
-high K layer
+\section{Conclusion}
 
-tests of both materials alone
+ihnfi
