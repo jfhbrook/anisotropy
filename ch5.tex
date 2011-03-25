@@ -20,7 +20,7 @@ Figure \ref{fig:numvanal}.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{fig/numvanal.png}
+\includegraphics[width=\textwidth]{fig/numvanal.png}
 \label{fig:numvanal}
 \caption{A comparison of the numerical results and the analytical theory shows
 general agreement. Grey dots represent numerical simulation results, the grey surface represents an interpolating surface of the dots, and the blue surface represents the analytical model. Disagreement between the two may be due to edge effects and/or numerical
@@ -42,7 +42,7 @@ In the first case, the numerical model accounts for edge effects by
 modeling a finite length needle. Meanwhile, the analytical model does not take
 into account edge effects, as it models an infinitely long needle like the
 original needle probe method. The author conjectures that this is the mechanism
-primarily responsible for the smoothing of \(k_{\meas}(\theta)\) at more extreme
+primarily responsible for the smoothing of \(k_{\textrm{meas}}(\theta)\) at more extreme
 cases of anisotropy. In fact, for the isotropic case, these edge effects have
 been studied and quantified analytically by other researchers.
 
@@ -50,9 +50,9 @@ been studied and quantified analytically by other researchers.
 
 In the second case, the numerical model operates with a moderately coarse grid.
 The convergence study results show that, while the time/temperature curves look
-largely the same, that the minor differences are magnified when taking the
+largely the same (Figure \ref{fig:conv_curves}), that the minor differences are magnified when taking the
 derivative with respect to \(\ln(t)\) such that the coarse grid reports a
-thermal conductivity of about \(110\%\) of the finer grid. The author
+thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_kvals}). The author
 conjectures that such effects may explain why the numerical predictions
 consistently over-predict thermal conductivity as compared to the analytical
 predictions, particularly in the isotropic case.
@@ -60,7 +60,7 @@ predictions, particularly in the isotropic case.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{fig/cond_curves.png}
+\includegraphics[width=0.6\textwidth]{fig/conv_curves.png}
 \label{fig:conv_curves}
 \caption{These two curves look similar enough, right?}
 \end{figure}
@@ -70,8 +70,8 @@ predictions, particularly in the isotropic case.
 \centering
 \includegraphics[width=0.6\textwidth]{fig/conv_kvals.png}
 \label{tab:conv_kvals}
-\caption{Even a limited amount of in-situ snow measurements show a degree of
-anisotropy.}
+\caption{Despite the similarities in time/temperature curves, the resulting 
+conductivity calculations differ by nearly 10 \%.}
 \end{table}
 
 \section{Benchtop Measurements}
@@ -115,3 +115,10 @@ refining this approach into a useful technique for measuring anisotropy.
 anisotropy.}
 \end{figure}
 
+Due to the difficulty in taking snow measurements on top of the inherent noise
+of the method, snow measurements resulted in being inconclusive. The 
+measurements indicate anisotropy, as expected. However, the erratic nature of
+the measurements suggests that the apparent trend could be as much operator
+error as anything else. Either way, it indicates that, like the case of the
+salt/sugar benchtop experiments, that levels of anisotropy appear relatively
+weak, though probably detectable with enough measurements.
