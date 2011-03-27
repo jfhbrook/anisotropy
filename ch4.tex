@@ -1,5 +1,5 @@
 \chapter{Real-Life Measurements}
-
+\label{ch:irl}
 \section{Introduction}
 
 idkmybffjill
@@ -87,7 +87,11 @@ to right represented:
 This csv data may be analyzed with either spreadsheet software, a series of
 scripts, or both. For this series of experiments, Excel and Gnumeric were used
 to verify the existence of data and to combine datasets, while python was used
-for the analysis.
+for the analysis.  Generally, each analysis consists of subtracting \(t_0\)
+from the relevant time intervals, subsetting the collected data over a straight
+section, and finding the slope.  In addition, a correction factor, named the
+McGaw Cooling Curve Correction after a CRREL researcher, is used for benchtop
+measurements to account for the insulation around the apparatus.
 
 \marginpar{Organization?}
 Generally, each measurement also has some metadata associated with it. In
@@ -121,6 +125,8 @@ curve and the beginning of the cooling curve.
 \caption{A plot of time vs. temperature from a real-world measurement of snow.
 Each curve must be analyzed by-hand to check for such effects as convection.}
 \end{figure}
+
+
 
 \section{Snow Conductivity Measurements}
 
