@@ -191,7 +191,7 @@ def cooling_curve(cool_data, q):
     return -q/4/pi/float(const)
 
 
-#applies mcgaw cooling curve. Untested.
+#applies mcgaw cooling curve.
 def mcgaw(data, k_hot, q_hot, hot_period):
     from math import exp, log, pi
 
@@ -220,8 +220,8 @@ def mcgaw(data, k_hot, q_hot, hot_period):
 
     return tablib.Dataset(*new_data, headers=new_headers)
     
-
-#Haven't been able to find this paper. Whatever.
+#Lachenbruch's Time Correction from a 1957 paper.
+#Haven't been able to find said paper. Whatever.
 def lachenbruch(data, dt):
     from numpy import exp, log
 
