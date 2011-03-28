@@ -86,21 +86,34 @@ The results of the benchtop measurements are mixed.
 analytical predictions, given the calculated anisotropic thermal conductivity.}
 \end{figure}
 
+\begin{table}[h]
+\centering
+\input{tables/powders.tex}
+\label{tab:powders}
+\caption{Raw data from the benchtop measurements. Note that one of the cooling curve measurements is striked out. This is because, when examined, it is clearly an outlier.}
+\end{table}
+
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{fig/test_results_confidence.png}
 \label{fig:test_confidence}
-\caption{Upper and lower bounds of 90 \% confidence in measurements.}
+\caption{Upper and lower bounds of 95 \% confidence in measurements.}
 \end{figure}
+
+\begin{table}[h]
+\centering
+\input{tables/pow_stats.tex}
+\label{tab:pow-stats}
+\caption{Statistics on normalized benchtop measurements.}
+\end{table}
+
 
 First, it may be seen that there is a significant amount of noise inherent in
 the needle probe method, even accounting for obvious ``garbage measurements.''
 This is likely due in part to the numerical derivative as well as the relatively
 unpredictable behavior of porous materials. Given
 this noise, it is difficult to see which of the two models is more appropriate.
-
-\marginpar{I saw this sensitivity from experience, but I should prove it 
-to myself and the readers.}
 
 Based on a general curve fit, the results show a slight upward slope, as
 expected. However, given the variation in the results, it is statistically
@@ -119,6 +132,15 @@ the numerical or analytical predictions alone.
 \marginpar{cite http://www.reddit.com/r/statistics/comments/gc7zn/how_do_you_quantify_the_goodness_of_a_fit/}
 
 \section{In-Situ Snow Measurements}
+
+\begin{table}[h]
+\centering
+\input{tables/snow.tex}
+\label{tab:snow}
+\caption{Raw data from the snow measurements.}
+\end{table}
+
+
 
 \begin{figure}[h]
 \centering
