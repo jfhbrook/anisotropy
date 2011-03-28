@@ -224,19 +224,15 @@ where:
 \mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi
 \end{equation}
 
-This was implemented in python with the ``elliptical'' and ``Tavg'' functions
-in Appendix \ref{apx:analytical-np}. The elliptical integrals are numerically evaluated using a quadrature method.
-
 \section{Finding Measured Conductivity as a Function of Needle Orientation}
 
 In order to extract the measured \(k\) value, we fit a function of the form
-\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}, in the ``kmeas'' function, also
-in Appendix \ref{apx:analytical-np}.
+\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}. Then, all that is left is to evaluate the functions at various combinations of
+\(k_xy\), \(k_z\) and \(\theta\).
 
-Then, all that is left is to evaluate the functions at various combinations of
-\(k_xy\), \(k_z\) and \(\theta\), which is done with the ``\_\_main\_\_'' procedure
-in Appendix \ref{apx:analytical-np}. After iterating through all the values,
-this procedure prints to stdout in .csv format, so that a table of values may be generated and piped to a text file for future analysis.
+\section{Software Implementation}
+
+This method is implemented in python, in Appendix \ref{apx:analytical-np}. The ``elliptical'' and ``tavg'' functions to calculate theoretical long-time temperature curves as a function of time. The elliptical integrals are numerically evaluated using a quadrature method.  Then, the ``k\_meas'' function calculates the measured k-value that would result from a curve fit to the isotropic model. Finally, the ``\_\_main\_\_'' procedure calculates the resulting \(k\) measurements for various combinations of \(k_xy\), \(k_z\) and \(\theta\), and prints the results to stdout in .csv format so that a table of values may be generated and piped to a text file for future analysis.
 
 \section{Conclusions}
 \label{sec:analytical-np:conclusion}
