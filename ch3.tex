@@ -303,7 +303,9 @@ test combinations is laid out here:
 The reason that this code couldn't recover solved conductivity combinations
 after a segmentation fault is because of the use of ``arrayfun,'' which acts 
 similarly to the ``map()'' functions seen in other languages, such as perl and
-python.
+python, and returns an array of the same size of the input but with the
+corresponding results of the function applied to it. For example,
+\texttt{map(lambda x: 2*x, [1, 2, 3])} will return \texttt{[2, 4, 6]}.
 
 As a result of these manipulations, the results would be organized into a nested
 cell array which mirrored the format of the two MATLAB matrices k\_xy and k\_z,
