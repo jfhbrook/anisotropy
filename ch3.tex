@@ -245,6 +245,13 @@ correlation coefficient of the remaining points was sufficiently high. Then, a
 linear curvefit was applied to these remaining points. Finally, the slope was
 used to calculate \(k_{\textrm{meas}}\).
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig/curvefit.png}
+\label{fig:curvefit}
+\caption{An illustration of the method used to find the "long-time" slope of the numerical simulations, which used a correlation coefficient to estimate the "straightness" of a section.}
+\end{figure}
+
 Interestingly enough, MATLAB actually comes with an exponential integral
 function, though it's defined differently in MATLAB than it is in this context.
 A failed approach involved trying to fit the data points directly against the
