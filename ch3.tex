@@ -43,13 +43,13 @@ density of snow & \(200\) kg/\(\textrm{m}^3\)\\
 \end{table}
 
 The needle was simulated as a long, thin steel cylinder embedded in the center
-of a sphere of snow, as in figure \ref{fig:domain}. While most of the dimensions and material properties were
-held constant (see Table \ref{tab:constants}), the anisotropic conductivity of
-the snow was parameterized in the form of a \(3\times3\) symmetric, positive
-definite matrix.  In practice, this was done by specifying a diagonal matrix
-\(\Lambda\) with positive eigenvalues \(k_{xy}\) and \(k_z\) and a rotation
-matrix \(R\) around the \(x\) axis, and then defining \(K = R^T\Lambda R\) as in
-equation \ref{eq:rotdiagrot} :
+of a sphere of snow, as in figure \ref{fig:domain}. While most of the dimensions
+and material properties were held constant (see Table \ref{tab:constants}), the
+anisotropic conductivity of a snow-like material was parameterized in the form
+of a  \(3\times3\) symmetric, positive definite matrix.  In practice, this was
+done by specifying a diagonal matrix \(\Lambda\) with positive eigenvalues
+\(k_{xy}\) and \(k_z\) and a rotation matrix \(R\) around the \(x\) axis, and
+then defining \(K = R^T\Lambda R\) as in equation \ref{eq:rotdiagrot} :
 
 \begin{equation}
 \label{eq:rotdiagrot}
@@ -76,7 +76,10 @@ infinite medium.
 
 Point temperatures recorded were the center of the needle, which corresponds to
 the location of the thermocouple used in real-world experiments, and six points
-on the surface of the snow, to ensure that the sphere was sufficiently large.
+on the surface of the snow, to ensure that the sphere was sufficiently large by
+checking for a near-zero increase in temperatures on these points. In these
+models, the increase in temperature was on the order of \(10^{-14}\) degrees
+Kelvin.
 
 \section{MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}
 \label{sec:numerical-np:matlab}
