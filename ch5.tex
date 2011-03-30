@@ -62,7 +62,7 @@ predictions, particularly in the isotropic case.
 \centering
 \includegraphics[width=0.6\textwidth]{fig/conv_curves.png}
 \label{fig:conv_curves}
-\caption{These two curves look similar enough, right?}
+\caption{These two curves appear quite similar.}
 \end{figure}
 
 
@@ -86,46 +86,84 @@ The results of the benchtop measurements are mixed.
 analytical predictions, given the calculated anisotropic thermal conductivity.}
 \end{figure}
 
+\begin{table}[h]
+\centering
+\input{tables/powders.tex}
+\label{tab:powders}
+\caption{Raw data from the benchtop measurements. Note that one of the cooling curve measurements is striked out. This is because, when examined, it is clearly an outlier.}
+\end{table}
+
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{fig/test_results_confidence.png}
 \label{fig:test_confidence}
-\caption{Upper and lower bounds of 90 \% confidence in measurements.}
+\caption{Upper and lower bounds of 95 \% confidence in measurements.}
 \end{figure}
+
+\begin{table}[h]
+\centering
+\input{tables/pow_stats.tex}
+\label{tab:pow-stats}
+\caption{Statistics on normalized benchtop measurements.}
+\end{table}
+
 
 First, it may be seen that there is a significant amount of noise inherent in
 the needle probe method, even accounting for obvious ``garbage measurements.''
-This is likely due in part to the numerical derivative, but also in part due to
-the method's sensitivity to errors in time measurement---that is, setting \(t_0\)
-even half a second off may strongly influence the resulting measurement. Given
+This is likely due in part to the numerical derivative as well as the relatively
+unpredictable behavior of porous materials. Given
 this noise, it is difficult to see which of the two models is more appropriate.
 
-\marginpar{I saw this sensitivity from experience, but I should prove it 
-to myself and the readers.}
+Based on a general curve fit, the results show a slight upward slope, as
+expected. However, given the variation in the results, it is statistically
+possible that angle has absolutely no effect on the reading. This could be fixed
+with more careful, exacting standards in the construction of the anisotropic
+materials, more measurements at each angle, and measurements at more angles.
+In other words, given the variance of the measurements, many more measurements
+would have to be made in order to reach any statistically significant
+conclusions, at least given the relatively amount of anisotropy of the sample.
 
 Also given this noise and the relatively weak levels of anisotropy in the
-sample, it would be difficult to deduce the degree of anisotropy of the sample
-with this data and a curve fit alone, and probably even with more measurements.
+sample, even with more measurements, it could still prove difficult to deduce
+the degree of anisotropy of the sample with this data and a curve fit to either
+the numerical or analytical predictions alone.
 
-However, it can be seen that, overall, the tests \emph{do} indicate anisotropy.
-The general trends seen in the measurements do match the general trends seen in
-the numerical and analytical models. This indicates that there may be hope in
-refining this approach into a useful technique for measuring anisotropy.
+\marginpar{cite reddit page}
 
 \section{In-Situ Snow Measurements}
+
+\begin{table}[h]
+\centering
+\input{tables/snow.tex}
+\label{tab:snow}
+\caption{Raw data from the snow measurements.}
+\end{table}
+
+
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{fig/snow_meas.png}
 \label{fig:test_results}
-\caption{Even a limited amount of in-situ snow measurements show a degree of
+\caption{Even a limited amount of in-situ snow measurements suggest a degree of
 anisotropy.}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fig/snow_meas_boxplot.png}
+\label{fig:test_boxplot}
+\caption{These boxplots give a general idea of the differences in measurements
+between the near-horizontal angle and the more oblique ones.}
+\end{figure}
+
+
 Due to the difficulty in taking snow measurements on top of the inherent noise
-of the method, snow measurements resulted in being inconclusive. The 
-measurements indicate anisotropy, as expected. However, the erratic nature of
+of the method, snow measurements are also inconclusive. However, the
+measurements taken *do* indicate anisotropy to a greater degree of confidence
+than the benchtop measurements. However, the erratic nature of
 the measurements suggests that the apparent trend could be as much operator
-error as anything else. Either way, it indicates that, like the case of the
-salt/sugar benchtop experiments, that levels of anisotropy appear relatively
-weak, though probably detectable with enough measurements.
+error as anything else. Like the case of the benchtop measurements, with so few
+measurements a curve fit against either method of prediction is unlikely to
+yield useful results.

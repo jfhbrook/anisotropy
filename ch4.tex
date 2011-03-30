@@ -1,13 +1,18 @@
 \chapter{Real-Life Measurements}
 \label{ch:irl}
+
 \section{Introduction}
 
-idkmybffjill
+In addition to theoretical results, real world cases \emph{must} be measured
+in order to validate the theory. In this chapter, methods for making actual
+measurements in both snow and in engineered materials are explored. Moreover,
+methods for building engineered materials are discussed.
+
 
 \section{Needle Probe Measurement Fundamentals}
 
-Needle probe measurements were taken using an apparatus borrowed from the Cold
-Regions Research and Engineering Laboratory, illustrated in figure
+Needle probe measurements are taken using an apparatus borrowed from the Cold
+Regions Research and Engineering Laboratory (CRREL), illustrated in Figure
 \ref{fig:apparatus}. Encased in a Pelican case for protection are a Campbell
 CR10X data logger, a relay switch, a 12v gel cell for the CR10X and a series of
 D-cells to power the heating coils in the needle. The program that came with the
@@ -32,8 +37,8 @@ matter of clearing and setting some registers using these star-codes.
 In general, the apparatus is used like so:
 
 \begin{enumerate}
-\item Turn on device.
-\item Insert needle into medium being measured.
+\item Turn on the device.
+\item Insert the needle into medium being measured.
 \item Use star-codes to clear the first three registers. ``* 6 A'' accesses the
 registers, and ``D \(n\)'' toggles the \(n\)th register. For example, to clear
 the second register, press ``* 6 A D 2'' .
@@ -41,15 +46,14 @@ the second register, press ``* 6 A D 2'' .
 apparatus measure temperature.
 \item Turn on the second register by pressing ``* 6 A D 2''. This turns on the
 heating element, effectively starting the test.
-\item Wait 15 minutes for test to complete.
+\item Wait 20 minutes for test to complete.
 \end{enumerate}
 
 Once testing is complete, data may be uploaded from the data logger using
-Campbell's PC200X software and a particular series of cables and devices, as
-shown in figure \ref{fig:cable}. In order, from datalogger to computer, they
+Campbell's PC200W software (shown in Figure \ref{fig:pc200w}) and a particular series of cables and devices, as
+shown in Figure \ref{fig:cable}. In order, from datalogger to computer, they
 are:
 
-\marginpar{Source PC200X?}
 
 \begin{enumerate}
 \item A DE-9 cable
@@ -69,12 +73,12 @@ cables to two, plus the SC32A interface.
 \caption{The cables used to communicate with the datalogger.}
 \end{figure}
 
-Using PC200W, data may be pulled off the CR10X in a raw binary format and then
+Using PC200W, data may be uploaded from the CR10X in a raw binary format and then
 converted to a CSV format. For this particular experiment, the columns from left
-to right represented:
+to right represent:
 
 \begin{enumerate}
-\item An instrument ID (not used).
+\item An instrument ID (constant in this case).
 \item Ordinal day, out of 366. For example, March 17th is day 76.
 \item hh:mm portion of timestamp. For example, 6:30pm is represented as 1830.
 \item Seconds portion of timestamp.
@@ -85,24 +89,21 @@ to right represented:
 \end{enumerate}
 
 This csv data may be analyzed with either spreadsheet software, a series of
-scripts, or both. For this series of experiments, Excel and Gnumeric were used
-to verify the existence of data and to combine datasets, while python was used
+scripts, or both. For this series of experiments, Excel, Gnumeric and cat/append are used
+to verify the existence of data and to combine datasets, while python is used
 for the analysis.  Generally, each analysis consists of subtracting \(t_0\)
 from the relevant time intervals, subsetting the collected data over a straight
 section, and finding the slope.  In addition, a correction factor, named the
 McGaw Cooling Curve Correction after a CRREL researcher, is used for benchtop
 measurements to account for the insulation around the apparatus.
 
-\marginpar{Organization?}
 Generally, each measurement also has some metadata associated with it. In
 particular, anisotropic measurements have an angle associated with them, and
 snow measurements also have a coordinate position on the snowpack associated
 with them. These are measured with a protractor and a tape measure,
 respectively. This means that, while taking measurements, one has to be careful
 to make sure that they can keep the proper metadata associated with each
-measurement. An unfortunate situation that can occur after a long series of
-measurements may recall memories of finishing an SAT section and realizing that
-you missed a question part-way through. \marginpar{appropriate?}
+measurement.
 
 \begin{figure}[h]
 \centering
@@ -130,8 +131,8 @@ Each curve must be analyzed by-hand to check for such effects as convection.}
 
 \section{Snow Conductivity Measurements}
 
-The first step in measuring proper snow was to make a vertical cut in the
-snowpack, as in figure \ref{fig:snowpack}.
+The first step in measuring proper snow is to make a vertical cut in the
+snowpack, as in Figure \ref{fig:snowpack}.
 
 \begin{figure}[h]
 \centering
@@ -140,10 +141,10 @@ snowpack, as in figure \ref{fig:snowpack}.
 \caption{A close-up shot of tested snowpack.}
 \end{figure}
 
-Then, for every measurement, the needle was inserted into snow and a measurement
-was taken. Snow is relatively difficult to work with due to the low structural 
+Then, for every measurement, the needle is inserted into snow and a measurement
+is taken. Snow is relatively difficult to work with due to the low structural 
 integrity of the material.  The wire connecting the probe to the data logger is
-stiff enough a low temperatures that situating the needle without ruining the
+stiff enough at low temperatures that situating the needle without ruining the
 snowpack can be quite a challenge.
 
 Along with each conductivity measurement, the height from the ground---measured
@@ -151,7 +152,7 @@ with a tape measure---and the angle of insertion---measured with a protractor
 and a plumb bob---were recorded as metadata.
 
 In addition, for each series of measurements at a particular region, the density
-of the snow was also measured with cardboard cylinder (used as a control volume)
+of the snow is also measured with a cardboard cylinder (used as a control volume)
 and a scale.
 
 \begin{figure}[h]
@@ -161,12 +162,12 @@ and a scale.
 \caption{Equipment used to measure snow thermal conductivity.}
 \end{figure}
 
-Data management was problematic, and techniques needed to be developed to handle
-it. To ensure that no data was lost, after every measurement data was copied and
+Data management is problematic, and techniques needed to be developed to handle
+it. To ensure that no data is lost, after every measurement data is copied and
 appended to the end of a version-controlled csv, and analyzed before the next
-measurement was complete. This allowed for mistakes to be caught and undone so
-that every measurement could be used. However, metadata management was still
-difficult.
+measurement is complete. This allows for mistakes to be caught and undone so
+that every measurement can be used. However, metadata management is still
+difficult even with these measures.
 
 \begin{comment}
 \begin{figure}[h]
@@ -187,9 +188,9 @@ glycerine does not leave an air gap between the needle and the surrounding
 medium like many porous materials, such as snow, will. -
 
 A method for testing anisotropic measurements by using alternating alternating
-layers of more-conductive and less-conductive materials was devised, based on
+layers of more-conductive and less-conductive materials has been devised, based on
 this glycerine benchmark test. However, instead of glycerine, the materials
-used were table salt and table sugar.
+used are table salt and table sugar.
 
 \section{Raw Materials for the Anisotropic Composite}
 
@@ -198,7 +199,12 @@ apparatus. These measurements resulted in conductivities of
 \(0.225\) \(\textrm{W}/\textrm{m}^2/\textrm{K}\) and 
 \(0.106\) \(\textrm{W}/\textrm{m}^2/\textrm{K}\), respectively.
 
-\marginpar{Table in appendix!}
+\begin{table}[h]
+\centering
+\input{tables/saltnsugar.tex}
+\label{tab:saltnsugar}
+\caption{Raw results of salt and sugar measurements after calculating conductivity. The multiple results were averaged for the purpose of predicting anisotropic conductivity of an alternately-layered medium.}
+\end{table}
 
 Assuming alternating layers of equal thickness, the anisotropic thermal
 conductivities in the aggregate should be:
@@ -214,22 +220,12 @@ anisotropic conductivity ratio is fairly close to 1, meaning that the anisotropy
 of the experimental medium, while significant, is relatively weak. On the plus
 side, salt and sugar are relatively cheap media to work with.
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{fig/anisovmaterial_ratios.png}
-\label{fig:anisovmatl_rats}
-\caption{Anisotropic Conductivity Ratio vs. Material Conductivity Ratio for the
-layered geometry used in the benchtop experiments. It may take a very large
-material conductivity ratio in order to achieve a relatively minor anisotropic
-conductivity ratio.}
-\end{figure}
-
 \section{Apparatus for Containing Anisotropic Composite}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/tilter.png}
-\label{fig:tilter}
+\includegraphics[width=0.4\textwidth]{fig/tilter_diagram.png}
+\label{fig:tilter_diagram}
 \caption{An illustration of the tilting apparatus.}
 \end{figure}
 
@@ -241,6 +237,13 @@ would self-level. However, because powders were used instead of gels, leveling
 had to be done by hand, usually with a spoon. The sugar was dyed green in order
  to differentiate it from the salt.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig/tilter_irl.jpg}
+\label{fig:tilter}
+\caption{A photograph of the tilting mechanism in action, at 60 degrees.}
+\end{figure}
+
 \section{Measurement Procedure}
 
 Unlike the case of snow, keeping track of measurements was easier for a number
@@ -249,6 +252,10 @@ was measured multiple times, and completely finished before other angles were
 measured. Each angle measured was measured at least three times, and up to five
 or more if clean measurements proved elusive.
 
-\section{Conclusion}
+\section{conclusion}
 
-ihnfi
+Both measurements of snow and engineered materials were taken. The general
+method for using the measurement apparatus is shared for both, as only the
+material itself differs. However, each material has its own challenges. Snow
+is difficult to measure, while creating a composite for benchtop tests requires
+its own effort.

@@ -19,7 +19,7 @@ Moreover, the problem is further simplified by posing the problem into radial
 coordinates and solving for temperature as a function of radial distance only.
 
 In the isotropic case, this is straightforward, as conductivity is a constant
-scalar. Unfortunately, the anisotropic case is more complex, but luckily not
+scalar. Unfortunately the anisotropic case is more complex, but luckily not
 completely intractible.
 
 \section{The Isotropic Case}
@@ -57,6 +57,8 @@ as defined in equation \ref{eq:ei} for real-valued arguments.
 \Ei(x) = \int_x^{\infty} \frac{e^{-t}}{t}dt
 \end{equation}
 
+\marginpar{I want to triple check this in my loaned copy of Carslaw, but I can't find it! Frustrating.}
+
 Solving for the exponential integral analytically is not possible, and numerical
 solutions can be difficult. Typically, we instead use an approximation for small
 \(r/t\),
@@ -66,8 +68,8 @@ solutions can be difficult. Typically, we instead use an approximation for small
 T(r,t) = \frac{q}{4\pi K}\ln\left(\frac{4Kt}{r^2}\right) - \frac{\gamma q}{4\pi K}
 \end{equation}
 
-Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve that
-for \(k\). We will be working with \ref{isotropic_case} for the remainder of
+Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve
+for \(k\). We will be working with Equation \ref{isotropic_case} for the remainder of
 this analysis, though it could easily be applied to \ref{isotropic_ei} as well.
 
 
@@ -113,13 +115,14 @@ In particular, equation \ref{eq:projection} was used in practice.
 \left[K\right]\right)
 \end{equation}
 
+\begin{comment}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{fig/projection.png}
 \label{fig:projection}
 \caption{An informal demonstration of how the 3-D problem may be projected onto a 2-D domain.}
 \end{figure}
-
+\end{comment}
 
 \section{Coordinate Transformation}
 \label{sec:analytical-np:transformation}
@@ -134,7 +137,7 @@ In particular, equation \ref{eq:projection} was used in practice.
 In order to apply the isotropic solution to this anisotropic case, we would like
 to apply a coordinate transformation such that we can transform the problem into
 an isotropic case with respect to some \(x' = a_x x\) and \(y' = a_y y\), as in
-figure \ref{fig:coord_trans}.
+Figure \ref{fig:coord_trans}.
 Without loss of generality, suppose \(a_x = 1\).
 
 \begin{align}
@@ -147,7 +150,7 @@ Without loss of generality, suppose \(a_x = 1\).
 \nabla \cdot \left([K]\nabla T\right) &= k_x\frac{\partial^2 T}{\partial {x'}^2} + k_ya_y^2\frac{\partial^2 T}{\partial {y'}^2}\\
 \end{align}
 
-Suppose we set the right side equal to the equivalent isotropic expression:
+Suppose the right hand side is equal to the equivalent isotropic expression:
 \begin{equation*}
 k\left(\frac{\partial^2 T}{\partial {x'}^2} + \frac{\partial^2 T}{\partial {y'}^2} \right) = k_x\frac{\partial^2 T}{\partial {x'}^2} + k_ya_y^2\frac{\partial^2 T}{\partial {y'}^2}
 \end{equation*}
@@ -182,9 +185,15 @@ and get the following result (for sufficiently large \(t/r'\)):
 T(r',t) = \frac{q}{4\pi k_x}\ln\left(\frac{4k_xt}{r'^2}\right) - \frac{\gamma q}{4\pi k_x}
 \end{equation}
 
-When measuring for the anisotropic case, I argue that we are effectively
-measuring the temperature at some \(r = r_{\textrm{0}}\)---either on the surface
-of the needle, or some small distance away from the needle.
+It is tempting to say that we're done here, but such is not the case. It can be
+shown that, if \(r'\) is assumed to be a constant that ``falls out'' when 
+differentiating as \(r\) is in the isotropic case that we are unable to recover
+\(k_y\). In this case, we must also apply some other sort of transformation to
+handle \(r'\) properly. This requires that we clarify exactly \emph{what} \(r\)
+and \(r'\) mean in this context. When measuring for the anisotropic case, I
+argue that we are effectively measuring the temperature at some
+\(r = r_{\textrm{0}}\)---either on the surface of the needle, or some small
+distance away from the needle.
 
 This approach isn't without its problems. For example, it supposes that the
 isotherms are all circles in the transformed geometry, but if a finite-sized
@@ -209,7 +218,7 @@ into \(r_{x'y'}\):
 
 This means that the temperature around the needle should now vary as a function
 of \(\theta\), unlike in the isotropic case. Now, since the needle only measures
-a single value, it seems logical to suggest that the measured quantity is an
+a single value, we may assume that the measured quantity is an
 average temperature---say, the average surface temperature of the probe.  This
 may be expressed like so:
 
@@ -224,19 +233,17 @@ where:
 \mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi
 \end{equation}
 
-This was implemented in python with the ``elliptical'' and ``Tavg'' functions
-in Appendix \ref{apx:analytical-np}. The elliptical integrals are numerically evaluated using a quadrature method.
-
 \section{Finding Measured Conductivity as a Function of Needle Orientation}
 
 In order to extract the measured \(k\) value, we fit a function of the form
-\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}, in the ``kmeas'' function, also
-in Appendix \ref{apx:analytical-np}.
+\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}. Then, all that is left is to evaluate the functions at various combinations of
+\(k_xy\), \(k_z\) and \(\theta\).
 
-Then, all that is left is to evaluate the functions at various combinations of
-\(k_xy\), \(k_z\) and \(\theta\), which is done with the ``\_\_main\_\_'' procedure
-in Appendix \ref{apx:analytical-np}. After iterating through all the values,
-this procedure prints to stdout in .csv format, so that a table of values may be generated and piped to a text file for future analysis.
+\section{Software Implementation}
+
+This method is implemented in python, in Appendix \ref{apx:analytical-np}. The ``elliptical'' and ``tavg'' functions to calculate theoretical long-time temperature curves as a function of time. The elliptical integrals are numerically evaluated using a quadrature method.  Then, the ``k\_meas'' function calculates the measured k-value that would result from a curve fit to the isotropic model. Finally, the ``\_\_main\_\_'' procedure calculates the resulting \(k\) measurements for various combinations of \(k_xy\), \(k_z\) and \(\theta\), and prints the results to stdout in .csv format so that a table of values may be generated and piped to a text file for future analysis.
+
+\marginpar{Code snippets MAY be appropriate here.}
 
 \section{Conclusions}
 \label{sec:analytical-np:conclusion}
@@ -247,6 +254,6 @@ coordinate projections to pose the problem in two dimensions, and by applying
 coordinate transformations to the domain, one may apply the accepted isotropic
 theory to the anisotropic case with minimal modification.  By numerically
 evaluating the predicted temperature distribution over time, one may find the
-expected cmonductivity measurement given the theory holds for anisotropic
+expected conductivity measurement given the theory holds for anisotropic
 materials.
 

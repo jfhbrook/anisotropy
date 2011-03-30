@@ -2,7 +2,7 @@
 \label{sec:introduction}
 \bigskip
 
-\section{Motivation: Why Do Scientists Care?}
+\section{Motivation}
 \label{sec:introduction:motivation}
 
 \marginpar{Expand on this? Cite research tackling this problem through other means?}
@@ -71,13 +71,13 @@ heating cooling curves, respectively.  Based on the slopes of these
 curves as a function of \(\ln(t)\) and approximate analytical solutions for
 these situations, effective thermal conductivity may be calculated.
 
-In this document, studies concentrated on the heating curve. In fact, the
-numerical and analytical approaches focus exclusively on the heating curve.
-
-\marginpar{expand on the heating curve stuff?}
-
-The specifics of these solutions are explored more thoroughly in chapter
-\ref{sec:analytical-np}.
+In this document, studies concentrateCar on the heating curve. In fact, the
+numerical and analytical approaches focus exclusively on the heating curve. This
+is because the initial conditions of the cooling curve problem depend on the
+final conditions of the heating curve problem, and because many references spend
+more time describing the derivation of the heating curve and list the cooling
+curve as being possible to derive ``from an analogous argument.'' However, the
+benchtop and in-situ measurements use both heating and cooling curves.
 
 \section{Difficulties with the Needle Probe Method}
 
@@ -102,33 +102,31 @@ process called vapor transport. Vapor transport is best known for causing
 depth hoar, but occurs throughout the snowpack. Other events, such as
 freeze-thaw events, may also change the form of snow. All these metamorphic
 processes on snow cause it to form regions of varying thermal conductivity. In
-some cases, these regions may form sharp, distinct layers, while in other cases
-they may form a gradient.
+some cases, these regions may form sharp, distinct layers with constant
+properties, while in other cases they have continuously varying properties.
 
 \section{Anisotropic Aggregate Behavior in Snow}
 
 At a macroscale, alternating regions of low-conductivity and high-conductivity
-material may act, in the aggregate, as a single material of anisotropic thermal
+material may act in the aggregate as a single material of anisotropic thermal
 conductivity---In other words, the effective thermal conductivity parallel to
 the orientation of the layers may be different than the effective thermal
 conductivity orthogonal to the layers.
 
 For example, suppose a composite exists of alternating layers, each of thickness
-\(l\) and with conductivities \(k_1\) and \(k_2\), as in figure
+\(l\) and with conductivities \(k_1\) and \(k_2\), as in Figure
 \ref{fig:ex_laminate}:
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/ex_laminate.png}
+\includegraphics[width=0.3\textwidth]{fig/ex_laminate.png}
 \label{fig:ex_laminate}
 \caption{Two layers of materials create a different net conductivity value in the vertical direction than in the horizontal direction.}
 \end{figure}
 
 In the vertical direction, the effective thermal conductivity is
 \(\frac12(k_1 + k_2)\). However, in the horizontal direction the effective
-thermal conductivity is \(\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\).
-
-An analogous analysis could be applied to a number of geometries.
+thermal conductivity is \(2\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\). An analogous analysis could be applied to a number of geometries.
 
 
 \section{Measuring Anisotropic Thermal Conductivity}
@@ -153,28 +151,43 @@ to measure anisotropic thermal conductivity with needle probes should enable
 future researchers in answering the other questions. However, these other
 questions will also, in part, be addressed.
 
-\section{Outline}
-\marginpar{What should I call this section anyway?}
+\section{Anisotropic Model}
 
-\marginpar{This is terrible. I really need to rewrite it.}
+In every model studied, it has been assumed that the horizontal plane has the
+same thermal conductivity and that only the vertical direction differs. In other
+words, \(k_x = k_y = k_{xy} \ne k_z\). Each model aims to predict the measured
+conductivity, \(k_{\textrm{meas}}\) as a function of angle.
 
-I will discuss:
+In both analytical and numerical models and in the measurements, the angle
+parameter, \(\theta\), is measured from the horizontal plane, as in Figure 
+\ref{fig:angle}.
 
-\begin{enumerate}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\textwidth]{fig/angle.png}
+\label{fig:angle}
+\caption{A diagram illustrating the meaning of \(\theta\) in models and
+measurements in this document. In all these cases, \(\theta\) is measured from
+the horizontal plane, which is also the plane of isotropy.}
+\end{figure}
 
-\item The differential equations associated with adapting the isotropic needle
-probe technique to the anisotropic case, as well as analytical approaches to
-solving them.
 
-\item The use of finite element models in COMSOL to find numerical solutions to
-the problem
+\section{Document Outline}
 
-\item Techniques for testing the predictions of the these approaches with
-both snow and engineered anisotropic situations
+First, this document will discuss the differential equations associated with
+adapting the isotropic needle probe technique to the anisotropic case, as well
+as analytical approaches to solving them. 
 
-\item The results of the analytical and numerical approaches as compared to the
-measurements of engineered cases and initial results of snow measurements, and
-interpretations of said results
+Second, the use of 3D finite element models in COMSOL with MATLAB to find 
+numerical solutions to the problem will be discussed.
 
-\item ``Loose ends,'' and where to go next.
-\end{enumerate}
+Then, this document will cover techniques for testing the predictions of the
+these approaches with both real snow and engineered anisotropic materials, in
+this case using table salt and table sugar.
+
+The results of the analytical and numerical approaches will then be compared to
+each other and the measurements of snow and engineered materials. The meanings
+of these results are also discussed.
+
+Finally, ``loose ends,'' unanswered questions, and avenues for future research
+will be elucidated.

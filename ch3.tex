@@ -8,7 +8,7 @@
 Numerical experiments simulated needle probes in anisotropic mediums with
 three-dimensional finite element heat transfer models in COMSOL 3.5a. While the
 models themselves were relatively simple, attempting to automate a parameter
-study in COMSOL 3.5a with respect to the anisotropic material properties proved
+study in COMSOL 3.5a with respect to the anisotropic material properties proves
 difficult.
 
 \section{Geometry and Domain Properties}
@@ -33,23 +33,23 @@ length of needle & \(10\) cm\\
 radius of snow & \(40\) cm\\
 \hline
 density of needle & \(8000\) kg/\(\textrm{m}^3\)\\
-\(C_P\) of needle & \(460\) \textbf{*units*}\\
+\(C_P\) of needle & \(460\) \(\flatfrac{\textrm{J}}{\textrm{kg}\cdot\textrm{K}}\) \\
 \(q\) of needle & \(0.5\) W/m\\
-\(k\) of needle & \(160\) \textbf{*units*}\\
+\(k\) of needle & \(160\) W/m\(\cdot\)K\\
 \hline
 density of snow & \(200\) kg/\(\textrm{m}^3\)\\
-\(C_P\) of snow & \(2050\) \textbf{*units*}
+\(C_P\) of snow & \(2050\)  \(\flatfrac{\textrm{J}}{\textrm{kg}\cdot\textrm{K}}\)
 \end{tabular}
 \end{table}
 
-The needle was simulated as a long, thin steel cylinder embedded in the center
-of a sphere of snow, as in figure \ref{fig:domain}. While most of the dimensions and material properties were
-held constant (see Table \ref{tab:constants}), the anisotropic conductivity of
-the snow was parameterized in the form of a \(3\times3\) symmetric, positive
-definite matrix.  In practice, this was done by specifying a diagonal matrix
-\(\Lambda\) with positive eigenvalues \(k_{xy}\) and \(k_z\) and a rotation
-matrix \(R\) around the \(x\) axis, and then defining \(K = R^T\Lambda R\) as in
-equation \ref{eq:rotdiagrot} :
+The needle is simulated as a long, thin steel cylinder embedded in the center
+of a sphere of a snow-like material (called snow in this model), as in figure \ref{fig:domain}. While most of the dimensions
+and material properties are held constant (see Table \ref{tab:constants}), the
+anisotropic conductivity of the snow is parameterized in the form
+of a  \(3\times3\) symmetric, positive definite matrix.  In practice, this is
+done by specifying a diagonal matrix \(\Lambda\) with positive eigenvalues
+\(k_{xy}\) and \(k_z\) and a rotation matrix \(R\) around the \(x\) axis, and
+then defining \(K = R^T\Lambda R\) as in Equation \ref{eq:rotdiagrot} :
 
 \begin{equation}
 \label{eq:rotdiagrot}
@@ -70,33 +70,34 @@ k_{xy} & 0 & 0\\
 \end{bmatrix}
 \end{equation}
 
-The boundary conditions on the surface of the sphere enforced zero heat flux,
-and the radius of the sphere was chosen such that the sphere approximated an
+The boundary conditions on the surface of the sphere enforce zero heat flux,
+and the radius of the sphere is chosen such that the sphere approximates an
 infinite medium.
 
-Point temperatures recorded were the center of the needle, which corresponds to
+Point temperatures recorded are the center of the needle, which corresponds to
 the location of the thermocouple used in real-world experiments, and six points
-on the surface of the snow, to ensure that the sphere was sufficiently large.
+on the surface of the snow, to ensure that the sphere is sufficiently large by
+checking for a near-zero increase in temperatures on these points. In these
+models, the increase in temperature is on the order of \(10^{-14}\) degrees
+Kelvin.
 
 \section{MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}
 \label{sec:numerical-np:matlab}
 
-Unfortunately, COMSOL 3.5a did not have the facilities necessary to implement a
+Unfortunately, COMSOL 3.5a does not have the facilities necessary to implement a
 geometry-changing multi-parameter study as required from the GUI alone. However,
-COMSOL 3.5a did have facilities for scripting with MATLAB. Unfortunately, I
-found the facility to be poorly-documented, and, at least with the particular
-install hosted by ARSC, buggy and prone to crashing.
+COMSOL 3.5a does have facilities for scripting with MATLAB.
 
 MATLAB code written to implement the parameter study was largely auto-generated
 by COMSOL, by building a base model in COMSOL 3.5a and exporting to an m-file.
-This code was then split into two parts: The meshing code, and the solving code.
-These pieces of code were wrapped in functions, called ``mesher'' and ``solver''
+This code is split into two parts: The meshing code, and the solving code.
+These pieces of code are wrapped in functions, called ``mesher'' and ``solver''
 respectively, and used by a main procedure called ``worker.m.'' Contained in
 ``worker.m'' is a MATLAB structure with the constants outlined in section
 \ref{sec:numerical-np:domain} called ``params''. The structure also contains a
 list of angles yet to be solved for, and the times for which to solve.
 
-The meshing code was wrapped in a function called ``mesher'' and took an angle
+The meshing function is called ``mesher'' and takes an angle
 (in degrees) and the params structure as arguments, and is for the most part
 simply code generated by COMSOL:
 
@@ -135,10 +136,10 @@ the values used in the original model. For example:
 
 Notice that, in this code, ``theta'' is never actually used. This is
 because, in early iterations of the code, the needle was rotated by the angle
-``theta.'' However, this seemed to cause random errors from COMSOL's meshing
-procedures, so the anisotropic thermal properties of the snow were changed
+``theta.'' However, this caused unpredictable errors from COMSOL's meshing
+procedures, so the anisotropic thermal properties of the snow are changed
 instead, as outlined in section \ref{sec:numerical-np:domain}. However, the
-argument was retained in order to avoid editing other legacy code in the model.
+argument is retained in order to avoid editing other legacy code in the model.
 
 Afterwards, geometry is labelled and a mesh is initialized and refined using
 code generated by COMSOL, and returns the COMSOL ``fem'' structure.
@@ -181,7 +182,7 @@ This is also where the symmetric matrix is generated, as described in section
 converts symmetric matrices of the form \\
 \texttt{[a1 a2 a4; a2 a3 a5; a4 a5 a6]} to the form \texttt{\{a1, a2, a3, a4, a5, a6 \}}.
 
-Code to plot the solution was commented out and replaced with code to save the
+Code to plot the solution has been replaced with code that saves the
 temperature data at the center of the needle, and the average temperature of the
 six points at the surface of the sphere, to MATLAB variables:
 
@@ -205,8 +206,8 @@ six points at the surface of the sphere, to MATLAB variables:
 \end{minted}
 \normalsize
 
-Finally, the data was packed into a cell array, and the ``angles'' parameter
-was changed:
+Finally, the data is packed into a cell array, and the ``angles'' parameter
+is updated:
 
 \small
 \begin{minted}{matlab}
@@ -238,21 +239,22 @@ domain as in figure \ref{fig:comsol}.
 
 \section{Automatic Calculation of Conductivity from Simulated Time/Temperature Data}
 
-Results from COMSOL were automatically fitted against the linear model with
+Results from COMSOL are automatically fitted against the linear model with
 respect to \(\ln(t)\) by ``dropping'' early \((t,T)\) datapoints until the
-correlation coefficient of the remaining points was sufficiently high. Then, a
-linear curvefit was applied to these remaining points. Finally, the slope was
+correlation coefficient of the remaining points was sufficiently high, as in Figure \ref{fig:curvefit}. Then, a
+linear curvefit is applied to these remaining points. Finally, the slope of this fit is
 used to calculate \(k_{\textrm{meas}}\).
 
-Interestingly enough, MATLAB actually comes with an exponential integral
-function, though it's defined differently in MATLAB than it is in this context.
-A failed approach involved trying to fit the data points directly against the
-exponential integral solution. However, the convergence properties of this
-approach were less than ideal.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{fig/curvefit.png}
+\label{fig:curvefit}
+\caption{An illustration of the method used to find the "long-time" slope of the numerical simulations, which used a correlation coefficient to estimate the "straightness" of a section.}
+\end{figure}
 
 \section{Calculation and Serialization of Results}
 
-These functions were called by ``worker.m,'' which was used to run multiple
+These functions are called by ``worker.m,'' which is used to run multiple
 tests and save the results:
 
 %% WORKER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,12 +268,12 @@ function worker(kxy,kz)
 \normalsize
 
 Here, we can see ``worker.m'' loading a list of angles from an ``angles.mat''
-file, which is MATLAB's native serialization format. This is because COMSOL
-tended to have segmentation faults with relative regularity. So, a
-solution was written where angles would be serialized such that the
-process could continue on the last unfinished angle. Unfortunately, because the
-process wasn't written to recover previously-solved conductivities at that
-angle, the process could only handle a small subset of conductivity combinations
+file, which is MATLAB's native serialization format. This is because this particular install of COMSOL 3.5a
+tends to have segmentation faults with relative regularity. So, a
+solution was written where angles are serialized such that the
+process can continue on the last unfinished angle. Unfortunately, because the
+process hasn't been written to recover previously-solved conductivities at that
+angle, the process can only handle a small subset of conductivity combinations
 during a given run. The general method for iterating through all the different
 test combinations is laid out here:
 
@@ -299,35 +301,37 @@ test combinations is laid out here:
 \end{minted}
 \normalsize
 
-The reason that this code couldn't recover solved conductivity combinations
+The reason that this code can't recover solved conductivity combinations
 after a segmentation fault is because of the use of ``arrayfun,'' which acts 
 similarly to the ``map()'' functions seen in other languages, such as perl and
-python.
+python. Mapping functions return an array of the same size of the input but with the
+corresponding results of the function applied to it. For example,
+\texttt{map(lambda x: 2*x, [1, 2, 3])} will return \texttt{[2, 4, 6]} in python.
 
-As a result of these manipulations, the results would be organized into a nested
-cell array which mirrored the format of the two MATLAB matrices k\_xy and k\_z,
-as reflected in the use of ``arrayfun.'' The data stored in each slot of the
-nested array was itself a cell array containing the simulation results, as shown
-in figure \ref{fig:cellarray}.
+As a result of these manipulations, the results are organized into a nested
+cell array which mirrors the format of the two MATLAB matrices k\_xy and k\_z,
+as reflected in the use of ``arrayfun.'' The data in each slot of the
+nested array is itself a cell array containing the simulation results, organized as shown
+in Figure \ref{fig:cellarray}.
 
-This section of code also has exception handling, as there would often be issues
-trying to run code during development. Mutt, the command-line email program, was
+This section of code also has exception handling, as there are often issues when
+trying to run code during development. Mutt, the command-line email program, is
 used to email the author as an ad-hoc logging and notification system, as
-otherwise runtime errors could go unnoticed for hours if not days.
+otherwise runtime errors can go unnoticed for hours if not days.
 
 Finally, note that an angle of \(0\) is passed to the meshing function. Again,
 this is because the function was originally intended to rotate the needle
 instead of changing the thermal conductivity matrix of the snow.
 
 After successfully calculating results for a given angle, the ``angles'' list
-was modified and re-saved to ``angles.mat.'' Then, the simulation results were
-saved in another .mat file. Each angle, in the end, had its own .mat file. 
+is modified and re-saved to ``angles.mat.'' Then, the simulation results are
+saved in another .mat file. Each angle, at the end of a simulation run, has its own .mat file. 
 
-Finally, a file named ``down'' was created to signal that the process was
+Finally, a file named ``down'' is created to signal that the process is
 complete. This is a technique that was inspired by the daemontools suite of
 process management tools. In fact, it was originally intended to be used with
-something like daemontools to manage the process, though in the end this proved
-to be mostly unnecessary.
+something like daemontools to manage the process, though in the end the use of this file proved
+to be unnecessary.
 
 \marginpar{http://cr.yp.to/daemontools.html}
 
@@ -346,7 +350,7 @@ to be mostly unnecessary.
 
 \section{Executing Simulations}
 
-Various ``runs'' of simulations could then be executed with a combination of a
+Various ``runs'' of simulations may be executed with a combination of a
 small master MATLAB routine and a bash command. For example, one suite ran
 looked like this on the MATLAB side:
 
@@ -361,7 +365,7 @@ worker(kxy, kz);
 \end{minted}
 \normalsize 
 
-and was invoked like this:
+and was invoked like so:
 
 \small
 \begin{minted}{bash}
@@ -369,13 +373,13 @@ while :; do comsol matlab -np 4 -mlr 'suitefour.m'; done
 \end{minted}
 \normalsize
 
-This command would repeat over and over until the loop is cancelled with a
-ctrl-D, which would insure that, if the comsol command crashed while running,
-that it would restart and pick up its own pieces as best it could.
+This command will attempt to run 'suitefour.m', the matlab routine, over and over until the loop is cancelled with a
+ctrl-D. This insures that, if the comsol command crashes while running,
+that it will restart and pick up its own pieces as best it can.
 
 \section{Post-Simulation Analysis with MATLAB}
 
-The resulting .mat files would be organized in a folder like so (minus the
+The resulting .mat files are organized in a folder like so (minus the
 notes.txt, which was added for human-readable metadata purposes):
 
 \small
@@ -391,12 +395,12 @@ A procedure called ``assembler.m'' was written to gather the results of these
 .mat files and put them in a cell structure where index corresponds to
 angle.
 
-Given that the results were saved to a variable called ``answers,'' another
-procedure called ``analyzer'' could be applied to them.  Unlike the other
-MATLAB procedures, ``analyzer'' was not functional in nature, and relied on
+Given that the results are saved to a variable called ``answers,'' another
+procedure called ``analyzer'' can be applied to them.  Unlike the other
+MATLAB procedures, ``analyzer'' is not functional in nature, and relies on
 the pre-existence of certain parameters.
 
-A number of analyses, some of more use than others, could then be applied to the
+A number of analyses, some of more use than others, can be applied to the
 data. For example, this procedure was used to make sure that boundary conditions
 were acceptable for the long-time solution:
 
@@ -411,7 +415,8 @@ for theta=1:length(angles)
     try
         assert(all(all(tavgs< 0.001)));
     catch
-        disp(['Warning: average surface temps are a bit high at theta=' num2str(angles(theta))] );
+        disp(['Warning: average surface temps are a bit ' ...
+              'high at theta=' num2str(angles(theta))] );
         disp(tavgs);
     end
     if theta == length(angles)
@@ -420,7 +425,8 @@ for theta=1:length(angles)
         contourf(kxy,kz,tavgs);
         colorbar;
         colormap('pink');
-        title('Average Surface Temperature at End of Heating Curve Simulation for a representative angle');
+        title(['Average Surface Temperature at End of Heating Curve' ...
+               ' Simulation for a representative angle']);
         xlabel('K_{xy}');
         ylabel('K_{zz}');
     end
@@ -429,14 +435,14 @@ end
 \normalsize
 
 However, the organization of the data proved awkard, so instead, a procedure was
-written to print the data in a csv format. This allowed for plotting and
+written to print the data in a csv format. This allows for plotting and
 analysis of the data using other tools, such as python and Excel. Much like the
 ``analyzer'' procedure, this one also depends on access to the global namespace.
-The reasons for this are described in the comments.
+The reasons for this are described in the comments of the procedure in Appendix \ref{apx:numerical-np}.
 
 \section{Convergence Study}
 
-A small, informal convergence study executed in order to get a general idea
+A small, informal convergence study was executed in order to get a general idea
 of how appropriate the model's chosen grid size is. A convergence study, in this
 context, consists of running the same model with different grid sizes and
 studying how the results change as a function of grid size.  The goal is to show
@@ -462,13 +468,13 @@ points for which to base any conclusions, but even this may be useful.
 \input{tables/conv_kvals.tex}
 \label{fig:conv_runtime}
 \caption{It quickly becomes impractical to increase the mesh size.}
-\end{figure}
+\end{table}
 
 \section{Conclusions}
 
-COMSOL 3.5a was used to run three-dimensional simulations of thermal conduction
+COMSOL 3.5a is used to run three-dimensional simulations of thermal conduction
 in the needle probe problem, in concert with MATLAB for automation and
-post-processing. Much of the work involved working around the limitations and
+post-processing. Much of the work involves working around the limitations and
 instability of COMSOL 3.5a. Regardless of these problems, the method generated
 useful information on predicted thermal conductivity measurements from a heating
 curve approach given an anisotropy and a needle orientation with respect to this

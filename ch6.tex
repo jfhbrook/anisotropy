@@ -1,9 +1,9 @@
-\chapter{Loose Ends}
+\chapter{Future Work}
 
 \section{Introduction}
 
 This is clearly not the end of research on this method. While the groundwork has
-been laid, there are plenty of avenues which need more study. This section aims
+been laid, there are plenty of avenues which need more study. This chapter aims
 to describe those which the author thinks are important.
 
 \section{Assumptions in the Analytical Approach}
@@ -70,6 +70,32 @@ needle angles.
 
 In addition, the materials used only lend themselves to an anisotropy ratio of
 87\%. There is plenty of room for improvement, in terms of suitable materials.
+Figure \ref{fig:anisovmatl_rats} shows what material conductivity ratios are
+required to achieve a given anisotropic conductivity ratio, assuming
+equal-thickness layers, which achieves the most extreme anisotropy ratio for
+two given materials and an alternating-layers configuration. While salt and
+sugar fare poorly, real-world materials have a wide range of conductivities
+such that two materials with sufficiently different conductivities should be
+possible to find.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{fig/anisovmaterial_ratios.png}
+\label{fig:anisovmatl_rats}
+\caption{Anisotropic Conductivity Ratio vs. Material Conductivity Ratio for the
+layered geometry used in the benchtop experiments. It may take a very large
+material conductivity ratio in order to achieve a relatively minor anisotropic
+conductivity ratio.}
+\end{figure}
+
+\section{Comprehensive Benchtop Measurements}
+
+While enough benchtop measurements were taken to give a vague idea as to the
+effectiveness of this measurement technique, there were not nearly enough
+measurements to give a statistically valid conclusion regarding the slight
+trend we were looking for. In addition to improving the benchtop method, there
+need to be many more measurements taken, in order to draw statistically valid
+conclusions.
 
 \section{Comprehensive In-Situ Measurements}
 
@@ -77,6 +103,31 @@ The in-situ measurements presented in this document are very limited in scope.
 One could easily spend much more time taking more measurements on more snow at
 more angles, in order to better quantify the degrees of anisotropy in natural
 snowpacks.
+
+\section{A Better Measurement Apparatus}
+
+The current measurement apparatus works. However, it may be difficult to work
+with, and does not record insertion angle. An ideal instrument would be easier
+to work with, would record this metadata, and do more to keep test data
+separated. It is likely that this would make a better project for someone with a
+background in electrical engineering instead of a background in a mechanical
+engineering, due to the programming and wiring requirements of creating such an
+instrument.
+
+\section{Statistical Analyses of Rigor}
+
+Moreover, more rigorous statistical analyses should be applied to the data. The
+author has applied relatively elementary analyses to his data.
+There are, however, multiple approaches which may be used to quantify the
+confidence of a curve showing anisotropy.
+
+\section{Exploration of the Cooling Curve}
+
+In the numerical and analytical models, the cooling curve is all but ignored. It
+is believed that cooling curve models will yield analogous results, but this has
+not been tested. Because of the importance of cooling curve measurements in the
+real world (as they effectively double the number of measurements in a sample),
+verification of these expectations of analogous behavior should occur.
 
 \section{A Method for Determining Anisotropic Thermal Conductivity From Measurements}
 
