@@ -82,6 +82,14 @@ more time, the correct answer is to save time:
 It's a common pattern, and while it may seem to be less than ideal, it's also
 realistic.
 
+##Direct use of MATLAB's `expint()` Function
+
+Interestingly enough, MATLAB actually comes with an exponential integral
+function, though it's defined differently in MATLAB than it is in this context.
+A failed approach involved trying to fit the data points directly against the
+exponential integral solution. However, the convergence properties of this
+approach were less than ideal.
+
 ## Custom Data Logger
 
 Speaking of time management: I also spent a good chunk of time researching
