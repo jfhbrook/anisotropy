@@ -102,33 +102,31 @@ process called vapor transport. Vapor transport is best known for causing
 depth hoar, but occurs throughout the snowpack. Other events, such as
 freeze-thaw events, may also change the form of snow. All these metamorphic
 processes on snow cause it to form regions of varying thermal conductivity. In
-some cases, these regions may form sharp, distinct layers, while in other cases
-they may form a gradient.
+some cases, these regions may form sharp, distinct layers with constant
+properties, while in other cases they have continuously varying properties.
 
 \section{Anisotropic Aggregate Behavior in Snow}
 
 At a macroscale, alternating regions of low-conductivity and high-conductivity
-material may act, in the aggregate, as a single material of anisotropic thermal
+material may act in the aggregate as a single material of anisotropic thermal
 conductivity---In other words, the effective thermal conductivity parallel to
 the orientation of the layers may be different than the effective thermal
 conductivity orthogonal to the layers.
 
 For example, suppose a composite exists of alternating layers, each of thickness
-\(l\) and with conductivities \(k_1\) and \(k_2\), as in figure
+\(l\) and with conductivities \(k_1\) and \(k_2\), as in Figure
 \ref{fig:ex_laminate}:
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.4\textwidth]{fig/ex_laminate.png}
+\includegraphics[width=0.3\textwidth]{fig/ex_laminate.png}
 \label{fig:ex_laminate}
 \caption{Two layers of materials create a different net conductivity value in the vertical direction than in the horizontal direction.}
 \end{figure}
 
 In the vertical direction, the effective thermal conductivity is
 \(\frac12(k_1 + k_2)\). However, in the horizontal direction the effective
-thermal conductivity is \(\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\).
-
-An analogous analysis could be applied to a number of geometries.
+thermal conductivity is \(2\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\). An analogous analysis could be applied to a number of geometries.
 
 
 \section{Measuring Anisotropic Thermal Conductivity}
@@ -174,28 +172,22 @@ the horizontal plane, which is also the plane of isotropy.}
 \end{figure}
 
 
-\section{Outline}
-\marginpar{What should I call this section anyway?}
+\section{Document Outline}
 
-\marginpar{This is terrible. I really need to rewrite it.}
+First, this document will discuss the differential equations associated with
+adapting the isotropic needle probe technique to the anisotropic case, as well
+as analytical approaches to solving them. 
 
-I will discuss:
+Second, the use of 3D finite element models in COMSOL with MATLAB to find 
+numerical solutions to the problem will be discussed.
 
-\begin{enumerate}
+Then, this document will cover techniques for testing the predictions of the
+these approaches with both real snow and engineered anisotropic materials, in
+this case using table salt and table sugar.
 
-\item The differential equations associated with adapting the isotropic needle
-probe technique to the anisotropic case, as well as analytical approaches to
-solving them.
+The results of the analytical and numerical approaches will then be compared to
+each other and the measurements of snow and engineered materials. The meanings
+of these results are also discussed.
 
-\item The use of finite element models in COMSOL to find numerical solutions to
-the problem
-
-\item Techniques for testing the predictions of the these approaches with
-both snow and engineered anisotropic situations
-
-\item The results of the analytical and numerical approaches as compared to the
-measurements of engineered cases and initial results of snow measurements, and
-interpretations of said results
-
-\item ``Loose ends,'' and where to go next.
-\end{enumerate}
+Finally, ``loose ends,'' unanswered questions, and avenues for future research
+will be elucidated.
