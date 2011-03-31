@@ -96,7 +96,7 @@ By assuming that temperature distribution is not a function of axial direction
 Without loss of generality, it may be further simplified like so:
 
 \begin{equation}
--\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 && k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
+-\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 & k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
 We are able to do this by choosing the directions \(x\) and \(y\) such that the
@@ -211,7 +211,7 @@ into \(r_{x'y'}\):
     &= r_0\left(\cos(\theta) \e_x + \sqrt{\frac1{k_y}} \e_y \right)\\
 \end{align*}
 \begin{equation}
-    \norm{r}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
+    \norm{r'}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
 \end{equation}
 
 This means that the temperature around the needle should now vary as a function
