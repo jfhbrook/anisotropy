@@ -239,7 +239,9 @@ to Broad Overview this.
 
 
 \begin{frame}
-\frametitle{First: dimension--;}
+%That texttt mess is for making the dashes not blend.
+\frametitle{First: \texttt{dimension-}\texttt{-;}}
+\centering
 \includegraphics[width=0.6\textwidth]{fig/projection.png}
 \begin{itemize}
 \item Remember, there's no temperature gradient in the \(z\) direction!
@@ -251,7 +253,7 @@ to Broad Overview this.
 \frametitle{Second: Stretch!}
 We now have:
 \begin{equation*}
--\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 && k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
+-\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 & k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
 \end{equation*}
 
 \begin{columns}
