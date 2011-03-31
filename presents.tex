@@ -174,6 +174,7 @@ example, alternating layers of high and low conductivity.
 \frametitle{Example Time!}
 \begin{columns}[c]
 \column{0.5\textwidth}
+    \centering
     \includegraphics[width=0.7\textwidth]{fig/ex_laminate.png}
 \column{0.5\textwidth}
     \begin{itemize}
@@ -228,7 +229,7 @@ to Broad Overview this.
     \end{itemize}
 \column{0.5\textwidth}
     \begin{equation*}
-    \nabla\begin{bmatrix}
+    \nabla \cdot \begin{bmatrix}
     k_{11} & k_{12} & k_{13}\\
     k_{12} & k_{22} & k_{23}\\
     k_{13} & k_{23} & k_{33}
@@ -369,6 +370,39 @@ have a \(k_{\textrm{meas}}\)!
 \end{frame}
 
 
+\begin{frame}
+\frametitle{Numerical Modeling!}
+\begin{columns}[c]
+\column{0.6\textwidth}
+    \includegraphics[width=\textwidth]{fig/domain.png}
+\column{0.4\textwidth}
+    \begin{itemize}
+    \item 3D Model in COMSOL 3.5a
+    \item Steel needle embedded in sphere \emph{*cough*}snow\emph{*cough*}
+    \item Yes, that's a sphere.
+    \item Snow's conductivity rotated (\(R^T\Lambda R\)), not needle.
+    \end{itemize}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Constant Parameters}
+\centering
+\begin{tabular}{r | l}
+radius of needle & \(0.25\) mm\\
+length of needle & \(10\) cm\\
+radius of snow & \(40\) cm\\
+\hline
+density of needle & \(8000\) kg/\(\textrm{m}^3\)\\
+\(C_P\) of needle & \(460\) \(\flatfrac{\textrm{J}}{\textrm{kg}\cdot\textrm{K}}\) \\
+\(q\) of needle & \(0.5\) W/m\\
+\(k\) of needle & \(160\) W/m\(\cdot\)K\\
+\hline
+density of snow & \(200\) kg/\(\textrm{m}^3\)\\
+\(C_P\) of snow & \(2050\)  \(\flatfrac{\textrm{J}}{\textrm{kg}\cdot\textrm{K}}\)
+\end{tabular}
+\end{frame}
 \end{document}
 
 
