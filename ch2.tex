@@ -57,15 +57,13 @@ as defined in equation \ref{eq:ei} for real-valued arguments.
 \Ei(x) = -\int_{-x}^{\infty} \frac{e^{-t}}{t}dt
 \end{equation}
 
-\marginpar{I want to triple check this in my loaned copy of Carslaw, but I can't find it! Frustrating.}
-
 Solving for the exponential integral analytically is not possible, and numerical
 solutions can be difficult. Typically, we instead use an approximation for small
 \(r/t\),
 
 \begin{equation}
 \label{isotropic_case}
-T(r,t) = \frac{q}{4\pi K}\ln\left(\frac{4Kt}{r^2}\right) - \frac{\gamma q}{4\pi K}
+T(r,t) = \frac{q}{4\pi k}\ln\left(\frac{4kt}{r^2}\right) - \frac{\gamma q}{4\pi k}
 \end{equation}
 
 Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve
