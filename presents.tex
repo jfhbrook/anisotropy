@@ -487,7 +487,12 @@ density of snow & \(200\) kg/\(\textrm{m}^3\)\\
 \item Solves the problem
 \item Returns \((T,t)\) data for center of probe and averaged final temperature on 
 cardinal surface points
+\item A variation: Saves fem structure to .mph file for exploration in COMSOL GUI
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\textwidth]{fig/35892_elem_1097s.png}
 \end{frame}
 
 
@@ -585,7 +590,7 @@ heating element, effectively starting the test.
 
 \begin{frame}
 \frametitle{PC200W}
-\includegraphics[width=\textwidth]{fig/pc200w.png}\\
+\includegraphics[width=0.8\textwidth]{fig/pc200w.png}\\
 You use this software to get data off the data logger and eventually convert it
 to .csv format
 \end{frame}
@@ -650,15 +655,31 @@ time series!
 \end{enumerate}
 \end{frame}
 
+\begin{frame}
+\frametitle{This Is A Picture of Snowpack:}
+\includegraphics[width=0.8\textwidth]{fig/snowpack.jpg}
+\end{frame}
 
 \begin{frame}
 \frametitle{Also-Measured}
-\begin{itemize}
-\item Height above soil (tape measure)
-\item Density of snow in area being measured (cardboard cylinder \& scale)
-\item This could have been done better.
-\item Density interesting within a larger context (density/conductivity relations)
-\end{itemize}
+\begin{columns}[c]
+\column{0.4\textwidth}
+    \begin{itemize}
+    \item Height above soil (tape measure)
+    \item Density of snow in area being measured (cardboard cylinder \& scale)
+    \item This could have been done better.
+    \item Density interesting within a larger context (density/conductivity relations)
+    \end{itemize}
+\column{0.6\textwidth}
+    \begin{table}
+    \begin{tabular}{r | l}
+    Control Volume & \(736.76\) mL\\
+    Mass & \(161.14\) g\\
+    Density & \(0.219\) g/mL\\
+    & 219 kg/\(\textrm{m}^3\)\\
+    \end{tabular}
+    \end{table}
+\end{columns}
 \end{frame}
 
 
@@ -695,6 +716,41 @@ Pure sugar & 1 & 0.108 & 0.113 & 0.106 & 0.008\\
  & 3 & 0.094 & 0.113 &  & \\
 \end{tabular}
 \end{table}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Material k-ratio to Anisotropic k-ratio}
+(Remember how I said to remember that example? It's the same geometry.)
+\begin{align*}
+k_{xy} &= \frac12 \left( k_{\textrm{salt}} + k_{\textrm{sugar}} \right) &= \boxed{0.166}\\
+k_z &= 2 \left( \frac1{k_{\textrm{salt}}} + \frac1{k_{\textrm{sugar}}} \right)^{-1} &= \boxed{0.144}\\
+\frac{k_z}{k_{xy}} &= \boxed{0.870}
+\end{align*}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{What? Only 0.87?!}
+\begin{center}
+\includegraphics[width=\textwidth]{fig/anisovmaterial_ratios.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Model Results}
+\includegraphics[width=0.8\textwidth]{fig/numvanal.png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Comments On The Chart:}
+\begin{itemize}
+\item General agreement. Encouraging!
+\item Potential Explanation 1: Relative lack of mesh refinement
+\item Potential Explanation 2: Edge Effects
+\end{itemize}
 \end{frame}
 
 \end{document}
