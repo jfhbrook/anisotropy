@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{euler}
 \usepackage{verbatim}
+\usepackage{ulem}
 
 \input{custom-macros.tex}
 
@@ -753,4 +754,149 @@ k_z &= 2 \left( \frac1{k_{\textrm{salt}}} + \frac1{k_{\textrm{sugar}}} \right)^{
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+\frametitle{Benchtop Results:}
+\begin{table}
+\begin{tabular}{l l | l l}
+Angle (degrees) & \# & Heating & Cooling\\
+90 & 1 & 0.223 & 0.243\\
+& 2 & 0.247 & 0.246\\
+& 3 & 0.256 & \sout{0.318}\\
+75 & 1 & 0.213 & 0.224\\
+& 2 & 0.233 & 0.232\\
+& 3 & 0.208 & 0.226\\
+& 4 & 0.226 & 0.238\\
+60 & 2 & 0.239 & 0.244\\
+& 3 & 0.226 & 0.224\\
+& 4 & 0.218 & 0.217\\
+30 & 1 & 0.227 & 0.238\\
+& 2 & 0.226 & 0.247\\
+& 3 & 0.221 & 0.242\\
+& 4 & 0.223 & 0.221\\
+\end{tabular}
+\end{table}
+(The strikeout is a statistical outlier.)
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Compared to the Models:}
+\includegraphics[width=\textwidth]{fig/test_results.png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{What Can We Conclude?}
+\begin{itemize}
+\item The 30 degree limit is painful.
+\item Needs \emph{way} more data.
+\item There *is* a slope, but is it statistically significant?
+\item (Note, that outlier makes the slope more convenient for us.)
+\item Keep in mind, our layers are thick enough that the model \emph{might just not be that good}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Let's Do Some Basic Stats:}
+Ignoring the outlier at \(90\) degrees:
+\begin{table}
+\begin{tabular}{r | l l l}
+ & \multicolumn{3}{c}{ \(k_{\textrm{meas}} / \bar{k_{xy}}\) }\\
+Angle & Mean & Standard Deviation & 95\% Confidence\\
+90 & 1.000 & 0.0491 & 0.0431\\
+75 & 0.923 & 0.0419 & 0.0291\\
+60 & 0.937 & 0.0459 & 0.0367\\
+30 & 0.949 & 0.0420 & 0.0291\\
+\end{tabular}
+\end{table}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Statistical Conclusions}
+\includegraphics[width=\textwidth]{fig/test_results_confidence.png}
+\begin{itemize}
+\item Doesn't look good!
+\item Consulted statisticians used other appropriate tests to reach similar conclusions.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{What About Snow?}
+\begin{tabular}{r | l l}
+Angle & Heating & Cooling\\
+0 & 0.0289 & 0.0321\\
+5 & 0.0269 & 0.0244\\
+45 & 0.0290 & 0.0327\\
+52 & 0.0288 & 0.0326\\
+\end{tabular}
+\begin{itemize}
+\item Even worse with respect to \# measurements.
+\item I took three times this many measurements, but these are the ones that \emph{worked out}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Snow, Graphically:}
+\includegraphics[width=\textwidth]{fig/snow_meas.png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Snow, Statistically:}
+\begin{columns}[c]
+\column{0.6\textwidth}
+    \begin{itemize}
+    \item Still way too few measurements!
+    \item On the other hand, the trend looks very promising. Exciting!
+    \end{itemize}
+\column{0.4\textwidth}
+    \includegraphics[width=\textwidth]{fig/snow_meas_boxplot.png}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Some Future Work (There's A Lot!)}
+\begin{itemize}
+\item Port model to COMSOL 4, examine more configurations
+\item Better convergence study
+\item Edge effects in analytical model and/or finite thickness needle model
+\item Cooling curve analysis
+\item More manageable benchtop apparatus
+\item \textbf{Comprehensive benchtop measurement study}, backed with stats
+\item More thorough, careful analysis of snow
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quick Recap:}
+\begin{itemize}
+\item Snow is a very complex material, but understanding it is very important for climate studies
+\item The isotropic model for needle probes has been applied to anisotropic situations
+\item The anisotropic situation has been modelled in COMSOL 3.5
+\item A method for testing predictions was devised and used
+\item Actual snow measurements, while limited, show promise!
+\item Lots more to do!
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{A Few Acknowledgements:}
+\begin{itemize}
+\item CIFAR for grant money
+\item ARSC for computer access
+\item Rorik Peterson for being a great advisor
+\item Dr. Johnson and Dr. Sturm for their help and advice
+\item Dr. Bueler for helping with the mathematical rigour
+\item Everybody that came today (Hi Mom!)
+\end{itemize}
+\end{frame}
 \end{document}
+
