@@ -54,10 +54,8 @@ as defined in equation \ref{eq:ei} for real-valued arguments.
 
 \begin{equation}
 \label{eq:ei}
-\Ei(x) = \int_x^{\infty} \frac{e^{-t}}{t}dt
+\Ei(x) = -\int_{-x}^{\infty} \frac{e^{-t}}{t}dt
 \end{equation}
-
-\marginpar{I want to triple check this in my loaned copy of Carslaw, but I can't find it! Frustrating.}
 
 Solving for the exponential integral analytically is not possible, and numerical
 solutions can be difficult. Typically, we instead use an approximation for small
@@ -65,7 +63,7 @@ solutions can be difficult. Typically, we instead use an approximation for small
 
 \begin{equation}
 \label{isotropic_case}
-T(r,t) = \frac{q}{4\pi K}\ln\left(\frac{4Kt}{r^2}\right) - \frac{\gamma q}{4\pi K}
+T(r,t) = \frac{q}{4\pi k}\ln\left(\frac{4kt}{r^2}\right) - \frac{\gamma q}{4\pi k}
 \end{equation}
 
 Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve
@@ -98,7 +96,7 @@ By assuming that temperature distribution is not a function of axial direction
 Without loss of generality, it may be further simplified like so:
 
 \begin{equation}
--\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 && k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
+-\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 & k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
 We are able to do this by choosing the directions \(x\) and \(y\) such that the
@@ -213,7 +211,7 @@ into \(r_{x'y'}\):
     &= r_0\left(\cos(\theta) \e_x + \sqrt{\frac1{k_y}} \e_y \right)\\
 \end{align*}
 \begin{equation}
-    \norm{r}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
+    \norm{r'}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
 \end{equation}
 
 This means that the temperature around the needle should now vary as a function
