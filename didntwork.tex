@@ -1,8 +1,150 @@
 \chapter{What Didn't Work}
 
-\section{Introduction}
+This piece was written as a blog post for my blog
+(http://jesusabdullah.github.com), but I felt that the information would be
+useful for anybody wanting to continue this research.
 
-\section{Parallelism}
+\section{What Didn't Work}
+
+Science tends to report in the affirmative. Most papers and
+documentations focus on what \emph{did} work, and what \emph{was} shown
+as a result. However, much of science is the ``error'' in ``trial and
+error.'' Here, I try to document some of the ideas that didn't work, or
+didn't end up being useful, and what could be learned from them.
+
+\subsection{Ellipsoid Measurement Space}
+
+When I first looked at this problem, I conjectured that the ``shape'' of
+the measured conductivity space in spherical coordinates, where phi and
+theta mirrored real-world orientation and radius corresponded to
+measured conductivity, would have an ellipsoid shape. That is, I
+suspected that the equation
+
+\[
+x^TKx = 1
+\]
+would hold, where x is \(||1/k||\) long
+and in the measured direction, and \(K\) is the conductivity matrix.
+However, this is \textbf{clearly} not the case.
+
+This is, in part, not the case \emph{because} the needle isn't measuring
+conductivity \emph{parallel} to the needle, but \emph{orthogonal} to the
+needle, and some sort of average of said orthogonal conductivities at
+that. In retrospect, this is obvious.
+
+I suppose the lesson here is to make sure you fully understand the
+problem before making wild conjecture.
+
+That said, this \emph{is} a good method for conceptualizing eigenvalues,
+given that your matrix is symmetric and positive definite. It's called
+``Lame's Ellipsoid'' in certain contexts, and is used in discussing
+equivalent energy states in certain dynamics problems and sometimes as
+an alternative to Mohr's Circle. In fact, Mohr's Circle itself helps
+visualize eigenvalues admirably, though in many problems outside
+material mechanics a shear component doesn't make sense. I mean, ``shear
+conductivity?'' What's that?
+
+\subsection{Open-Source FEM Toolchain}
+
+As I became somewhat disheartened over a lack of initial success with
+COMSOL, I began exploring other tools. In particular, I was interested
+in using open-source finite element tools. A number of tools \emph{do}
+exist, but the situation isn't good, as I outlined in this reddit post,
+likely written in December 2010:
+
+\begin{quote}
+I know this was posted months ago, but seeing that nobody really said
+anything: I've done some research on open-source finite element analysis
+and think I might be able to shed some light here.
+
+Before I do, I noticed that you mentioned Abaqus, so I'll address
+free-as-in-beer modeling first. All of the commercial codes cost money,
+but their target audiences are also organizations and not people; As
+such, with enough searching you may be able to find some cheap or free
+student editions. One of my professors was shopping around an Abaqus
+student edition that just limited you in terms of mesh size such that
+you couldn't really do problems that required fine meshes in 3-D but
+could get yourself going if a coarse solution was okay.
+
+In terms of open-source software, here's my impression: It's out there,
+but it's often unpolished and typically not all-inclusive the same way
+commercial codes are. In a full FEA stack, you basically have four
+parts:
+
+\begin{itemize}
+\item
+  Modeling. This is when you say, ``my domains are shaped like this and
+  act like that.''
+\item
+  Meshing. This is when you split your domains into little tetrahedrons
+  (or whatever other shape makes sense).
+\item
+  FEA proper. This is when the program actually uses a finite element
+  formulation of your governing equations to find a numerical solution.
+  This is the part that requires iron.
+\item
+  Visualization/Post-Processing. Once a solution is obtained, it needs
+  to be visualized somehow. This is where pretty pictures and graphs
+  comes in.
+\end{itemize}
+In the open-source world, there are tons and tons of programs and codes
+that can do all of these things, but they tend to be more decoupled and
+have a higher learning curve. Some of them are better for some things
+than for others. I haven't been successful in learning a full stack yet
+and this list is far from exhaustive, but here are a few things I've ran
+across:
+
+\begin{itemize}
+\item
+  \href{http://www.salome-platform.org/}{Salome}, I believe, aims to be
+  an interface to the full stack. That is, it uses third-party meshers
+  and solvers to do the heavy lifting, and takes care of steps 1 and 4
+  in a more common-style one-stop interface. Last time I tried to use it
+  I found it pretty incomprehensible but it was also years ago so ymmv.
+\item
+  ELMER (http://elmerfem.org/) is a one-stop solution, I believe.
+  It's modular in construction, but all the major pieces are there. On
+  the other hand, while its learning curve isn't terrible and it has
+  decent docs last I checked, I've also heard that its solvers aren't
+  the best. Of course, for simple problems, simple solvers suffice.
+\item
+  GMSH (http://www.geuz.org/gmsh/) is a stand-alone mesher. Its
+  style is a bit different from some 3-D modelers, but it seemed to work
+  alright if you didn't need to force the mesh to be really tight in
+  some areas and coarse in others.
+\item
+  MeshPy (http://mathema.tician.de/software/meshpy) looks good
+  from meshing, and Andreas makes good software. However, there seems to
+  be disappointingly little in the way of online documentation.
+\item
+  OpenFOAM (http://www.openfoam.com/) is, I believe, one of the
+  standard solvers that Salome uses. It's a relatively common CFD
+  package. I otherwise don't know much about it.
+\item
+  Dolfyn (http://www.dolfyn.net/index\_en.html) is another CFD
+  package I heard about while researching a long time ago. I honestly
+  don't know anything about it.
+\item
+  sfepy (https://github.com/rc/sfepy) should allow for FEA using
+  python. However, the rest of the stack is up to you, and I don't think
+  it's been proven ``in the wild.''
+\item
+  Paraview (http://www.paraview.org/) is a common visualization
+  tool, and I believe many open source solvers output their results in
+  the ``old-style'' paraview format.
+\item
+  Mayavi (http://code.enthought.com/projects/mayavi/ is another
+  option for visualization.
+\end{itemize}
+If you've learned anything else about free modeling/analysis, I'm
+definitely interested. Like I said, I'm pretty sure this is just
+scratching the surface.
+
+\end{quote}
+At the time of authorship, these tools were much more fresh in my mind
+than they are now, so I'll let Past Self speak in my stead.
+
+\subsection{Parallelism}
 
 Last summer, after making the first iteration of my model, I found that
 simulations took a while to run. At about the same time, I attended the
@@ -16,9 +158,9 @@ I attempted to develop a scheme that would use SSH to implement an
 ad-hoc mapreduce-esque scheme across a number of ARSC workstations to
 split the job of calulating K-values amongst about six machines.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{fig/parallelism.jpg}
+\includegraphics{fig/parallelism.jpg}
 \caption{}
 \end{figure}
 
@@ -61,7 +203,15 @@ avoiding spending more time, the correct answer is to save time:
 It's a common pattern, and while it may seem to be less than ideal, it's
 also realistic.
 
-\section{Custom Data Logger}
+\subsection{Direct use of MATLAB's \texttt{expint()} Function}
+
+Interestingly enough, MATLAB actually comes with an exponential integral
+function, though it's defined differently in MATLAB than it is in this
+context. A failed approach involved trying to fit the data points
+directly against the exponential integral solution. However, the
+convergence properties of this approach were less than ideal.
+
+\subsection{Custom Data Logger}
 
 Speaking of time management: I also spent a good chunk of time
 researching the programming of my own data logger using a
@@ -74,7 +224,7 @@ This isn't in and of itself a bad idea. In fact, there would be many
 advantages to using a custom-programmed microcontroller over a Campbell
 data logger. However, there are other considerations:
 
-\begin{enumerate}
+\begin{enumerate}[1.]
 \item
   I didn't know a lick about programming microcontrollers. I know a
   little more now, but not enough.
@@ -97,7 +247,7 @@ On the other hand, having followed the ``spend money'' rule, I now have
 a MSP--430 that I don't need right now. This could lead to fun hackery
 down the road. Who knows?
 
-\section{Layered Glycerine}
+\subsection{Layered Glycerine}
 
 One of the ``standards'' used with the needle probe apparatus is to
 measure the thermal conductivity of glycerine in an insulated box.
@@ -121,5 +271,9 @@ glycerine and rubbing alcohol. What happens, of course, is that the
 alcohol mixture floats on top of the unadulterated glycerine.
 
 This shouldn't have been a surprise, and yet it was. Interesting how
-that works. Current plans call for using salt and sugar (in powder form,
-not in any solutions).
+that works. Instead, the experiments use straight table salt and table
+sugar.
+
+\subsection{Conclusions}
+
+Science is hard.

@@ -35,6 +35,49 @@ fact, Mohr's Circle itself helps visualize eigenvalues admirably, though in
 many problems outside material mechanics a shear component doesn't make sense.
 I mean, "shear conductivity?" What's that?
 
+## Open-Source FEM Toolchain
+
+As I became somewhat disheartened over a lack of initial success with COMSOL, I
+began exploring other tools. In particular, I was interested in using open-source
+finite element tools. A number of tools *do* exist, but the situation isn't good,
+as I outlined in this reddit post, likely written in December 2010:
+
+> I know this was posted months ago, but seeing that nobody really said anything:  I've done some research on open-source finite element analysis and think I might be able to shed some light here.
+> 
+> Before I do, I noticed that you mentioned Abaqus, so I'll address free-as-in-beer modeling first.  All of the commercial codes cost money, but their target audiences are also organizations and not people; As such, with enough searching you may be able to find some cheap or free student editions.  One of my professors was shopping around an Abaqus student edition that just limited you in terms of mesh size such that you couldn't really do problems that required fine meshes in 3-D but could get yourself going if a coarse solution was okay.
+> 
+> In terms of open-source software, here's my impression: It's out there, but it's often unpolished and typically not all-inclusive the same way commercial codes are.  In a full FEA stack, you basically have four parts:
+
+> * Modeling. This is when you say, "my domains are shaped like this and act like that." 
+> * Meshing. This is when you split your domains into little tetrahedrons (or whatever other shape makes sense).
+> * FEA proper. This is when the program actually uses a finite element formulation of your governing equations to find a numerical solution. This is the part that requires iron.
+> * Visualization/Post-Processing. Once a solution is obtained, it needs to be visualized somehow. This is where pretty pictures and graphs comes in.
+> 
+> In the open-source world, there are tons and tons of programs and codes that can do all of these things, but they tend to be more decoupled and have a higher learning curve. Some of them are better for some things than for others. I haven't been successful in learning a full stack yet and this list is far from exhaustive, but here are a few things I've ran across:
+> 
+> * [Salome](http://www.salome-platform.org/), I believe, aims to be an interface to the full stack. That is, it uses third-party meshers and solvers to do the heavy lifting, and takes care of steps 1 and 4 in a more common-style one-stop interface. Last time I tried to use it I found it pretty incomprehensible but it was also years ago so ymmv.
+> 
+> * [ELMER](http://elmerfem.org/) is a one-stop solution, I believe. It's modular in construction, but all the major pieces are there. On the other hand, while its learning curve isn't terrible and it has decent docs last I checked, I've also heard that its solvers aren't the best. Of course, for simple problems, simple solvers suffice.
+> 
+> * [GMSH](http://www.geuz.org/gmsh/) is a stand-alone mesher. Its style is a bit different from some 3-D modelers, but it seemed to work alright if you didn't need to force the mesh to be really tight in some areas and coarse in others.
+> 
+> * [MeshPy](http://mathema.tician.de/software/meshpy) looks good from meshing, and Andreas makes good software. However, there seems to be disappointingly little in the way of online documentation.
+> 
+> * [OpenFOAM](http://www.openfoam.com/) is, I believe, one of the standard solvers that Salome uses. It's a relatively common CFD package. I otherwise don't know much about it.
+> 
+> * [Dolfyn](http://www.dolfyn.net/index_en.html) is another CFD package I heard about while researching a long time ago. I honestly don't know anything about it.
+> 
+> * [sfepy](https://github.com/rc/sfepy) should allow for FEA using python. However, the rest of the stack is up to you, and I don't think it's been proven "in the wild."
+> 
+> * [Paraview](http://www.paraview.org/) is a common visualization tool, and I believe many open source solvers output their results in the "old-style" paraview format.
+> 
+> * [Mayavi](http://code.enthought.com/projects/mayavi/) is another option for visualization.
+> 
+> If you've learned anything else about free modeling/analysis, I'm definitely interested. Like I said, I'm pretty sure this is just scratching the surface.
+
+At the time of authorship, these tools were much more fresh in my mind than they
+are now, so I'll let Past Self speak in my stead.
+
 ## Parallelism
 
 Last summer, after making the first iteration of my model, I found that 
@@ -145,3 +188,7 @@ is that the alcohol mixture floats on top of the unadulterated glycerine.
 
 This shouldn't have been a surprise, and yet it was. Interesting how that
 works.  Instead, the experiments use straight table salt and table sugar.
+
+## Conclusions
+
+Science is hard.
