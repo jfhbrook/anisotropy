@@ -1,0 +1,31 @@
+LaTeX Warning: Label `sec:analytical-np:isotropic' multiply defined.
+LaTeX Warning: Label `fig:test_results' multiply defined.
+LaTeX Warning: Reference `sec:analytical-np' on page 49 undefined on input line
+LaTeX Warning: Reference `sec:numerical-np' on page 52 undefined on input line 
+LaTeX Warning: Reference `ch:irl' on page 66 undefined on input line 80.
+LaTeX Warning: Reference `fig:heating_curve' on page 2 undefined on input line 
+LaTeX Warning: Reference `fig:cooling_curve' on page 2 undefined on input line 
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
