@@ -12,19 +12,16 @@ study in COMSOL 3.5a with respect to the anisotropic material properties proves
 difficult.
 
 \section{Geometry and Domain Properties}
-\label{sec:numerical-np:domain}
-
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/domain_2.png}
-\label{fig:domain}
 \caption{A COMSOL screenshot showing the geometry of the finite element model, which consists of a metal needle in a sphere of a snow-like material.}
+\label{fig:domain}
 \end{figure}
 
 
 \begin{table}[h]
-\label{tab:constants}
 \centering
 \caption{Constants Used in Numerical Models}
 \begin{tabular}{r | l}
@@ -40,6 +37,7 @@ density of needle & \(8000\) kg/\(\textrm{m}^3\)\\
 density of snow & \(200\) kg/\(\textrm{m}^3\)\\
 \(C_P\) of snow & \(2050\)  \(\flatfrac{\textrm{J}}{\textrm{kg}\cdot\textrm{K}}\)
 \end{tabular}
+\label{tab:constants}
 \end{table}
 
 The needle is simulated as a long, thin steel cylinder embedded in the center
@@ -248,8 +246,8 @@ used to calculate \(k_{\textrm{meas}}\).
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{fig/curvefit.png}
-\label{fig:curvefit}
 \caption{An illustration of the method used to find the "long-time" slope of the numerical simulations, which used a correlation coefficient to estimate the "straightness" of a section.}
+\label{fig:curvefit}
 \end{figure}
 
 \section{Calculation and Serialization of Results}
@@ -466,8 +464,9 @@ points for which to base any conclusions, but even this may be useful.
 \begin{table}[h]
 \centering
 \input{tables/conv_runtime.tex}
+\caption{It quickly becomes impractical to increase the mesh size of a model, as
+increases in runtime are non-linear and are limited by both CPU and computer memory.}
 \label{tab:conv_runtime}
-\caption{It quickly becomes impractical to increase the mesh size.}
 \end{table}
 
 \section{Conclusions}
