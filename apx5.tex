@@ -1,0 +1,38 @@
+\chapter{Needle Probe Apparatus Directions}
+
+\section{Taking A Measurement}
+
+The apparatus is controlled using a keypad that enables one to communicate
+with the data logger using Campbell ``star-codes.'' Initiating a test is a
+matter of clearing and setting some registers using these star-codes.
+
+In general, the apparatus is used like so:
+
+\begin{enumerate}
+\item Turn on the device.
+\item Insert the needle into medium being measured.
+\item Use star-codes to clear the first three registers. ``* 6 A'' accesses the
+registers, and ``D \(n\)'' toggles the \(n\)th register. For example, to clear
+the second register, press ``* 6 A D 2'' .
+\item Turn on the first register by pressing ``* 6 A D 1''. This makes the
+apparatus measure temperature.
+\item Turn on the second register by pressing ``* 6 A D 2''. This turns on the
+heating element, effectively starting the test.
+\item Wait 20 minutes for test to complete.
+\end{enumerate}
+
+\section{CSV Headers}
+
+Data from the Campbell instrument comes in the form of a .csv file. For this particular experiment, the columns (from left
+to right) represent:
+
+\begin{enumerate}
+\item An instrument ID (constant in this case).
+\item Ordinal day, out of 366. For example, March 17th is day 76.
+\item hh:mm portion of timestamp. For example, 6:30pm is represented as 1830.
+\item Seconds portion of timestamp.
+\item Needle temperature, in Celcius.
+\item Reference temperature, in Celcius.
+\item Voltage across needle probe, in millivolts.
+\item Experiment timer, in seconds.
+\end{enumerate}

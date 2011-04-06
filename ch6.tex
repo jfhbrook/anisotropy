@@ -3,8 +3,7 @@
 \section{Introduction}
 
 This is clearly not the end of research on this method. While the groundwork has
-been laid, there are plenty of avenues which need more study. This chapter aims
-to describe those which the author thinks are important.
+been laid, there are plenty of avenues which need more study.
 
 \section{Assumptions in the Analytical Approach}
 
@@ -15,48 +14,14 @@ other way to represent such a problem that may yield more accurate results. For
 example, one may be able to approach the problem in terms of a needle with a
 finite thickness, in which case the solution to the problem should be an
 infinite series of Bessel functions in the isotropic case. One may be able to
-tackle the problem from a finite-thickness needle approach for better results.
+tackle the problem from a finite-thickness needle approach for better results. In addition, a refined model could account for edge effects. \cite{axialerror}
 
-\section{Numerical Model Rewrite}
+\section{Extended Convergence Study}
 
-As mentioned previously, the numerical model is, while conceptually simple, made
-difficult by the limitations of COMSOL 3.5a and its interactions with MATLAB and
-the ARSC system.  It is the author's impression that COMSOL 4.1 has much better
-tools for conducting such parameter studies, and as such, a model rewrite in
-COMSOL 4.1 would likely be much easier to execute and to extend than the old
-COMSOL 3.5a/MATLAB model used in this research.
-
-Moreover, there are plenty of other finite element software packages capable of
-running such a study. For example, ABAQUS can likely handle such heat transfer
-problems without difficulty, and is scriptable in python (instead of MATLAB).
-In addition, ABAQUS, and its python API in particular, are well-documented.
-
-\section{Thorough Convergence Study}
-
-While a convergence study for the numerical model was undertaken, it was very
+While a convergence study for the numerical model was undertaken, it was relatively
 informal, and executed for only one particular configuration of parameters. A
 more thorough investigation of the convergence properties of the numerical model
 should likely be undertaken.
-
-\section{Model Verification}
-
-While the analytical model and the numerical model show general agreement,
-neither model has been shown to be technically correct. Even if the numerical
-model is properly convergent, it has still not been shown to be converging on
-a \emph{correct value}.
-
-A suggested experiment which the author was unable to complete is this: First,
-find the analytical solution for a cylinder embedded in an infinite, 
-\emph{isotropic} medium. This solution should already exist in a reference, such
-as Carslaw and Jaeger. Then, run a two-dimensional finite element model of the
-same problem, and show that the finite element model converges on the same
-solution as the analytical solution.
-
-While this would not prove that the full 3D model is converging on a correct
-solution, it \emph{would} show that this is so in simplified cases, and that the
-discontinuity in conductivites that occurs at the needle/snow boundary shouldn't
-be a concern. This experiment should quickly lend verification to the numerical
-model.
 
 \section{Improved Benchtop Method}
 
@@ -102,24 +67,9 @@ conclusions.
 The in-situ measurements presented in this document are very limited in scope.
 One could easily spend much more time taking more measurements on more snow at
 more angles, in order to better quantify the degrees of anisotropy in natural
-snowpacks.
+snowpacks. More measurements would allow for a rigorous statistical analysis that
+can show a trend with high confidence.
 
-\section{A Better Measurement Apparatus}
-
-The current measurement apparatus works. However, it may be difficult to work
-with, and does not record insertion angle. An ideal instrument would be easier
-to work with, would record this metadata, and do more to keep test data
-separated. It is likely that this would make a better project for someone with a
-background in electrical engineering instead of a background in a mechanical
-engineering, due to the programming and wiring requirements of creating such an
-instrument.
-
-\section{Statistical Analyses of Rigor}
-
-Moreover, more rigorous statistical analyses should be applied to the data. The
-author has applied relatively elementary analyses to his data.
-There are, however, multiple approaches which may be used to quantify the
-confidence of a curve showing anisotropy.
 
 \section{Exploration of the Cooling Curve}
 

@@ -61,7 +61,7 @@ This needle is inserted into the material whose thermal conductivity is being
 measured, and a constant voltage is applied to the needle's heating element.
 This causes a constant heat flux along the needle, and, knowing the resistance
 of the heat trace, this heat flux may be calculated. This causes the material's
-temperature near the needle to rise (Figure \ref{fig:heating_curve}. After some
+temperature near the needle to rise (Figure \ref{fig:heating_curve}). After some
 given amount of time, the heating element is turned off, and the temperature
 around the needle begins to fall back towards ambient (Figure \ref{fig:cooling_curve}).
 
@@ -86,11 +86,7 @@ curves as a function of \(\ln(t)\) and approximate analytical solutions for
 these situations, effective thermal conductivity may be calculated.
 
 In this document, studies concentrate on the heating curve. In fact, the
-numerical and analytical approaches focus exclusively on the heating curve. This
-is because the initial conditions of the cooling curve problem depend on the
-final conditions of the heating curve problem, and because many references spend
-more time describing the derivation of the heating curve and list the cooling
-curve as being possible to derive ``from an analogous argument.'' However, the
+numerical and analytical approaches focus exclusively on the heating curve. However, the
 benchtop and in-situ measurements use both heating and cooling curves.
 
 \section{Difficulties with the Needle Probe Method}
@@ -100,7 +96,7 @@ instance, it was shown that convection can and will occur in natural snowpack.
 \cite{sturm3} In addition to the fact that convection in snowpack can change the
 entire assumed heat transfer dynamic, heating the needle itself can cause this
 convection to occur. This means that, when measurements are taken, there will
-not only be ``transient'' regions due to early-time behavior, but also regions
+not only be ``transient'' regions due to short-term behavior, but also regions
 where convection becomes a major force. Practically, this means that linear
 portions (with respect to \(\ln(t)\)) must be found in between these regions
 of instability.
@@ -139,7 +135,7 @@ For example, suppose a composite exists of alternating layers, each of thickness
 \end{figure}
 
 In the vertical direction, the effective thermal conductivity is
-\(\frac12(k_1 + k_2)\). However, in the horizontal direction the effective
+\(\frac12(k_1 + k_2)\) \cite{lunardini}. However, in the horizontal direction the effective
 thermal conductivity is \(2\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\). An analogous analysis could be applied to a number of geometries.
 
 
@@ -152,7 +148,8 @@ This aggregate anisotropy brings a number of questions:
 probe technique at all? If so, how accurately, and how many measurements would
 one need?
 \item How severe is anisotropy in snow? Is the amount of anisotropy
-significant?
+significant? Can horizontal measurements be used to approximate vertical thermal
+conductivity?
 \item Is anisotropy in snow predictable? That is, could one take a single
 measurement and extrapolate from it the anisotropic thermal conductivity?
 \item Can anisotropy in snow explain historical differences between various
