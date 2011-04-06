@@ -53,8 +53,8 @@ as defined in Equation \ref{eq:ei} for real-valued arguments.
 \end{equation}
 
 Solving for the exponential integral analytically is not possible, and numerical
-solutions can be difficult. Typically, we instead use an approximation for small
-\(r/t\),
+solutions can be difficult. Typically, an approximation for small
+\(r^2/t\) is used instead:
 
 \begin{equation}
 \label{isotropic_case}
@@ -62,8 +62,8 @@ T(r,t) = \frac{q}{4\pi k}\ln\left(\frac{4kt}{r^2}\right) - \frac{\gamma q}{4\pi 
 \end{equation}
 
 Typical use of this function is to find \(\frac{dT}{d(\ln t)}\) and solve
-for \(k\). We will be working with Equation \ref{isotropic_case} for the remainder of
-this analysis, though it could easily be applied to \ref{isotropic_ei} as well.
+for \(k\). Equation \ref{isotropic_case} will be used for the remainder of
+this analysis, though it could easily be applied to Equation \ref{isotropic_ei} as well.
 
 
 \section{Difficulties In The Anisotropic Case}
@@ -81,27 +81,27 @@ solution becomes a function not only of \(r\), but of \(\phi\) as well.
 \label{sec:analytical-np:2D}
 
 By assuming that temperature distribution is not a function of axial direction
-\(z\), we may reduce the problem to an analogous one in orthogonal directions
+\(z\), one may reduce the problem to an analogous one in orthogonal directions
 \(x\) and \(y\) instead:
 
 \begin{equation}
--\nabla_{xy} \cdot \left([K]_{2 \times 2}\nabla_{xy} T \right)= \rho C\frac{\partial T}{\partial t}
+\nabla_{xy} \cdot \left([K]_{2 \times 2}\nabla_{xy} T \right)= \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
 Without loss of generality, it may be further simplified like so:
 
 \begin{equation}
--\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 & k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
+\nabla \cdot \left(\begin{bmatrix}k_x & 0\\ 0 & k_y\end{bmatrix}\nabla T \right)= \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
-We are able to do this by choosing the directions \(x\) and \(y\) such that the
+This may be done by choosing the directions \(x\) and \(y\) such that the
 matrix is diagonal.
 
 The values of \(k_x\) and \(k_y\) may be found by finding the components of
 \([K]\) that are in the \(xy\) plane.
 
 %, as illustrated in \ref{fig:projection}. 
-In particular, equation \ref{eq:projection} was used in practice.
+In particular, Equation \ref{eq:projection} was used in practice.
 
 \begin{equation}
 \label{eq:projection}
@@ -129,8 +129,7 @@ In particular, equation \ref{eq:projection} was used in practice.
 \label{fig:coord_trans}
 \end{figure}
 
-In order to apply the isotropic solution to this anisotropic case, we would like
-to apply a coordinate transformation such that we can transform the problem into
+In order to apply the isotropic solution to this anisotropic case, a coordinate transformation may be applied such that the problem is transformed into
 an isotropic case with respect to some \(x' = a_x x\) and \(y' = a_y y\), as in
 Figure \ref{fig:coord_trans}.
 Without loss of generality, suppose \(a_x = 1\).
@@ -156,8 +155,8 @@ As a result,
 k &= k_x\\ a_y &= \sqrt{\frac{k_x}{k_y}}\\
 \end{align*}
 
-Therefore, the following coordinate transformation will allow us to apply the
-isotropic solutions to an isotropic case with \(k = k_x\):
+Therefore, the following coordinate transformation will allow for the application
+of isotropic solutions to an isotropic case with \(k = k_x\):
 
 \begin{equation}
     \label{coord_trans}
@@ -167,27 +166,24 @@ isotropic solutions to an isotropic case with \(k = k_x\):
 
 \section{From Temperature Distribution to Measurement}
 
-Using equation \ref{coord_trans}, we may apply the isotropic solution:
+Using Equation \ref{coord_trans}, the isotropic solution may be applied:
 
 \begin{equation}
-    -k_x \nabla^2 T = \rho C\frac{\partial T}{\partial t}
+    k_x \nabla^2 T = \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
-and get the following result (for sufficiently large \(t/r'\)):
+and get the following result (for sufficiently large \(t/(r')^2\)):
 
 \begin{equation}
 T(r',t) = \frac{q}{4\pi k_x}\ln\left(\frac{4k_xt}{r'^2}\right) - \frac{\gamma q}{4\pi k_x}
 \end{equation}
 
-It is tempting to say that we're done here, but such is not the case. It can be
-shown that, if \(r'\) is assumed to be a constant that ``falls out'' when 
-differentiating as \(r\) is in the isotropic case that we are unable to recover
-\(k_y\). In this case, we must also apply some other sort of transformation to
-handle \(r'\) properly. This requires that we clarify exactly \emph{what} \(r\)
-and \(r'\) mean in this context. When measuring for the anisotropic case, I
-argue that we are effectively measuring the temperature at some
-\(r = r_{\textrm{0}}\)---either on the surface of the needle, or some small
-distance away from the needle.
+In the isotropic case, the value of \(r\) does not change the derivative with
+respect to the natural log of time, as long as it is assumed constant. In contrast, the anisotropic case requires that another transformation is applied
+to \(r'\) so that both \(k_x\) and \(k_y\) may be recovered. This requires that
+some contextual meaning is assigned to \(r\) and \(r'\). In this analysis, it
+is assumed that the measurement occurs at some  \(r = r_{\textrm{0}}\), perhaps
+on the surface of the physical needle.
 
 This approach isn't without its problems. For example, it supposes that the
 isotherms are all circles in the transformed geometry, but if a finite-sized
@@ -197,14 +193,13 @@ well, and only isotherms sufficiently far away would be round. However, this
 approach allows us to keep using the \(\ln()\) approximation, while a solution
 given a finite needle would likely require the use of Bessel functions.
 
-Applying this technique to the anisotropic case, we find that we must also
-transform \(r_{xy} = \cos(\theta) \hat{e}_x + \sin(\theta) \hat{e}_y \)
+Applying this technique to the anisotropic case, \(r_{xy} = \cos(\theta) \hat{e}_x + \sin(\theta) \hat{e}_y \) must also be transformed
 into \(r_{x'y'}\):
 
 \begin{align*}
     \begin{pmatrix}r_{x'} \\ r_{y'}\end{pmatrix} &=
     \begin{bmatrix}1 & 0\\ 0 & \sqrt{\frac{k_x}{k_y}} \end{bmatrix}\begin{pmatrix}r_0\cos(\theta) \\ r_0\sin(\theta)\end{pmatrix}\\
-    &= r_0\left(\cos(\theta) \e_x + \sqrt{\frac1{k_y}} \e_y \right)\\
+    &= r_0\left(\cos(\theta) \e_x + \sqrt{\frac{k_x}{k_y}} \e_y \right)\\
 \end{align*}
 \begin{equation}
     \norm{r'}^2 = r_0^2 \left(\cos^2(\theta) + \frac{k_x}{k_y}\sin^2(\theta) \right)\\
@@ -212,8 +207,8 @@ into \(r_{x'y'}\):
 
 This means that the temperature around the needle should now vary as a function
 of \(\theta\), unlike in the isotropic case. Now, since the needle only measures
-a single value, we may assume that the measured quantity is an
-average temperature---say, the average surface temperature of the probe.  This
+a single value, it may be assumed that the measured quantity is an
+average temperature, such as the average surface temperature of the probe.  This
 may be expressed like so:
 
 \begin{equation}
@@ -229,13 +224,9 @@ where:
 
 \section{Finding Measured Conductivity as a Function of Needle Orientation}
 
-In order to extract the measured \(k\) value, we fit a function of the form
-\(C_1 \ln(t) + C_2\) to equation \ref{eq:tavg}. Then, all that is left is to evaluate the functions at various combinations of
+In order to extract the measured \(k\) value, a function of the form
+\(C_1 \ln(t) + C_2\) is fit to Equation \ref{eq:tavg}. Then, all that is left is to evaluate the functions at various combinations of
 \(k_xy\), \(k_z\) and \(\theta\).
-
-\section{Software Implementation}
-
-This method is implemented in python, in Appendix \ref{apx:analytical-np}. The ``elliptical'' and ``tavg'' functions to calculate theoretical long-time temperature curves as a function of time. The elliptical integrals are numerically evaluated using a quadrature method.  Then, the ``k\_meas'' function calculates the measured k-value that would result from a curve fit to the isotropic model. Finally, the ``\_\_main\_\_'' procedure calculates the resulting \(k\) measurements for various combinations of \(k_xy\), \(k_z\) and \(\theta\), and prints the results to stdout in .csv format so that a table of values may be generated and piped to a text file for future analysis.
 
 \section{Conclusions}
 \label{sec:analytical-np:conclusion}
