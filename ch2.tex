@@ -3,7 +3,6 @@
 \bigskip
 
 \section{Introduction}
-\label{sec:analytical-np:intro}
 
 The technique used to measure thermal conductivity with a needle probe is based
 on the assumption that the needle approximates an infinite line source of energy
@@ -22,12 +21,11 @@ scalar. Unfortunately the anisotropic case is more complex, but luckily not
 completely intractible.
 
 \section{The Isotropic Case}
-\label{sec:analytical-np:isotropic}
 
 The isotropic case solves the following equation:
 
 \begin{equation*}
--k\nabla^2 T = \rho C\frac{\partial T}{\partial t}
+k\nabla^2 T = \rho C\frac{\partial T}{\partial t}
 \end{equation*}
 
 Where \(T\) is temperature, \(k\) is a scalar thermal conductivity, \(\rho\) is
@@ -49,7 +47,7 @@ T(r,t) = - \frac{q}{4\pi k}\Ei\left(-\frac{r^2}{4kt}\right)
 \end{equation}
 
 where \(q\) is heat flux from the needle per linear distance, and \(\Ei()\) is
-as defined in equation \ref{eq:ei} for real-valued arguments.
+as defined in Equation \ref{eq:ei} for real-valued arguments.
 
 \begin{equation}
 \label{eq:ei}
@@ -104,7 +102,7 @@ matrix is diagonal.
 The values of \(k_x\) and \(k_y\) may be found by finding the components of
 \([K]\) that are in the \(xy\) plane.
 
-%, as illustrated in figure \ref{fig:projection}. 
+%, as illustrated in \ref{fig:projection}. 
 In particular, equation \ref{eq:projection} was used in practice.
 
 \begin{equation}
@@ -129,8 +127,8 @@ In particular, equation \ref{eq:projection} was used in practice.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/coordinate_transformation.png}
-\label{fig:coord_trans}
 \caption{A 2-dimensional linear coordinate transformation.}
+\label{fig:coord_trans}
 \end{figure}
 
 In order to apply the isotropic solution to this anisotropic case, we would like
