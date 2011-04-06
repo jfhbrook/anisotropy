@@ -10,9 +10,9 @@
 \usepackage{minted} % Syntax hilighting!
 \usepackage{ulem} % This is mostly for sout.
 \usepackage[square]{natbib}
-\usepackage{tocbibind} % This fixes the "bibliography in ToC" problem that those
+%\usepackage{tocbibind} % This fixes the "bibliography in ToC" problem that those
                        % asshole physicists said should be fixed by directly
-                       % hacking the .toc file.
+                       % hacking the .toc file. Use with chapterbib.
 
 \input{custom-macros.tex}
 
@@ -44,8 +44,8 @@
 \tableofcontents
 \listoffigures
 \listoftables
-%\listofothermaterials
 \listofappendices
+%\listofothermaterials
 
 \begin{acknowledgements}
   \input acknowledgements.tex
