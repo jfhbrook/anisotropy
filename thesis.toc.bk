@@ -12,9 +12,9 @@
 \contentsline {section}{\numberline {1.3}Difficulties with the Needle Probe Method}{3}
 \contentsline {section}{\numberline {1.4}Snow Metamorphic Principles}{4}
 \contentsline {section}{\numberline {1.5}Anisotropic Aggregate Behavior in Snow}{4}
-\contentsline {section}{\numberline {1.6}Measuring Anisotropic Thermal Conductivity}{4}
+\contentsline {section}{\numberline {1.6}Measuring Anisotropic Thermal Conductivity}{5}
 \contentsline {section}{\numberline {1.7}Anisotropic Model}{5}
-\contentsline {section}{\numberline {1.8}Document Outline}{6}
+\contentsline {section}{\numberline {1.8}Document Outline}{5}
 \contentsline {chapter}{\numberline {2}Analytical Needle Probe Approach}{7}
 \contentsline {section}{\numberline {2.1}Introduction}{7}
 \contentsline {section}{\numberline {2.2}The Isotropic Case}{7}
@@ -23,44 +23,34 @@
 \contentsline {section}{\numberline {2.5}Coordinate Transformation}{9}
 \contentsline {section}{\numberline {2.6}From Temperature Distribution to Measurement}{11}
 \contentsline {section}{\numberline {2.7}Finding Measured Conductivity as a Function of Needle Orientation}{12}
-\contentsline {section}{\numberline {2.8}Software Implementation}{12}
-\contentsline {section}{\numberline {2.9}Conclusions}{12}
-\contentsline {chapter}{\numberline {3}Numerical Needle Probe Approach}{14}
-\contentsline {section}{\numberline {3.1}Introduction}{14}
-\contentsline {section}{\numberline {3.2}Geometry and Domain Properties}{14}
-\contentsline {section}{\numberline {3.3}MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}{15}
-\contentsline {section}{\numberline {3.4}Automatic Calculation of Conductivity from Simulated Time/Temperature Data}{19}
-\contentsline {section}{\numberline {3.5}Calculation and Serialization of Results}{19}
-\contentsline {section}{\numberline {3.6}Executing Simulations}{22}
-\contentsline {section}{\numberline {3.7}Post-Simulation Analysis with MATLAB}{22}
-\contentsline {section}{\numberline {3.8}Convergence Study}{24}
-\contentsline {section}{\numberline {3.9}Conclusions}{24}
-\contentsline {chapter}{\numberline {4}Real-Life Measurements}{26}
-\contentsline {section}{\numberline {4.1}Introduction}{26}
-\contentsline {section}{\numberline {4.2}Needle Probe Measurement Fundamentals}{26}
-\contentsline {section}{\numberline {4.3}Snow Conductivity Measurements}{29}
-\contentsline {section}{\numberline {4.4}Benchtop Tests}{31}
-\contentsline {section}{\numberline {4.5}Raw Materials for the Anisotropic Composite}{31}
-\contentsline {section}{\numberline {4.6}Apparatus for Containing Anisotropic Composite}{32}
-\contentsline {section}{\numberline {4.7}Measurement Procedure}{33}
-\contentsline {section}{\numberline {4.8}conclusion}{33}
-\contentsline {chapter}{\numberline {5}Results and Interpretation}{36}
-\contentsline {section}{\numberline {5.1}Parameters and Nondimensionalization}{36}
-\contentsline {section}{\numberline {5.2}Numerical vs. Analytical Predictions}{36}
-\contentsline {section}{\numberline {5.3}Benchtop Measurements}{37}
-\contentsline {section}{\numberline {5.4}In-Situ Snow Measurements}{38}
-\contentsline {chapter}{\numberline {6}Future Work}{44}
-\contentsline {section}{\numberline {6.1}Introduction}{44}
-\contentsline {section}{\numberline {6.2}Assumptions in the Analytical Approach}{44}
-\contentsline {section}{\numberline {6.3}Numerical Model Rewrite}{44}
-\contentsline {section}{\numberline {6.4}Thorough Convergence Study}{44}
-\contentsline {section}{\numberline {6.5}Model Verification}{45}
-\contentsline {section}{\numberline {6.6}Improved Benchtop Method}{45}
-\contentsline {section}{\numberline {6.7}Comprehensive Benchtop Measurements}{46}
-\contentsline {section}{\numberline {6.8}Comprehensive In-Situ Measurements}{46}
-\contentsline {section}{\numberline {6.9}A Better Measurement Apparatus}{46}
-\contentsline {section}{\numberline {6.10}Statistical Analyses of Rigor}{47}
-\contentsline {section}{\numberline {6.11}Exploration of the Cooling Curve}{47}
-\contentsline {section}{\numberline {6.12}A Method for Determining Anisotropic Thermal Conductivity From Measurements}{47}
-\contentsline {chapter}{\numberline {7}Conclusions}{48}
-\contentsline {chapter}{Bibliography}{49}
+\contentsline {section}{\numberline {2.8}Conclusions}{12}
+\contentsline {chapter}{\numberline {3}Numerical Needle Probe Approach}{13}
+\contentsline {section}{\numberline {3.1}Introduction}{13}
+\contentsline {section}{\numberline {3.2}Geometry and Domain Properties}{13}
+\contentsline {section}{\numberline {3.3}MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}{14}
+\contentsline {section}{\numberline {3.4}Automatic Calculation of Conductivity from Simulated Time/Temperature Data}{15}
+\contentsline {section}{\numberline {3.5}Convergence Study}{16}
+\contentsline {section}{\numberline {3.6}Conclusions}{17}
+\contentsline {chapter}{\numberline {4}Experimental Measurements}{18}
+\contentsline {section}{\numberline {4.1}Introduction}{18}
+\contentsline {section}{\numberline {4.2}Needle Probe Measurement Fundamentals}{18}
+\contentsline {section}{\numberline {4.3}Snow Conductivity Measurements}{19}
+\contentsline {section}{\numberline {4.4}Benchtop Tests}{20}
+\contentsline {section}{\numberline {4.5}Raw Materials for the Anisotropic Composite}{21}
+\contentsline {section}{\numberline {4.6}Apparatus for Containing Anisotropic Composite}{22}
+\contentsline {chapter}{\numberline {5}Results and Interpretation}{25}
+\contentsline {section}{\numberline {5.1}Parameters and Nondimensionalization}{25}
+\contentsline {section}{\numberline {5.2}Numerical vs. Analytical Predictions}{25}
+\contentsline {section}{\numberline {5.3}Benchtop Measurements}{26}
+\contentsline {section}{\numberline {5.4}In-Situ Snow Measurements}{27}
+\contentsline {chapter}{\numberline {6}Future Work}{33}
+\contentsline {section}{\numberline {6.1}Introduction}{33}
+\contentsline {section}{\numberline {6.2}Assumptions in the Analytical Approach}{33}
+\contentsline {section}{\numberline {6.3}Extended Convergence Study}{33}
+\contentsline {section}{\numberline {6.4}Improved Benchtop Method}{33}
+\contentsline {section}{\numberline {6.5}Comprehensive Benchtop Measurements}{34}
+\contentsline {section}{\numberline {6.6}Comprehensive In-Situ Measurements}{34}
+\contentsline {section}{\numberline {6.7}Exploration of the Cooling Curve}{35}
+\contentsline {section}{\numberline {6.8}A Method for Determining Anisotropic Thermal Conductivity From Measurements}{35}
+\contentsline {chapter}{\numberline {7}Conclusions}{36}
+\contentsline {chapter}{Bibliography}{37}
