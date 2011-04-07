@@ -114,11 +114,9 @@ if __name__=="__main__":
 
     fea = import_numerical('./data_fea.csv')
 
-    """
     print "By-Angle Frequencies:"
     for theta in sorted(unique(fea['angle'])):
         print str(theta) + ': ' + str(len([t for t in fea['angle'] if t == theta]))
-    """
 
     angle_0 = tab_filter(fea, 'angle', lambda t: t == 0)
     angle_30 = tab_filter(fea, 'angle', lambda t: t == 30)
@@ -129,7 +127,6 @@ if __name__=="__main__":
 
 
     #zero angle only
-    """
     anal_kratios_0 = linspace(0.2, 2.0, 20)
     anal_kmeas_0 = map(lambda k: getKmeas(1, k, 0), list(anal_kratios_0))
     
@@ -145,6 +142,7 @@ if __name__=="__main__":
     anal_kratios = linspace(0.2, 2.0, 20)
     anal_kmeas = [map(lambda k: getKmeas(1, k, a), list(anal_kratios)) for a in angles]
 
+    #By-angle
     for (i, a) in enumerate(angles):
         angle_set = byAngle[a]
         (kz,kmeas) = zip(*sorted( zip(angle_set['kz/kxy'], angle_set['kmeas/kxy']),
@@ -155,4 +153,35 @@ if __name__=="__main__":
     plt.xlabel(r'$k_z/k_{xy}$')
     plt.ylabel(r'$k/k_{xy}$')
     plt.show()
-    """
+
+    print "By-Ratio Frequencies:"
+    for kz in sorted(unique(fea['kz/kxy'])):
+        print str(kz) + ': ' + str(len([k for k in fea['kz/kxy'] if k == kz]))
+
+    rat_third = tab_filter(fea, 'kz/kxy', lambda k: 0.3 < k < 0.4)
+    rat_twothird = tab_filter(fea, 'kz/kxy', lambda k: 0.66666 < k < 0.66667)
+    rat_one = tab_filter(fea, 'kz/kxy', lambda k: 0.99999 < k < 1.00001)
+    rat_fourthird = tab_filter(fea, 'kz/kxy', lambda k: 1.33333 < k < 1.33334)
+    rat_fivethird = tab_filter(fea, 'kz/kxy', lambda k: 1.66666 < k < 1.66667)
+
+    byRatio = [ rat_third,
+                rat_twothird,
+                rat_one,
+                rat_fourthird,
+                rat_fivethird ]
+
+    #by ratio
+    anal_angles = linspace(0, 90, 20)
+    anal_kmeas = [map(lambda a: getKmeas(1, k, a), list(anal_angles)) for k in [(j+1.0)/3.0 for j in range(5)]]
+
+
+    for (i, rat_set) in enumerate(byRatio):
+        ratio = (i+1.)/3.
+        (th,kmeas) = zip(*sorted( zip(rat_set['angle'], rat_set['kmeas/kxy']),
+                                  key=lambda tup: tup[0]))
+        #print kz
+        plt.plot(th, kmeas, 'o--', color='k')
+        plt.plot(anal_angles, anal_kmeas[i], 'b')
+    plt.xlabel('Angle (degrees)')
+    plt.ylabel(r'$k/k_{xy}$')
+    plt.show()
