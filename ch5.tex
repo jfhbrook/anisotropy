@@ -16,7 +16,7 @@ the horizontal (\(xy\)) plane.
 \section{Numerical vs. Analytical Predictions}
 
 A 3-D plot of the numerical and analytical predictions may be seen in 
-Figure \ref{fig:numvanal}.
+Figures \ref{fig:numvanal}, \ref{fig:by_angle}, \ref{fig:by_kratio} and \ref{fig:angle0}.
 
 \begin{figure}[h]
 \centering
@@ -26,6 +26,31 @@ general agreement. Grey dots represent numerical simulation results, the grey su
 model convergence issues.}
 \label{fig:numvanal}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig/byAngle.png}
+\caption{Slices of theoretical predictions by angle. Black represents numerical results, while blue represents analytical theory. It can be seen that the analytical theory predicts measured conductivity to be a stronger function of angle than the numerical data.}
+\label{fig:by_angle}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig/byKratio.png}
+\caption{Slices of theoretical predictions by \(\flatfrac{k_z}{k_{xy}}\). Black represents numerical results, while blue represents analytical theory. It can be seen that the analytical theory
+is perfect for the isotropic case (\(\flatfrac{k_{\textrm{meas}}}{k_{xy}}\), while the numerical experiments report larger-than-expected values.}
+\label{fig:by_kratio}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{fig/angle_0.png}
+\caption{Theoretical predictions for the special case of \(\theta = 0\),
+when the needle is oriented horizontally. Black represents numerical results, while green shows the line where \(k_{\textrm{meas}}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.
+\label{fig:angle0}
+\end{figure}
+
 
 This plot shows that the two approaches to predicting measured conductivity
 as a function of angle and anisotropy ratio are in general agreement. However,
