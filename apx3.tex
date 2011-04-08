@@ -13,8 +13,9 @@ from __future__ import division
 import tablib
 from math import pi
 
-# csv.reader and tablib aren't smart enough to read in numbers as numbers.
-# Therefore, I map this over the strings in the rows spat out by csv.reader.
+# csv.reader and tablib aren't smart enough to read in numbers as 
+# numbers. Therefore, I map this over the strings in the rows spat
+# out by csv.reader.
 def str2num(string):
     import re
 
@@ -94,7 +95,8 @@ def tab_pprint(data):
 def tab_plot(data, x_header, y_headers = None, fit=None ):
     import matplotlib.pyplot as pyplot
 
-    headers = filter(lambda h: h != x_header, data.headers if y_headers == None else y_headers)
+    headers = filter(lambda h: h != x_header, data.headers 
+                     if y_headers == None else y_headers)
 
     xs = [ data[x_header] for header in headers ]
     ys = [ data[header] for header in headers]

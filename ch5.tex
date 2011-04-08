@@ -4,11 +4,11 @@
 
 For most analyses, many of the parameters and results are non-dimensionalized. In
 particular, instead of separate parameters for \(k_z\) and \(k_{xy}\), \(k_z\)
-and \(k_{\textrm{meas}}\) are both normalized by \(k_{xy}\). Numerical
+and \(k_{\textrm{eff}}\) are both normalized by \(k_{xy}\). Numerical
 experiments verified that this is permissible, as numerical experiments with
 different \(k_z\) and \(k_{xy}\) parameters but equivalent ratios
 \(\fracflat{k_z}{k_{xy}}\) resulted in very similar ratios of
-\(\fracflat{k_{\textrm{meas}}}{k_{xy}}\).
+\(\fracflat{k_{\textrm{eff}}}{k_{xy}}\).
 
 Angle is an exception. In this analysis, all angles are given as degrees from
 the horizontal (\(xy\)) plane.
@@ -30,7 +30,7 @@ model convergence issues.}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/byAngle.png}
-\caption{Slices of theoretical predictions by angle. Black represents numerical results, while blue represents analytical theory. It can be seen that the analytical theory predicts measured conductivity to be a stronger function of angle than the numerical data.}
+\caption{Slices of theoretical predictions by angle. Black points connected by dashed lines represent numerical results, while solid blue lines represent analytical theory. It can be seen that the analytical theory predicts measured conductivity to be a stronger function of angle than the numerical data.}
 \label{fig:by_angle}
 \end{figure}
 
@@ -38,7 +38,7 @@ model convergence issues.}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/byKratio.png}
-\caption{Slices of theoretical predictions by \(\flatfrac{k_z}{k_{xy}}\). Black represents numerical results, while blue represents analytical theory. It can be seen that the analytical theory
+\caption{Slices of theoretical predictions by \(\flatfrac{k_z}{k_{xy}}\). Black points connected by dashed lines represent numerical results, while solid blue lines represent analytical theory. It can be seen that the analytical theory
 is perfect for the isotropic case (\(\flatfrac{k_z}{k_{xy}} = 1\)), while the numerical experiments report larger-than-expected values.}
 \label{fig:by_kratio}
 \end{figure}
@@ -47,7 +47,7 @@ is perfect for the isotropic case (\(\flatfrac{k_z}{k_{xy}} = 1\)), while the nu
 \centering
 \includegraphics[width=0.8\textwidth]{fig/angle_0.png}
 \caption{Theoretical predictions for the special case of \(\theta = 0 \),
-when the needle is oriented horizontally. Black represents numerical results, while green shows the line where \(k_{\textrm{meas}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
+when the needle is oriented horizontally. Blue points represent numerical solution, while green shows the line where \(k_{\textrm{eff}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
 \label{fig:angle0}
 \end{figure}
 
@@ -55,8 +55,8 @@ when the needle is oriented horizontally. Black represents numerical results, wh
 This plot shows that the two approaches to predicting measured conductivity
 as a function of angle and anisotropy ratio are in general agreement. However,
 there are subtle disagreements which may be important. For example, the
-numerical model predicts overreporting of the thermal conductivity for
-isotropic materials by about \(10\%\), and generally predicts smoother
+numerical model over-predicts the thermal conductivity for
+isotropic materials by roughly \(10\%\), and generally predicts smoother
 curves for strongly anisotropic materials than the analytical approach.
 
 There are two potential explanations for this: The first has to do with edge
@@ -67,7 +67,7 @@ In the first case, the numerical model accounts for edge effects by
 modeling a finite length needle. Meanwhile, the analytical model does not take
 into account edge effects, as it models an infinitely long needle like the
 original needle probe method. The author conjectures that this is the mechanism
-primarily responsible for the smoothing of \(k_{\textrm{meas}}(\theta)\) at more extreme
+primarily responsible for the smoothing of \(k_{\textrm{eff}}(\theta)\) at more extreme
 cases of anisotropy. In fact, for the isotropic case, these edge effects have
 been studied and quantified analytically by other researchers. \cite{axialerror}
 
@@ -80,6 +80,8 @@ thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_k
 conjectures that such effects may explain why the numerical predictions
 consistently over-predict thermal conductivity as compared to the analytical
 predictions, particularly in the isotropic case.
+
+% Discuss how to sort this out in a future study.
 
 
 \begin{figure}[h]
@@ -95,7 +97,7 @@ time slopes are measurably different}
 \begin{table}[h]
 \centering
 \input{tables/conv_kvals.tex}
-\caption{A comparison of \(k_{\textrm{meas}}\) from two equivalent simulations 
+\caption{A comparison of \(k_{\textrm{eff}}\) from two equivalent simulations 
 with different fineness of mesh. Despite the similarities in time/temperature
 curves, the resulting  conductivity calculations differ by nearly 10 \%. Units are in W\(/\)m\(\cdot\)K.}
 \label{tab:conv_kvals}
@@ -109,7 +111,8 @@ The results of the benchtop measurements are mixed.
 \centering
 \includegraphics[width=0.9\textwidth]{fig/test_results.png}
 \caption{A comparison of the benchtop measurements with the numerical and
-analytical predictions, given the calculated anisotropic thermal conductivity.}
+analytical predictions for alternating layers of salt and sugar, given the
+calculated anisotropic thermal conductivity.}
 \label{fig:test_results}
 \end{figure}
 
@@ -124,7 +127,7 @@ analytical predictions, given the calculated anisotropic thermal conductivity.}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{fig/test_results_confidence.png}
-\caption{Upper and lower bounds of 95 \% confidence in measurements. This analysis 
+\caption{Upper and lower bounds of 95 \% confidence in thermal conductivity measurements of the salt and sugar layered samples. This analysis 
 indicates that the measurements can not statistically exclude a null hypothesis.}
 \label{fig:test_confidence}
 \end{figure}
@@ -137,13 +140,13 @@ indicates that the measurements can not statistically exclude a null hypothesis.
 \end{table}
 
 
-First, it may be seen that there is a significant amount of noise inherent in
-the needle probe method, even accounting for obviously failed measurements.
+First, it may be seen that there is a significant amount of variation between
+measurements using the needle probe method, even accounting for obviously failed measurements.
 This is likely due in part to the numerical derivative as well as the relatively
 unpredictable behavior of porous materials. Given
-this noise, it is difficult to see which of the two models is more appropriate.
+this variation, it is difficult to see which of the two models is more appropriate.
 
-Based on a general curve fit, the results show a slight upward slope, as
+Based on a general curve fit, the benchtop results show a slight upward slope (Figure \ref{fig:test_results}) as
 expected. However, given the variation in the results, it is statistically
 possible that angle has absolutely no effect on the reading. This could be fixed
 with more careful, exacting standards in the construction of the anisotropic

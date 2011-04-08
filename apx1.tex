@@ -7,7 +7,8 @@
 \begin{minted}{python}
 import json
 from math import pi
-from numpy import log, sin, cos, sqrt, array, arange, hstack, linspace, dot
+from numpy import log, sin, cos, sqrt, array, \
+                  arange, hstack, linspace, dot
 from functools import reduce
 
 def elliptical(fxn, ecc):
@@ -29,10 +30,11 @@ def elliptical(fxn, ecc):
 
 def Tavg(k_x, k_y, q, t):
     """
-    given scalar r0, k_x, k_y and 1-d time, this returns a curve with the same 
-    slope at Tavg(t) for long T. May refactor.
+    given scalar r0, k_x, k_y and 1-d time, this returns a curve with
+    the same slope at Tavg(t) for long T. May refactor.
     """
-    return (4*pi*k_x/q)*array([elliptical(log(time) , k_x/k_y)/elliptical(1, k_x/k_y) for time in t])
+    return (4*pi*k_x/q)*array([elliptical(log(time) , k_x/k_y)/
+                               elliptical(1, k_x/k_y) for time in t])
 
 def kmeas(k_x, k_y, q, t):
     from numpy import polyfit
@@ -60,9 +62,13 @@ def rot(th, axis):
 def proj(matrix, rot):
     from numpy import eye, hstack, vstack, newaxis
     from numpy.linalg import eig
-    return tuple(eig(reduce( dot, [ vstack((
-                                        hstack(( eye(2), array([0, 0])[:, newaxis] )),
-                                        array([0, 0, 0]))),
+    return tuple(
+               eig(
+                   reduce( dot, [ vstack((
+                                    hstack((
+                                        eye(2),
+                                        array([0, 0])[:, newaxis] )),
+                                    array([0, 0, 0]))),
                                     rot,
                                     matrix,
                                     rot.T ]))[0])[0:2]

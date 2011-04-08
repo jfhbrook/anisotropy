@@ -5,7 +5,7 @@
 \section{Introduction} 
 \label{sec:numerical-np:introduction}
 
-Numerical experiments simulated needle probes in anisotropic mediums with
+Numerical experiments were used to simulate needle probes in anisotropic mediums with
 three-dimensional finite element heat transfer models in COMSOL 3.5a. These
 consisted of a large-scale parameter study using varying combinations of \(k_{xy}\), \(k_z\) and angle orientation \(\theta\).
 
@@ -40,7 +40,7 @@ density of snow & \(200\) kg/\(\textrm{m}^3\)\\
 \end{table}
 
 The needle is simulated as a long, thin steel cylinder embedded in the center
-of a sphere of a snow-like material (called snow in this model), as in figure \ref{fig:domain}. While most of the dimensions
+of a sphere of a snow-like material (called snow in this model), as in Figure \ref{fig:domain}. While most of the dimensions
 and material properties are held constant (see Table \ref{tab:constants}), the
 anisotropic conductivity of the snow is parameterized in the form
 of a  \(3\times3\) symmetric matrix with all positive eigenvalues.  In practice, this is
@@ -104,7 +104,7 @@ Results from COMSOL are automatically fitted against the linear model with
 respect to \(\ln(t)\) by ``dropping'' early \((t,T)\) datapoints until the
 correlation coefficient of the remaining points was sufficiently high, as in Figure \ref{fig:curvefit}. Then, a
 linear curvefit is applied to these remaining points. Finally, the slope of this fit is
-used to calculate \(k_{\textrm{meas}}\).
+used to calculate \(k_{\textrm{eff}}\).
 
 \begin{figure}[h]
 \centering
@@ -117,7 +117,7 @@ The results from these analyses are organized into a nested
 cell array which mirrors the format of the two MATLAB matrices k\_xy and k\_z,
 as reflected in the use of ``arrayfun.'' The data in each slot of the
 nested array is itself a cell array containing the simulation results, organized as shown
-in Figure \ref{fig:cellarray}. Typically, the only data saved from the simulation was the \((t,T)\) data from the center of the modeled needle, the average of the temperatures measured on the surface of the sphere, and the simulated \(k_{\textrm{meas}}\). In some runs, the fem structure was exported back to the COMSOL format for
+in Figure \ref{fig:cellarray}. Typically, the only data saved from the simulation was the \((t,T)\) data from the center of the modeled needle, the average of the temperatures on the surface of the sphere, and the simulated \(k_{\textrm{eff}}\). In some runs, the raw structure representing the problem to COMSOL was exported back to the native .mph format for
 further study, such as viewing the temperature distribution over the entire
 domain as in Figure \ref{fig:comsol}. 
 
