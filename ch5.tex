@@ -4,11 +4,11 @@
 
 For most analyses, many of the parameters and results are non-dimensionalized. In
 particular, instead of separate parameters for \(k_z\) and \(k_{xy}\), \(k_z\)
-and \(k_{\textrm{meas}}\) are both normalized by \(k_{xy}\). Numerical
+and \(k_{\textrm{eff}}\) are both normalized by \(k_{xy}\). Numerical
 experiments verified that this is permissible, as numerical experiments with
 different \(k_z\) and \(k_{xy}\) parameters but equivalent ratios
 \(\fracflat{k_z}{k_{xy}}\) resulted in very similar ratios of
-\(\fracflat{k_{\textrm{meas}}}{k_{xy}}\).
+\(\fracflat{k_{\textrm{eff}}}{k_{xy}}\).
 
 Angle is an exception. In this analysis, all angles are given as degrees from
 the horizontal (\(xy\)) plane.
@@ -47,7 +47,7 @@ is perfect for the isotropic case (\(\flatfrac{k_z}{k_{xy}} = 1\)), while the nu
 \centering
 \includegraphics[width=0.8\textwidth]{fig/angle_0.png}
 \caption{Theoretical predictions for the special case of \(\theta = 0 \),
-when the needle is oriented horizontally. Black represents numerical results, while green shows the line where \(k_{\textrm{meas}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
+when the needle is oriented horizontally. Black represents numerical results, while green shows the line where \(k_{\textrm{eff}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
 \label{fig:angle0}
 \end{figure}
 
@@ -67,7 +67,7 @@ In the first case, the numerical model accounts for edge effects by
 modeling a finite length needle. Meanwhile, the analytical model does not take
 into account edge effects, as it models an infinitely long needle like the
 original needle probe method. The author conjectures that this is the mechanism
-primarily responsible for the smoothing of \(k_{\textrm{meas}}(\theta)\) at more extreme
+primarily responsible for the smoothing of \(k_{\textrm{eff}}(\theta)\) at more extreme
 cases of anisotropy. In fact, for the isotropic case, these edge effects have
 been studied and quantified analytically by other researchers. \cite{axialerror}
 
@@ -95,7 +95,7 @@ time slopes are measurably different}
 \begin{table}[h]
 \centering
 \input{tables/conv_kvals.tex}
-\caption{A comparison of \(k_{\textrm{meas}}\) from two equivalent simulations 
+\caption{A comparison of \(k_{\textrm{eff}}\) from two equivalent simulations 
 with different fineness of mesh. Despite the similarities in time/temperature
 curves, the resulting  conductivity calculations differ by nearly 10 \%. Units are in W\(/\)m\(\cdot\)K.}
 \label{tab:conv_kvals}
