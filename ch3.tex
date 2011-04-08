@@ -117,7 +117,7 @@ The results from these analyses are organized into a nested
 cell array which mirrors the format of the two MATLAB matrices k\_xy and k\_z,
 as reflected in the use of ``arrayfun.'' The data in each slot of the
 nested array is itself a cell array containing the simulation results, organized as shown
-in Figure \ref{fig:cellarray}. Typically, the only data saved from the simulation was the \((t,T)\) data from the center of the modeled needle, the average of the temperatures on the surface of the sphere, and the simulated \(k_{\textrm{eff}}\). In some runs, the fem structure was exported back to the COMSOL format for
+in Figure \ref{fig:cellarray}. Typically, the only data saved from the simulation was the \((t,T)\) data from the center of the modeled needle, the average of the temperatures on the surface of the sphere, and the simulated \(k_{\textrm{eff}}\). In some runs, the raw structure representing the problem to COMSOL was exported back to the native .mph format for
 further study, such as viewing the temperature distribution over the entire
 domain as in Figure \ref{fig:comsol}. 
 
