@@ -16,7 +16,9 @@ the horizontal (\(xy\)) plane.
 \section{Numerical vs. Analytical Predictions}
 
 A 3-D plot of the numerical and analytical predictions may be seen in 
-Figures \ref{fig:numvanal}, \ref{fig:by_angle}, \ref{fig:by_kratio} and \ref{fig:angle0}.
+Figures \ref{fig:numvanal}. This plot shows that the two approaches to predicting measured conductivity
+as a function of angle and anisotropy ratio have similar trends. However,
+there are important disagreements which must be resolved.
 
 \begin{figure}[h]
 \centering
@@ -27,13 +29,38 @@ model convergence issues.}
 \label{fig:numvanal}
 \end{figure}
 
+Many details may be seen more readily in two-dimensional plots. In particular,
+Figure \ref{fig:by_angle} shows theoretical predictions from both the analytical
+and numerical model as a function of anisotropic conductivity ratios, sliced by
+angle, while Figure \ref{fig:by_kratio} shows theoretical predictions from both
+methods as a function of angle, sliced by anisotropic conductivity ratios.
+Figure \ref{fig:by_angle} readily shows that an increase in conductivity ratio
+above \(1\) has a weaker effect on effective conductivity for the numerical
+model than in the analytical model. This may be due to edge effects decreasing
+the effective thermal conductivity in the numerical model by conducting heat
+axially from the needle. The analytical model, in contrast, does not model edge
+effects, as it models an infinitely long needle like the
+original needle probe method. For the isotropic case, these edge effects have
+been studied and quantified analytically by other researchers. \cite{axialerror}
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{fig/byAngle.png}
-\caption{Slices of theoretical predictions by angle. Black points connected by dashed lines represent numerical results, while solid blue lines represent analytical theory. It can be seen that the analytical theory predicts measured conductivity to be a stronger function of angle than the numerical data.}
+\caption{Slices of theoretical predictions by angle. Black points connected by dashed lines represent numerical results, while solid blue lines represent analytical theory. It can be seen that the analytical theory predicts measured conductivity to be a stronger function of angle than the numerical data at
+higher conductivity ratios.}
 \label{fig:by_angle}
 \end{figure}
 
+Figure \ref{fig:by_kratio} also shows the smoothing seen in Figure 
+\ref{fig:by_angle}, but also readily shows the predictions of both models for
+the isotropic case (\(\flatfrac{k_{\textrm{eff}}}{k_{xy}} = 1\)). Both models
+correctly predict that effective thermal conductivity is not a function of angle
+for the isotropic case. However, it is also clear that the numerical model
+over-predicts \(k_{\textrm{eff}}\) by at least \(10\%\). Some of this may also
+be due to edge effects, as evidenced by the cluster of points at the zero angle
+(More readily seen in Figure \ref{fig:angle0}), where it can be seen that, in fact,
+the predictions for the numerical method are a very weak function of \(k_{xy}\)
+and not just the ratio of the anisotropic conductivities. 
 
 \begin{figure}[h]
 \centering
@@ -43,45 +70,12 @@ is perfect for the isotropic case (\(\flatfrac{k_z}{k_{xy}} = 1\)), while the nu
 \label{fig:by_kratio}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{fig/angle_0.png}
-\caption{Theoretical predictions for the special case of \(\theta = 0 \),
-when the needle is oriented horizontally. Blue points represent numerical solution, while green shows the line where \(k_{\textrm{eff}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
-\label{fig:angle0}
-\end{figure}
-
-
-This plot shows that the two approaches to predicting measured conductivity
-as a function of angle and anisotropy ratio are in general agreement. However,
-there are subtle disagreements which may be important. For example, the
-numerical model over-predicts the thermal conductivity for
-isotropic materials by roughly \(10\%\), and generally predicts smoother
-curves for strongly anisotropic materials than the analytical approach.
-
-There are two potential explanations for this: The first has to do with edge
-effects, while the second has to do with convergence properties of the numerical
-model.
-
-In the first case, the numerical model accounts for edge effects by
-modeling a finite length needle. Meanwhile, the analytical model does not take
-into account edge effects, as it models an infinitely long needle like the
-original needle probe method. The author conjectures that this is the mechanism
-primarily responsible for the smoothing of \(k_{\textrm{eff}}(\theta)\) at more extreme
-cases of anisotropy. In fact, for the isotropic case, these edge effects have
-been studied and quantified analytically by other researchers. \cite{axialerror}
-
-
-In the second case, the numerical model operates with a moderately coarse grid.
-The convergence study results show that, while the time/temperature curves look
+However, the dominant
+cause for this discrepancy is believed to be due to using a model with too
+coarse of a mesh. The convergence study results show that, while the time/temperature curves look
 largely the same (Figure \ref{fig:conv_curves}), that the minor differences are magnified when taking the
 derivative with respect to \(\ln(t)\) such that the coarse grid reports a
-thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_kvals}). The author
-conjectures that such effects may explain why the numerical predictions
-consistently over-predict thermal conductivity as compared to the analytical
-predictions, particularly in the isotropic case.
-
-% Discuss how to sort this out in a future study.
+thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_kvals}).  This can be resolved in part with an extended convergence study.
 
 
 \begin{figure}[h]
@@ -103,9 +97,33 @@ curves, the resulting  conductivity calculations differ by nearly 10 \%. Units a
 \label{tab:conv_kvals}
 \end{table}
 
-\section{Benchtop Measurements}
+Figure \ref{fig:angle0} shows predictions for the special case of
+\(\theta = 0 \), where the needle is oriented parallel to the planes of isotropy.
+This special case is of interest because previous needle probe measurements have
+determined effective conductivities at this angle, which may or may not be
+accurate representations of \(k_z\), the vertical thermal conductivity, which is
+what is measured by a guarded hot plate apparatus and is the conductivity
+of interest to climatologists modeling heat transfer between the atmosphere and
+soil. If predictions for \(k_{\textrm{eff}}\) are \emph{equal} to \(k_z\), then
+the measured \(k_{\textrm{eff}}\) accurately reflects \(k_z\). This agreement
+between measurements seems unlikely for anisotropic measurements, and in fact 
+the numerical model shows the expected trend of \(k_{\textrm{eff}} > k_z\) for
+low conductivity ratios, and \(k_{\textrm{eff}} < k_z\) for higher conductivity
+ratios. However, the analytical model predicts that \(k_{\textrm{eff}} = k_z\)
+for all anisotropy ratios. While the analytical model shows expected behavior
+for the isotropic case and shows the general trends one would expect, this
+surprising result casts doubt onto the validity of the analytical model.
 
-The results of the benchtop measurements are mixed.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{fig/angle_0.png}
+\caption{Theoretical predictions for the special case of \(\theta = 0 \),
+when the needle is oriented horizontally. Blue points represent numerical solution, while green shows the line where \(k_{\textrm{eff}} = k_z\), where measured conductivity and vertical conductivity are the same. The analytical predictions are indistinguishable from this line, and are therefore not plotted.}
+\label{fig:angle0}
+\end{figure}
+
+
+\section{Benchtop Measurements}
 
 \begin{figure}[h]
 \centering
@@ -140,23 +158,23 @@ indicates that the measurements can not statistically exclude a null hypothesis.
 \end{table}
 
 
-First, it may be seen that there is a significant amount of variation between
-measurements using the needle probe method, even accounting for obviously failed measurements.
-This is likely due in part to the numerical derivative as well as the relatively
+It may be seen that there is a significant amount of variation between
+benchtop measurements using the needle probe method in Figure \ref{fig:test_results} and Table \ref{tab:pow_stats}, even accounting for obviously failed measurements such as the removed outlier in Table \ref{tab:test_results}.
+This is likely due in part to the nature of numerical derivatives as well as the relatively
 unpredictable behavior of porous materials. Given
-this variation, it is difficult to see which of the two models is more appropriate.
+this variation, it is difficult to see which of the two models (analytical or numerical) is more appropriate.
 
 Based on a general curve fit, the benchtop results show a slight upward slope (Figure \ref{fig:test_results}) as
-expected. However, given the variation in the results, it is statistically
+expected. However, given the variation in the benchtop results, it is statistically
 possible that angle has absolutely no effect on the reading. This could be fixed
 with more careful, exacting standards in the construction of the anisotropic
 materials, more measurements at each angle, and measurements at more angles.
 In other words, given the variance of the measurements, many more measurements
 would have to be made in order to reach any statistically significant
-conclusions, at least given the relatively amount of anisotropy of the sample.
+conclusions, at least given the relatively low amount of anisotropy of the sample.
 
-Also given this noise and the relatively weak levels of anisotropy in the
-sample, even with more measurements, it could still prove difficult to deduce
+Also given this variation and the relatively weak levels of anisotropy in the
+sample, even with more measurements it could still prove difficult to deduce
 the degree of anisotropy of the sample with this data and a curve fit to either
 the numerical or analytical predictions alone.
 
