@@ -9,12 +9,20 @@ been laid, there are plenty of avenues which need more study.
 
 In the analytical model presented here, the needle is assumed to be of zero
 thickness, and yet an average temperature over an ellipse is taken which
-represents the needle surface.  The model seems to work; however, there are
+represents the needle surface.  The model seems to work relatively well; however, there are
 other ways to represent such a problem that may yield more accurate results. For
 example, one may be able to approach the problem in terms of a needle with a
 finite thickness, in which case the solution to the problem should be an
 infinite series of Bessel functions in the isotropic case. One may be able to
 tackle the problem from a finite-thickness needle approach for better results. In addition, a refined model could account for edge effects. \cite{axialerror}
+
+Another recommendation for future study is to build a hybrid method, which uses
+the projection technique developed for the analytical method to specify a 2D
+problem, but uses a finite element method to solve the 2D problem. Since this
+new finite element model would not account for edge effects, it could be used to
+help the causes of the discrepancies between the models. Moreover, since 2D
+problems are much easier to solve, experiments may be ran at very high mesh
+resolutions as compared to the 3D problem.
 
 \section{Extended Convergence Study}
 
