@@ -1,18 +1,18 @@
-\contentsline {chapter}{\numberline {A}Code Used in Chapter 2\hbox {}}{38}
-\contentsline {section}{\numberline {A.1}model.py}{38}
-\contentsline {chapter}{\numberline {B}Code Used for Chapter 3\hbox {}}{41}
-\contentsline {section}{\numberline {B.1}worker.m}{41}
-\contentsline {section}{\numberline {B.2}mesher.m}{42}
-\contentsline {section}{\numberline {B.3}solver.m}{45}
-\contentsline {section}{\numberline {B.4}fitter.m}{49}
-\contentsline {section}{\numberline {B.5}assembler.m}{49}
-\contentsline {section}{\numberline {B.6}reFitter.m}{50}
-\contentsline {section}{\numberline {B.7}analyzer.m}{50}
-\contentsline {section}{\numberline {B.8}tabulator.m}{53}
-\contentsline {section}{\numberline {B.9}symmetric\_tocell.m}{54}
-\contentsline {chapter}{\numberline {C}Code Used for Chapter 4\hbox {}}{55}
-\contentsline {section}{\numberline {C.1}testtools.py}{55}
-\contentsline {chapter}{\numberline {D}Raw Results of Numerical Model}{62}
-\contentsline {chapter}{\numberline {E}Needle Probe Apparatus Directions}{66}
-\contentsline {section}{\numberline {E.1}Taking A Measurement}{66}
-\contentsline {section}{\numberline {E.2}CSV Headers}{66}
+\contentsline {chapter}{\numberline {A}Code Used in Chapter 2\hbox {}}{44}
+\contentsline {section}{\numberline {A.1}model.py}{44}
+\contentsline {chapter}{\numberline {B}Code Used for Chapter 3\hbox {}}{47}
+\contentsline {section}{\numberline {B.1}worker.m}{47}
+\contentsline {section}{\numberline {B.2}mesher.m}{48}
+\contentsline {section}{\numberline {B.3}solver.m}{51}
+\contentsline {section}{\numberline {B.4}fitter.m}{55}
+\contentsline {section}{\numberline {B.5}assembler.m}{56}
+\contentsline {section}{\numberline {B.6}reFitter.m}{56}
+\contentsline {section}{\numberline {B.7}analyzer.m}{57}
+\contentsline {section}{\numberline {B.8}tabulator.m}{60}
+\contentsline {section}{\numberline {B.9}symmetric\_tocell.m}{60}
+\contentsline {chapter}{\numberline {C}Code Used for Chapter 4\hbox {}}{62}
+\contentsline {section}{\numberline {C.1}testtools.py}{62}
+\contentsline {chapter}{\numberline {D}Raw Results of Numerical Model}{69}
+\contentsline {chapter}{\numberline {E}Needle Probe Apparatus Directions}{73}
+\contentsline {section}{\numberline {E.1}Taking A Measurement}{73}
+\contentsline {section}{\numberline {E.2}CSV Headers}{73}
