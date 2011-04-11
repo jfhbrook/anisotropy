@@ -2,8 +2,7 @@
 \label{sec:introduction}
 \bigskip
 
-\section{Motivation}
-\label{sec:introduction:motivation}
+\section{Why Snow's Conductivity Matters}
 
 The thermal properties of snow are of interest to scientists studying Arctic and
 sub-Arctic climates because, during the long, cold winters in this region,
@@ -24,15 +23,13 @@ transfer, affecting this heat transfer.}
 
 This energy transfer is critical in accurate climate models for these cold
 regions, therefore the effective thermal conductivity of snow is a very
-important factor for these models, and has been studied thoroughly. \cite{sturm1, sturm2, sturm3}
+important factor for these models, and has been studied thoroughly. \cite{sturm1,sturm2,sturm3}
 
+\section{Thermal Conductivity Measurements of Snow}
 
-\section{Needle Probes: Basic Principles}
-\label{sec:introduction:needles}
-
-A more typical technique for measuring thermal conductivity, especially in the
+A typical technique for measuring thermal conductivity, especially in the
 context of engineering materials such as building insulation, is the guarded
-hot plate. For this technique, a constant temperature gradient is induced across
+hot plate method. For this technique, a constant temperature gradient is induced across
 the material, and heat flux over the material is measured.  By Fourier's Law,
 \(k = \frac{\dot{q}l}{A\Delta T}\), where \(\dot{q}\) is the heat flux, \(A\) is
 the cross-sectional area of the sample, \(l\) is the sample thickness, and 
@@ -87,18 +84,6 @@ In this document, studies concentrate on the heating curve. In fact, the
 numerical and analytical approaches focus exclusively on the heating curve. However, the
 benchtop and in-situ measurements use both heating and cooling curves.
 
-\section{Difficulties with the Needle Probe Method}
-
-It should be noted that the needle probe method is not without its caveats. For
-instance, it was shown that convection can and will occur in natural snowpack.
-\cite{sturm3} In addition to the fact that convection in snowpack can change the
-entire assumed heat transfer dynamic, heating the needle itself can cause this
-convection to occur. This means that, when measurements are taken, there will
-not only be ``transient'' regions due to short-term behavior, but also regions
-where convection becomes a major force. Practically, this means that linear
-portions (with respect to \(\ln(t)\)) must be found in between these regions
-of instability.
-
 \section{Snow Metamorphic Principles}
 \label{sec:introduction:metamorphic}
 
@@ -123,7 +108,8 @@ On the small scale, snow may be anisotropic due to differences in grain boundary
 connections, as illustrated in Figure \ref{fig:ex_structural}. \cite{pitman} In this case, the
 layer of snow is itself anisotropic with respect to thermal conductivity because
 grains connect to each other more completely in one direction than in another.
-This occurs, for example, in depth hoar.
+This occurs, for example, in depth hoar, where vapor transport causes the grains
+to develop vertically-aligned structural features.
 
 At a macroscale, alternating regions of low-conductivity and high-conductivity
 material (isotropic or not) may also act in the aggregate as a single material of anisotropic thermal
@@ -153,31 +139,44 @@ In the vertical direction, the effective thermal conductivity is
 thermal conductivity is \(2\left( \frac1{k_1} + \frac1{k_2} \right)^{-1}\). An analogous analysis could be applied to a number of geometries.
 
 
-\section{Measuring Anisotropic Thermal Conductivity}
+\section{Motivation for Measuring Snow Anisotropy}
 
-Both structural and aggregate anisotropy raise a number of questions:
+It is expected that thermal conductivity in snow should be correlated with snow
+density, since density is a function of percent composition ice and air.
+\cite{pitman} This is seen in practice, based both on measurements taken with
+the guarded hot plate method and with the needle probe method. However, the
+guarded hot plate method consistently predicts higher thermal conductivity as a
+function of snow density than the needle probe, and nobody knows why.
+
+One theory that could potentially explain this is that this discrepancy is
+caused by anisotropy in snow.  Guarded hot plate methods typically measure
+conductivity in the vertical direction (\(k_z\)), while needle probe
+measurements typically measure some sort of average of vertical and horizontal
+thermal conductivities (\(k_z\) and \(k_{}xy\)). If \(k_z\) is consistently
+higher than \(k_{xy}\) in snow, then this \emph{could} potentially explain
+the discrepancy.
+
+In order to properly address this theory, it must be known if anisotropic
+thermal conductivity in snow can be measured with needle probes. If this can be
+done, then the accuracy of such determinations and the number of measurements
+required to make a determination, must also be known. Approaching this question
+is the primary focus of this research, as it enables answering the following
+questions:
 
 \begin{itemize}
-\item Can anisotropic thermal conductivity in snow be measured with the needle
-probe technique at all? If so, how accurately, and how many measurements would
-one need?
 \item How severe is anisotropy in snow? Is the amount of anisotropy
 significant? Can horizontal measurements be used to approximate vertical thermal
 conductivity?
 \item Is anisotropy in snow predictable? That is, could one take a single
 measurement and extrapolate from it the anisotropic thermal conductivity?
-\item Can anisotropy in snow explain historical differences between various
-thermal conductivity measurements of snow using both the guarded hot plate and
-needle probe techniques?
 \end{itemize}
 
-
-%I can make conclusions/comments on most of these points.
-
-This document primarily focuses on the first question. Developing a way
-to measure anisotropic thermal conductivity with needle probes should enable
-future researchers in answering the other questions. However, these other
-questions will also, in part, be addressed.
+If anisotropy in snow is significant and predictable, then anisotropy in snow
+may be able to explain the historical difference between guarded hot plate
+methods and needle probe methods. However, if snow anisotropy is typically
+not very severe or if needle probe measurements should closely approximate
+vertical conductivities, then anisotropy in snow is likely not the explanation
+for these differences.
 
 \section{Anisotropic Model}
 
@@ -214,8 +213,9 @@ these approaches with both real snow and engineered anisotropic materials, in
 this case using table salt and table sugar.
 
 The results of the analytical and numerical approaches will then be compared to
-each other and the measurements of snow and engineered materials. The meanings
-of these results are also discussed.
+each other and to the measurements of snow and engineered materials. The meanings
+of these results, and their ramifications with regards to conductivity/density
+relations will also be discussed.
 
 Finally, unanswered questions and avenues for future research
-will be elucidated.
+will be described.
