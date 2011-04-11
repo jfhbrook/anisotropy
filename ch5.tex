@@ -56,11 +56,24 @@ Figure \ref{fig:by_kratio} also shows the smoothing seen in Figure
 the isotropic case (\(\flatfrac{k_{\textrm{eff}}}{k_{xy}} = 1\)). Both models
 correctly predict that effective thermal conductivity is not a function of angle
 for the isotropic case. However, it is also clear that the numerical model
-over-predicts \(k_{\textrm{eff}}\) by at least \(10\%\). Some of this may also
-be due to edge effects, as evidenced by the cluster of points at the zero angle
+over-predicts \(k_{\textrm{eff}}\) by at least \(10\%\). 
+
+The dominant cause for this discrepancy is believed to be due to using a model with too
+coarse of a mesh. The convergence study results show that, while the time/temperature curves look
+largely the same (Figure \ref{fig:conv_curves}), that the minor differences are magnified when taking the
+derivative with respect to \(\ln(t)\) such that the coarse grid reports a
+thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_kvals}).
+This difference is of the same order of magnitude as the difference seen between
+the numerical predictions and the analytical predictions, and it is believed that
+running the same simulations at a finer grid would resolve most of the difference
+seen, particularly in the isotropic case.
+
+However, some of this may also be due to edge effects, as evidenced by the cluster
+of points at the zero angle
 (More readily seen in Figure \ref{fig:angle0}), where it can be seen that, in fact,
 the predictions for the numerical method are a very weak function of \(k_{xy}\)
-and not just the ratio of the anisotropic conductivities. 
+and not just the ratio of the anisotropic conductivities. Simply repeating the
+experiments at higher resolutions of mesh should be able to resolve this problem.
 
 \begin{figure}[h]
 \centering
@@ -69,14 +82,6 @@ and not just the ratio of the anisotropic conductivities.
 is perfect for the isotropic case (\(\flatfrac{k_z}{k_{xy}} = 1\)), while the numerical experiments report larger-than-expected values.}
 \label{fig:by_kratio}
 \end{figure}
-
-However, the dominant
-cause for this discrepancy is believed to be due to using a model with too
-coarse of a mesh. The convergence study results show that, while the time/temperature curves look
-largely the same (Figure \ref{fig:conv_curves}), that the minor differences are magnified when taking the
-derivative with respect to \(\ln(t)\) such that the coarse grid reports a
-thermal conductivity of about \(110\%\) of the finer grid (Table \ref{tab:conv_kvals}).  This can be resolved in part with an extended convergence study.
-
 
 \begin{figure}[h]
 \centering
