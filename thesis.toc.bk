@@ -17,7 +17,7 @@
 \contentsline {chapter}{\numberline {2}Analytical Needle Probe Approach}{8}
 \contentsline {section}{\numberline {2.1}Introduction}{8}
 \contentsline {section}{\numberline {2.2}The Isotropic Case}{8}
-\contentsline {section}{\numberline {2.3}Difficulties In The Anisotropic Case}{9}
+\contentsline {section}{\numberline {2.3}Difficulties in the Anisotropic Case}{9}
 \contentsline {section}{\numberline {2.4}Posing The Problem in Two Coordinates}{9}
 \contentsline {section}{\numberline {2.5}Coordinate Transformation}{10}
 \contentsline {section}{\numberline {2.6}From Temperature Distribution to Effective Thermal Conductivity}{12}
@@ -26,7 +26,7 @@
 \contentsline {chapter}{\numberline {3}Numerical Needle Probe Approach}{14}
 \contentsline {section}{\numberline {3.1}Introduction}{14}
 \contentsline {section}{\numberline {3.2}Geometry and Domain Properties}{14}
-\contentsline {section}{\numberline {3.3}MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}{15}
+\contentsline {section}{\numberline {3.3}MATLAB in Geometry-Based Parametric Studies Using COMSOL 3.5a}{15}
 \contentsline {section}{\numberline {3.4}Automatic Calculation of Conductivity from Simulated Time/Temperature Data}{16}
 \contentsline {section}{\numberline {3.5}Convergence Study}{17}
 \contentsline {section}{\numberline {3.6}Conclusions}{18}
@@ -54,3 +54,21 @@
 \contentsline {section}{\numberline {6.8}A Method for Determining Anisotropic Thermal Conductivity From Measurements}{39}
 \contentsline {chapter}{\numberline {7}Conclusions}{41}
 \contentsline {chapter}{Bibliography}{43}
+\contentsline {chapter}{\numberline {A}Code Used for Chapter 2\hbox {}}{44}
+\contentsline {section}{\numberline {A.1}model.py}{44}
+\contentsline {chapter}{\numberline {B}Code Used for Chapter 3\hbox {}}{47}
+\contentsline {section}{\numberline {B.1}worker.m}{47}
+\contentsline {section}{\numberline {B.2}mesher.m}{48}
+\contentsline {section}{\numberline {B.3}solver.m}{51}
+\contentsline {section}{\numberline {B.4}fitter.m}{55}
+\contentsline {section}{\numberline {B.5}assembler.m}{56}
+\contentsline {section}{\numberline {B.6}reFitter.m}{56}
+\contentsline {section}{\numberline {B.7}analyzer.m}{57}
+\contentsline {section}{\numberline {B.8}tabulator.m}{60}
+\contentsline {section}{\numberline {B.9}symmetric\_tocell.m}{60}
+\contentsline {chapter}{\numberline {C}Code Used for Chapter 4\hbox {}}{62}
+\contentsline {section}{\numberline {C.1}testtools.py}{62}
+\contentsline {chapter}{\numberline {D}Raw Results of Numerical Model}{69}
+\contentsline {chapter}{\numberline {E}Needle Probe Apparatus Directions}{73}
+\contentsline {section}{\numberline {E.1}Taking A Measurement}{73}
+\contentsline {section}{\numberline {E.2}CSV Headers}{73}
