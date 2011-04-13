@@ -66,7 +66,7 @@ for \(k\). Equation \ref{isotropic_case} will be used for the remainder of
 this analysis, though it could easily be applied to Equation \ref{isotropic_ei} as well.
 
 
-\section{Difficulties In The Anisotropic Case}
+\section{Difficulties in the Anisotropic Case}
 \label{sec:analytical-np:anisotropic-diff}
 
 
@@ -145,15 +145,15 @@ Without loss of generality, suppose \(a_x = 1\).
 \end{align}
 
 Suppose the right hand side is equal to the equivalent isotropic expression:
-\begin{equation*}
+\begin{equation}
 k\left(\frac{\partial^2 T}{\partial {x'}^2} + \frac{\partial^2 T}{\partial {y'}^2} \right) = k_x\frac{\partial^2 T}{\partial {x'}^2} + k_ya_y^2\frac{\partial^2 T}{\partial {y'}^2}
-\end{equation*}
+\end{equation}
 
 As a result,
 
-\begin{align*}
+\begin{align}
 k &= k_x\\ a_y &= \sqrt{\frac{k_x}{k_y}}\\
-\end{align*}
+\end{align}
 
 Therefore, the following coordinate transformation will allow for the application
 of isotropic solutions to an isotropic case with \(k = k_x\):
@@ -172,7 +172,7 @@ Using Equation \ref{coord_trans}, the isotropic solution may be applied:
     k_x \nabla^2 T = \rho C\frac{\partial T}{\partial t}
 \end{equation}
 
-and get the following result (for sufficiently large \(t/(r')^2\)):
+to yield the following result (for sufficiently large \(t/(r')^2\)):
 
 \begin{equation}
 T(r',t) = \frac{q}{4\pi k_x}\ln\left(\frac{4k_xt}{r'^2}\right) - \frac{\gamma q}{4\pi k_x}
@@ -216,7 +216,7 @@ may be expressed like so:
 T_{\textrm{avg}}(t) = \frac{4\pi k_x}{q} \frac{\mathcal{E}(\ln(t), \frac{k_x}{k_y})}{\mathcal{E}(1, \frac{k_x}{k_y})}
 \end{equation}
 
-where:
+\hspace{-\parindent}where:
 
 \begin{equation}
 \mathcal{E}(f(\phi, \alpha), \alpha) = \int_0^{2\pi} f\sqrt{\cos^2(\phi) + \alpha\sin^2(\phi)} d\phi

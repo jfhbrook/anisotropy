@@ -7,7 +7,7 @@
 
 Numerical experiments were used to simulate needle probes in anisotropic mediums with
 three-dimensional finite element heat transfer models in COMSOL 3.5a. These
-consisted of a large-scale parameter study using varying combinations of \(k_{xy}\), \(k_z\) and angle orientation \(\theta\).
+consisted of a large-scale parametric study using varying combinations of \(k_{xy}\), \(k_z\) and angle orientation \(\theta\).
 
 \section{Geometry and Domain Properties}
 \label{sec:numerical-np:domain}
@@ -78,14 +78,14 @@ checking for a near-zero increase in temperatures on these points. In these
 models, the increase in temperature is on the order of \(10^{-14}\) degrees
 Kelvin.
 
-\section{MATLAB in Geometry-Based Parameter Studies Using COMSOL 3.5a}
+\section{MATLAB in Geometry-Based Parametric Studies Using COMSOL 3.5a}
 \label{sec:numerical-np:matlab}
 
 Unfortunately, COMSOL 3.5a does not have the facilities necessary to implement a
-geometry-changing multi-parameter study as required from the GUI alone. However,
+geometry-changing multi-parameter parametric study as required from the GUI alone. However,
 COMSOL 3.5a does have facilities for scripting with MATLAB.
 
-MATLAB code written to implement the parameter study was largely auto-generated
+MATLAB code written to implement the parametric study was largely auto-generated
 by COMSOL, by building a base model in COMSOL 3.5a and exporting to an m-file.
 This code is split into two parts: The meshing code, and the solving code.
 These pieces of code are wrapped in functions, called ``mesher'' and ``solver''
@@ -147,7 +147,7 @@ solution is correct, that the model uses a sufficiently refined grid to get
 sufficiently accurate results.
 
 For this convergence study, a particular solution was chosen from the finite
-element parameter study and the mesh was refined to different levels. An
+element parametric study and the mesh was refined to different levels. An
 analysis of these results should then give an idea of the convergence properties
 of the problem.
 
