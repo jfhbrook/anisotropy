@@ -1,0 +1,93 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage{amssymb}
+
+\begin{document}
+    \section{Outline of Tasks}
+    \begin{enumerate}
+        \item Build and Run Numerical Model
+        \begin{enumerate}
+            \item Develop a geometrical model for FEA that makes sense
+            \begin{enumerate}
+                \item 3-D model with spherical snow makes sense \checkmark
+                \item 2-D model of snow slice may be worth pursuing
+            \end{enumerate}
+            \item Choose reasonable values for physical properties in FE model \checkmark
+            \item Find a good method for automatically deriving \(k_\textrm{meas}\) from \((t,T)\) data at thermistor location given by FEM results \checkmark
+            \begin{enumerate}
+                \item Currently using a curve fit to the exponential integral.
+            \end{enumerate}
+            \item Develop scripts and workflow to run all necessary models given a new set of parameters and retrieve useful results \checkmark
+            \begin{enumerate}
+                \item More difficult than I expected
+                \item Work on http://github.com/jesusabdullah/anisotropy\_fea
+            \end{enumerate}
+        \end{enumerate}
+        \item Interpret Results from Numerical Model
+        \begin{enumerate}
+            \item Find good methods for visualizing eigenvectors \& eigenvalues
+            \begin{enumerate}
+                \item Simple vectors in R3? Likely a good choice.
+                \item Lame's ellipsoid? Quite possibly!
+            \end{enumerate}
+            \item Find good method(s) for visualizing measurements
+            \begin{enumerate}
+                \item \((\theta, k_{xy}/k_z, k_{meas})\) on Cartesian coordinates, in my opinion
+                \item \(k_{meas}\) will need to be normalized by something in order to be able to compare problems of different \(k_{xy}\) and \(k_z\) (\(k_{min}\)? \(k_{avg}\)?)
+            \end{enumerate}
+            \item Find something good to curve fit results to
+            \begin{enumerate}
+                \item I suspect that an ellipsoid would be a good fit, with \(k_{meas}\) along \(z\) being \(k_z\) and \(0.5(k_{xy}+k_z)\) inside the \(xy\) plane. Time will tell.
+            \end{enumerate}
+            \item Benchmark the numerical solution as a function of \(k_\textrm{meas}\) results of FEM-based simulations against the input \([K]\) and angle of said simulations.
+        \end{enumerate}
+
+        \item Refine Numerical Model
+        \begin{enumerate}
+            \item Add cooling curve to numerical model
+            \item Investigate inclusion of convective effects within snow
+            \item Investigate more complex functions of \([K](x,y,z)\).
+        \end{enumerate}
+        \item Develop a Physical Test Procedure
+        \begin{enumerate}
+            \item Investigate Needle Selection and Construction
+            \begin{enumerate}
+                \item Make a possible attempt at building own needle probes
+                \item Probably borrow needle probes from Dr. Sturm
+            \end{enumerate}
+            \item Investigate ``Snow'' Selection and Construction
+            \begin{enumerate}
+                \item Investigate prediction of aggregate properties of composites based on base materials and geometry
+                \item Investigate materials with which such composite may be formed
+                \item Construct composites
+            \end{enumerate}
+            \item Investigate methods for measuring needle direction
+            \begin{enumerate}
+                \item Considering an accelerometer (gravitational pull) and a compass (magnetic North) for measuring direction
+            \end{enumerate}
+            \item Adapt Numerical Method for deriving \([K]\) to physical tests
+        \end{enumerate}
+        \item (Given Time) Address In-Situ Testing on Actual Snow (``Field measurements are non-trivial''--Jerry Johnson)
+        \begin{enumerate}
+            \item Predict difficulties in adapting test procedure to snow
+            \item Adapt test procedure to meet these difficulties
+        \end{enumerate}
+        \item Address Questions Raised which Prompted this Research:
+        \begin{enumerate}
+            \item Can \(k_{zz}\) be predicted from \(k_{xy}\)? Does the gradient of \([k]\) affect this? Is directional anisotropy in real snow even significant? Can a simple correction factor be developed?
+            \item How can we measure \([K]\) in snow? How many measurements would one need to do so? Can simplifying assumptions reduce the number of measurements? Can measurements be somehow reduced for a trade-off regarding accuracy?
+            \item Needle probe measurements are consistently lower than similar measurements with a guarded hot-plate. Can this be (in part) explained by anisotropy in snow?
+        \end{enumerate}
+        \item Present Results to Public (such as the AGU Fall conference)
+        \item Compile Results Into a Large Written Work Known as a Thesis
+    \end{enumerate}
+
+    \section{Schedule (Work-in-progress)}
+
+    \begin{itemize}
+        \item[July 2010] Receive CGC Funds \checkmark
+        \item[Aug. 31 2010] Have initial results of simulations (Running late, ETA 1 week)
+        \item[Oct. 1 2010] Proposed method for calculating \([K]\) from series of \(k_{meas}\) written down.
+        \item[Oct. 15 2010] Have new simulations showing difference(s) between heating and cooling curves, if any
+        \item[Dec. 2010] Present initial findings to AGU
+    \end{itemize}
+\end{document}
