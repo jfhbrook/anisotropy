@@ -1,0 +1,79 @@
+\documentclass{uafthesis}
+
+\usepackage{fixltx2e} % At the least, allows \(\) in captions.
+\usepackage{ppl} % Bitches love the Paladino font.
+\usepackage{amsmath, amssymb, amsfonts} % Thanks, AMS!
+\usepackage{graphicx, float, subfig} % Graphics stuff
+%\usepackage{epstopdf} % Should let me include eps images. Requires write18?
+\usepackage{verbatim} % Mostly for the comment environment.
+%\usepackage{chapterbib} % This is an option for those bundling papers.
+\usepackage{minted} % Syntax hilighting!
+\usepackage{ulem} % This is mostly for sout.
+\usepackage[square]{natbib}
+%\usepackage{tocbibind} % This fixes the "bibliography in ToC" problem that those
+                       % asshole physicists said should be fixed by directly
+                       % hacking the .toc file. Use with chapterbib.
+
+\input{custom-macros.tex}
+
+\begin{document}
+
+\title{The Measurement of Anisotropic Thermal Conductivity in Snow With Needle Probes}
+\author{Joshua Holbrook}
+
+\degreeyear{2011}
+\degreemonth{May}
+\degree{Master of Science}
+\department{Dept. of Mechanical Engineering}
+\numberofmembers{3} % Make sure this is right! The grad school hates empty
+                    % signature lines.
+\prevdegrees{B.S.}
+\college{College of Engineering and Mines}
+
+\makesig
+\maketitle
+
+% Wondering when to use `input' and when to use `include?'
+% read http://en.wikibooks.org/wiki/LaTeX/Basics#Big_Projects .
+\begin{abstract}
+  \input abstract.tex
+\end{abstract}
+
+
+%Table of Contents and such
+\tableofcontents
+\listoffigures
+\listoftables
+\listofappendices
+%\listofothermaterials
+
+\begin{acknowledgements}
+  \input acknowledgements.tex
+\end{acknowledgements}
+
+\begin{quotepage}
+  \input quotepage.tex
+\end{quotepage}
+
+\include{ch1}
+\include{ch2}
+\include{ch3}
+\include{ch4}
+\include{ch5}
+\include{ch6}
+\include{ch7}
+
+
+\nocite{pratt}
+\nocite{ewen}
+\bibliographystyle{agufull08}
+\bibliography{thesis}
+
+\appendix
+\include{apx1}
+\include{apx2}
+\include{apx3}
+\include{apx4}
+\include{apx5}
+
+\end{document}
