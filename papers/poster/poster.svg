@@ -24,8 +24,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.32000001"
-     inkscape:cx="1924.9935"
-     inkscape:cy="2017.0932"
+     inkscape:cx="5147.3518"
+     inkscape:cy="766.65865"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3298,10 +3298,10 @@
          id="flowRegion3118"><rect
            y="2340.1011"
            x="4937.6255"
-           height="199.88388"
-           width="1139.452"
+           height="284.25888"
+           width="1164.452"
            id="rect3120" /></flowRegion><flowPara
-         id="flowPara3122">This work was supported in part by a grant of HPC resources from the Arctic Region Supercomputing Center, and by a grant from the Cooperative Institute for Alaska Research.</flowPara></flowRoot>    <g
+         id="flowPara6624">This work was supported in part by a grant of HPC resources from the Arctic Region Supercomputing Center, and in part by a UAF Center for Global Change Student Research Grant with funds from the Cooperative Institute for Alaska Research.</flowPara></flowRoot>    <g
        id="g23967"
        transform="matrix(0.95025772,0,0,0.95025772,502.01292,-272.51283)">
       <g
@@ -4625,7 +4625,7 @@
            id="tspan2826"
            x="485.83206"
            y="-3037.3179"
-           style="font-size:96px"># 957633: Determination of Anisotropic Thermal Conductivity with Thermal Needle Probe Measurements</tspan></text>
+           style="font-size:96px">Determination of Anisotropic Thermal Conductivity with Thermal Needle Probe Measurements</tspan></text>
       <text
          xml:space="preserve"
          style="font-size:144px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:DejaVu Serif;-inkscape-font-specification:DejaVu Serif"
@@ -15022,9 +15022,11 @@
            y="3643.8291"
            style="font-size:72px" /></flowRegion><flowPara
          id="flowPara49717">ACKNOWLEDGEMENTS:</flowPara></flowRoot>    <path
-       style="fill:none;stroke:#cccccc;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       d="m 4738.125,477.5125 c -32.9148,0 -59.4062,24.5269 -59.4062,55 l 0,102.2813 c -1.2433,4.0949 -1.9063,8.3782 -1.9063,12.8124 l 0,119.3126 c 0,28.1627 26.658,50.8124 59.7813,50.8124 l 1139.9687,0 c 33.1232,0 59.7813,-22.6497 59.7813,-50.8124 l 0,-119.3126 c 0,-28.1627 -26.6581,-50.8437 -59.7813,-50.8437 l -187.7813,0 0,-64.25 c 0,-30.4731 -26.4914,-55 -59.4062,-55 l -891.25,0 z"
-       id="rect49719" />
+       style="fill:none;stroke:#cccccc;stroke-width:4.45932579;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 4739.5492,477.74216 c -33.556,0 -60.5636,29.90066 -60.5636,67.0503 l 0,124.69076 c -1.2675,4.99208 -1.9434,10.21383 -1.9434,15.61955 l 0,145.45356 c 0,34.33304 27.1774,61.9452 60.9461,61.9452 l 1162.1797,0 c 33.7686,0 60.9461,-27.61216 60.9461,-61.9452 l 0,-167.32856 c 0,-48.72802 -27.1775,-77.60837 -60.9461,-77.60837 l -191.44,0 0,-40.82694 c 0,-37.14964 -27.0075,-67.0503 -60.5636,-67.0503 z"
+       id="rect49719"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sscssssssscsss" />
     <path
        style="fill:none;stroke:#cccccc;stroke-width:3.96131897;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        d="M 3782 1783.0625 C 3749.8695 1783.0625 3724 1823.6926 3724 1874.1562 L 3724 1950.2188 C 3724 1955.8805 3724.3452 1961.4106 3724.9688 1966.7812 L 3724.9688 3194.125 C 3724.9688 3224.0474 3751.4371 3248.1562 3784.3125 3248.1562 L 4684.5938 3248.1562 L 4684.5938 3611.8438 C 4684.5938 3648.2707 4711.0619 3677.5938 4743.9688 3677.5938 L 6238.8438 3677.5938 C 6271.7506 3677.5938 6298.2188 3648.2707 6298.2188 3611.8438 L 6298.2188 3207.4062 C 6299.3901 3203.1597 6300.0312 3198.7113 6300.0312 3194.125 L 6300.0312 1945.875 C 6300.0312 1915.9526 6273.5629 1891.8438 6240.6875 1891.8438 L 4218.1875 1891.8438 L 4218.1875 1874.1562 C 4218.1875 1823.6926 4192.318 1783.0625 4160.1875 1783.0625 L 3782 1783.0625 z "
