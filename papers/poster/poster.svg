@@ -14,7 +14,7 @@
    height="4320"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.1 r9760"
    sodipodi:docname="poster.svg">
   <sodipodi:namedview
      id="base"
@@ -24,16 +24,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.32000001"
-     inkscape:cx="2029.5266"
-     inkscape:cy="3749.6766"
+     inkscape:cx="4886.7198"
+     inkscape:cy="2945.9874"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="ft"
-     inkscape:window-width="1271"
-     inkscape:window-height="945"
-     inkscape:window-x="1"
-     inkscape:window-y="26"
+     inkscape:window-width="1022"
+     inkscape:window-height="573"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
      inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -4605,14 +4605,14 @@
        id="image23852"
        height="451.05298"
        width="661.5033"
-       xlink:href="file:///home/josh/anisotropy_papers/poster/35892_elem_1097s.png" />
+       xlink:href="file:///home/josh/anisotropy/papers/poster/35892_elem_1097s.png" />
     <image
        y="-1951.645"
        x="5580.5044"
        id="image23926"
        height="372.28448"
        width="663.88379"
-       xlink:href="file:///home/josh/anisotropy_papers/poster/xyslice.png" />
+       xlink:href="file:///home/josh/anisotropy/papers/poster/xyslice.png" />
     <g
        id="g6466">
       <text
@@ -5447,7 +5447,7 @@
          x="234.88708"
          sodipodi:role="line" /></text>
     <image
-       xlink:href="file:///home/josh/anisotropy_papers/poster/inkscape_pasted_image_20101129_165140.png"
+       xlink:href="file:///home/josh/anisotropy/papers/poster/inkscape_pasted_image_20101129_165140.png"
        width="526.67084"
        height="410.91159"
        id="image27113"
