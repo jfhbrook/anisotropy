@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.22627418"
-     inkscape:cx="5087.9368"
-     inkscape:cy="1500.8274"
+     inkscape:zoom="0.16000001"
+     inkscape:cx="3794.5904"
+     inkscape:cy="2248.6984"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -15816,7 +15816,7 @@
            height="1125.7142"
            width="1520"
            id="rect12684" /></flowRegion><flowPara
-         id="flowPara49671">3) Both simulations yield reasonable values for the cases of 0 degrees and 90 degrees, and display non-monotonic behavior. However, the analytical case shows much stronger non-monotonic behavior, and the numerical simulations show an  unexpected slope as a function of conductivity ratio for 90 degrees. This may also be due to edge effects.</flowPara></flowRoot>    <g
+         id="flowPara49671">3) Both simulations yield reasonable values for the cases of 0 degrees and 90 degrees, and display non-monotonic behavior. However, the analytical model predicts effective conductivity to be a much stronger function of anisotropy, and the numerical simulations show an  unexpected slope as a function of conductivity ratio for 90 degrees. This may also be due to edge effects.</flowPara></flowRoot>    <g
        transform="translate(1995.758,-463.22849)"
        id="g65655">
       <g
