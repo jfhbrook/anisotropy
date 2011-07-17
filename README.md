@@ -8,9 +8,8 @@ The part everyone would actually want to see is, predictably,
 It's pretty awesome. No, really. Read it! Gogogo.
 
 Want a tl;dr? Then check out
-**[/papers/poster/poster.pdf](https://github.com/jesusabdullah/anisotropy/blob/master/papers/poster/poster.pdf?raw=true)**!
-I made it for AGU Fall 2010! Keep in mind, there is a flaw in the methodology
-used to generate the plot, which was later fixed in the thesis proper.
+**[/papers/poster/poster.pdf](https://github.com/jesusabdullah/anisotropy/blob/master/papers/poster/poster.pdf?raw=true)**, a revised version of the poster I made for
+AGU Fall 2010!
 
 However, for the graduate student at UAF interested in
 extending what I've done, you may find some files of interest here. In
