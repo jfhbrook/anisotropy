@@ -1,4 +1,4 @@
-#A N I S O T R O P Y
+# A N I S O T R O P Y
 
 This is my thesis! Yes that's right, all of it. Not just the written document,
 but also all of the code.
